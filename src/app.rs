@@ -2,8 +2,12 @@ use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{Route, Router, Routes},
-    StaticSegment,
+    // StaticSegment,
+    path,
 };
+// use stylance::*;
+
+use crate::pages::home_page::home::Home;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -38,24 +42,30 @@ pub fn App() -> impl IntoView {
 
         // content for this welcome page
         <Router>
+            <nav>
+                "Everything outside <Routes/> will be present on every page, so you can leave things like a navigation bar or menu outside the <Routes/>."
+            </nav>
             <main>
                 <Routes fallback=|| "Page not found.".into_view()>
-                    <Route path=StaticSegment("") view=HomePage/>
+                    // <Route path=StaticSegment("") view=HomePage />
+                    <Route path=path!("/") view=Home />
+                    // This catch-all route for 404 - Not Found pages is causing errors. So I need to figure out how to implement this correctly.
+                    // <Route path=path!("/*any") view=|| view! { <h1>"Not Found"</h1> }/>
                 </Routes>
             </main>
         </Router>
     }
 }
 
-/// Renders the home page of your application.
-#[component]
-fn HomePage() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let count = RwSignal::new(0);
-    let on_click = move |_| *count.write() += 1;
+// /// Renders the home page of your application.
+// #[component]
+// fn HomePage() -> impl IntoView {
+//     // Creates a reactive value to update the button
+//     let count = RwSignal::new(0);
+//     let on_click = move |_| *count.write() += 1;
 
-    view! {
-        <h1>"Welcome to Leptos!"</h1>
-        <button on:click=on_click>"Click Me: " {count}</button>
-    }
-}
+//     view! {
+//         <h1>"Welcome to Leptos!"</h1>
+//         <button on:click=on_click>"Click Me: " {count}</button>
+//     }
+// }
