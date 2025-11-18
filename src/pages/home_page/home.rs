@@ -18,5 +18,7 @@ pub fn Home() -> impl IntoView {
 
         <h1 class=style::title>"Welcome to the Home Page!"</h1>
         <button on:click=on_click>"Click Me: " {count}</button>
+        <br/><br/>
+        <img src="/images/android-chrome-512x512.png" alt="Logo" />
     }
 }
