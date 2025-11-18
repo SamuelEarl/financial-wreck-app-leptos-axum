@@ -4,3 +4,7 @@ run-dev:
 run-build:
 # 	TODO: What is the build command for Leptos? That needs to go here instead of `cargo leptos`.
 	& cargo leptos & stylance . --output-dir ./src/assets/styles/
+
+
+# Kill process on port
+# fuser -k 3000/tcp 
