@@ -128,6 +128,7 @@ output_dir = "./src/assets/styles/"
 # folders in which stylance cli will look for css module files.
 # defaults to ["./src/"]
 folders = ["./src/pages/", "./src/components/", "./src/assets/styles/"]
+# folders = ["./src/"]
 
 # extensions
 # files ending with these extensions will be considered to be
