@@ -9,7 +9,7 @@ use std::thread;
 const WATCH_DIR: &str = "src/assets/styles/stylance/";
 const STYLANCE_INDEX: &str = "src/assets/styles/stylance/_index.scss";
 const MAIN_SCSS: &str = "src/assets/styles/main.scss";
-const TRAILING_COMMENT: &str = "// This comment is added and removed to trigger Leptos hot reloads when SCSS modules are updated.";
+const TRAILING_COMMENT: &str = "// This comment is added and removed when SCSS modules are updated, which will trigger Leptos hot reloading.";
 
 fn str_to_event_kind(s: &str) -> EventKind {
     match s.to_lowercase().as_str() {
