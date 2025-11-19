@@ -1,6 +1,43 @@
 # IMAGE LOADING & PERFORMANCE NOTES
 
-NOTE: These notes are also in my media-queries.scss file.
+## 4K Images
+
+A 4K image is an image with a resolution of approximately 4,000 pixels horizontally, most commonly specified as 3840 x 2160 pixels. This resolution contains about 8.3 million pixels, which is four times the number of pixels in a Full HD image, resulting in sharper, more detailed visuals. The "4K" term refers to the horizontal resolution of around 4,000 pixels, making it the standard for high-definition displays like TVs, monitors, and cameras. 
+
+### Key characteristics of 4K images
+
+* High pixel count: A 4K image has a resolution of 3840 x 2160 pixels, which equates to a total of 8,294,400 pixels.
+* Increased detail: The higher number of pixels creates a crisper, more detailed, and more vivid picture compared to lower-resolution images.
+* Four times Full HD: The total pixel count of a 4K image is four times that of a Full HD (1920 x 1080) image.
+* Consumer vs. professional: While the common consumer standard is 3840 x 2160, the professional cinema standard for "4K" is slightly different at 4096 x 2160 pixels. 
+
+## Images for Retina Displays
+
+### Should I use 4K images for retina displays?
+
+Yes, using 4K images for high-resolution displays like Apple's Retina is a good practice for sharpness, but it's crucial to consider file size and bandwidth, as 4K images are much larger. For web and email, consider using responsive images that deliver the right size to each device, optimizing file size and load times. In cases where image sharpness is critical, such as in professional design or on large screens, 4K is beneficial, but on smaller displays, a smaller, scaled-up image (like a "2x" image) can be sufficient. 
+
+### When to use 4K images
+
+* For maximum sharpness and clarity: 4K provides the highest detail, making it ideal for professional work or when you need future-proof content.
+* On larger displays: A 4K display on a 27-inch or larger screen can provide "Retina" quality if the image is scaled correctly, often requiring a "2x" or even higher resolution image depending on the pixel density.
+* For professional content: Use 4K for projects where high-quality images are essential, like graphic design, video production, or web development where color accuracy is important.
+* For post-production flexibility: Shooting in 4K gives you more flexibility to crop, zoom, and reframe images in post-production without significant quality loss. 
+
+### When to use smaller images
+
+* For emails and small web banners: The benefits of a large 4K image are often lost on small screens, and the increased file size can lead to slow load times, frustrating users.
+* When bandwidth is a concern: If your users have limited data or your website is on a low-bandwidth connection, a smaller, optimized image is better for performance.
+* For less critical images: For complex images like lifestyle or landscape shots, the negative impact on load time may not be worth the increased sharpness. 
+
+### Best practices
+
+* Use responsive images: Deliver different image sizes based on the device and screen resolution to optimize performance for everyone. This is especially important for mobile devices.
+* Use modern image formats: Consider using modern formats like WebP or AVIF instead of JPG for better compression and quality.
+* Optimize with compression: Use image compression to reduce file size without a significant loss of quality.
+* Consider your audience: If your audience is primarily using high-density displays, you may need to serve larger images, but always have smaller fallbacks for those with lower-spec devices. 
+
+**NOTE: The following notes are also in my media-queries.scss file with examples of how to use media queries for standard and high resolution. I also have Chrome bookmarks (in my Image Editing folder) for videos that explain how to optimize images for the web using GIMP and WebP images.**
 
 * The images for retina displays need to be 2x resolution, which means that the image has twice the width and twice the height of a standard "1x" image, resulting in a total of four times the number of pixels. You can use a free AI image upscaler online to convert standard-resolution images to high-resolution images. For example, Pixelcut.ai has a free image upscaler: https://www.pixelcut.ai/image-upscaler. Pixelcut.ai says that you have 3 downloads per day, but something is wrong with that feature because you are not able to download more than once. This is what you can do to fix that:
     * In Pexelcut.ai, go to the dashboard by clicking the "Create" button. 

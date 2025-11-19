@@ -21,6 +21,6 @@ pub fn Home() -> impl IntoView {
             <button on:click=on_click>"Click Me: " {count}</button>
         </div>
         <br/><br/>
-        <img src="/images/android-chrome-512x512.png" alt="Logo" />
+        <img src="/images/car-wreck.png" alt="background" />
     }
 }
