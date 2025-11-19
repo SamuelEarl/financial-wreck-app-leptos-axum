@@ -9,7 +9,7 @@ use std::thread;
 const WATCH_DIR: &str = "src/assets/styles/stylance/";
 const STYLANCE_INDEX: &str = "src/assets/styles/stylance/_index.scss";
 const MAIN_SCSS: &str = "src/assets/styles/main.scss";
-const TRAILING_COMMENT: &str = "// trigger leptos reload";
+const TRAILING_COMMENT: &str = "// This comment is added and removed to trigger Leptos hot reloads when SCSS modules are updated.";
 
 fn str_to_event_kind(s: &str) -> EventKind {
     match s.to_lowercase().as_str() {
@@ -31,7 +31,7 @@ fn str_to_event_kind(s: &str) -> EventKind {
 /// This code toggles a comment at the bottom of the main.scss file (i.e. adds or removes the comment) and saves the file (by writing the file back to disk), which triggers a reload.
 
 fn main() -> notify::Result<()> {
-    println!("Watching: {}", WATCH_DIR);
+    println!("Notify is watching for changes in {}", WATCH_DIR);
     // Create a multi-producer, single-consumer (mpsc) channel that can send values of type Result<Event>.
     // tx = the sender - you can send messages into the channel through the sender.
     // rx = the receiver - you can read events from the channel through the receiver.
