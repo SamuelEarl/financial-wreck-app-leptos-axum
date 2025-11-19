@@ -46,7 +46,7 @@ fn main() -> notify::Result<()> {
         // println!("RES: {:?}", res);
         match res {
             Ok(event) => {
-                println!("File Changed: {:?}", event.paths);
+                // println!("File Changed: {:?}", event.paths);
                 let path = &event.paths[0];
                 // Convert STYLANCE_INDEX to a PathBuf data type.
                 let stylance_index_path = &PathBuf::from(STYLANCE_INDEX);                
