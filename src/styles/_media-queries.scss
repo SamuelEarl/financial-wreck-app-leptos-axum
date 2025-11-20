@@ -95,13 +95,13 @@ Usage example:
 @media (--xs-up) {
   @media (--standard-res) {
     .hero-image {
-      background-image: url("src/lib/client/assets/images/standard-res-image.webp");
+      background-image: url("/images/standard-res-image.webp");
     }
   }
 
   @media (--high-res) {
     .hero-image {
-      background-image: url("src/lib/client/assets/images/high-res-image.webp");
+      background-image: url("/images/high-res-image.webp");
     }
   }
 }

@@ -14,4 +14,4 @@ Cargo.lock
 *.pdb
 
 # Auto-generated and bundled SCSS files.
-src/assets/styles/stylance/
+src/styles/stylance/
