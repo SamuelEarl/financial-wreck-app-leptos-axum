@@ -2,11 +2,11 @@ use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, Title};
 use stylance::*;
 
-import_style!(style, "home.module.scss");
+import_style!(style, "sign_in.module.scss");
 
 /// Shows progress toward a goal.
 #[component]
-pub fn Home() -> impl IntoView {
+pub fn SignIn() -> impl IntoView {
     provide_meta_context();
 
     // Creates a reactive value to update the button
@@ -14,9 +14,9 @@ pub fn Home() -> impl IntoView {
     let on_click = move |_| *count.write() += 1;
 
     view! {
-        <Title text="Financial Wreck | Home"/>
+        <Title text="Financial Wreck | Sign In"/>
 
-        <h1 class=style::title>"Welcome to the Home Page!"</h1>
+        <h1 class=style::title>"Welcome to the Sign In Page!"</h1>
         <div class=style::btn_wrapper>
             <button on:click=on_click>"Click Me: " {count}</button>
         </div>

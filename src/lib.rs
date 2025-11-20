@@ -1,7 +1,19 @@
 pub mod app;
 pub mod pages {
-    pub mod home_page {
-        pub mod home;
+    pub mod layout;
+    pub mod auth {
+        pub mod sign_in;
+    }
+    pub mod dashboard {
+        pub mod dashboard;
+    }
+    pub mod goals {
+        pub mod goals;
+    }
+    pub mod bank_accounts {
+        pub mod bank_account_layout;
+        pub mod transactions;
+        pub mod budget;
     }
 }
 

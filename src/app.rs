@@ -1,13 +1,21 @@
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
-    components::{Route, Router, Routes},
+    components::{Route, Router, Routes, ParentRoute},
     // StaticSegment,
     path,
 };
 // use stylance::*;
 
-use crate::pages::home_page::home::Home;
+use crate::pages::auth::sign_in::SignIn;
+use crate::pages::layout::Layout;
+use crate::pages::dashboard::dashboard::Dashboard;
+use crate::pages::goals::goals::Goals;
+use crate::pages::bank_accounts::{
+    transactions::Transactions, 
+    budget::Budget, 
+    bank_account_layout::BankAccountLayout
+};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -42,17 +50,20 @@ pub fn App() -> impl IntoView {
 
         // content for this welcome page
         <Router>
-            <nav>
-                "Everything outside <Routes/> will be present on every page, so you can leave things like a navigation bar or menu outside the <Routes/>."
-            </nav>
-            <main>
-                <Routes fallback=|| "Page not found.".into_view()>
-                    // <Route path=StaticSegment("") view=HomePage />
-                    <Route path=path!("/") view=Home />
-                    // This catch-all route for 404 - Not Found pages is causing errors. So I need to figure out how to implement this correctly.
-                    // <Route path=path!("/*any") view=|| view! { <h1>"Not Found"</h1> }/>
-                </Routes>
-            </main>
+            <Routes fallback=|| "Page not found.".into_view()>
+                // <Route path=StaticSegment("") view=HomePage />
+                <Route path=path!("/") view=SignIn />
+                <ParentRoute path=path!("/") view=Layout>
+                    <Route path=path!("/dashboard") view=Dashboard />
+                    <Route path=path!("/goals") view=Goals />
+                    <ParentRoute path=path!("/bank-accounts/:uuid/:account_name/:year/:month_name") view=BankAccountLayout>
+                        <Route path=path!("/transactions") view=Transactions />
+                        <Route path=path!("/budget") view=Budget />
+                    </ParentRoute>
+                </ParentRoute>
+                // This catch-all route for 404 - Not Found pages is causing errors. So I need to figure out how to implement this correctly.
+                // <Route path=path!("/*any") view=|| view! { <h1>"Not Found"</h1> }/>
+            </Routes>
         </Router>
     }
 }
