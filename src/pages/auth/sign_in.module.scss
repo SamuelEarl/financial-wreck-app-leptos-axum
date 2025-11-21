@@ -1,7 +1,14 @@
-@include mq($from: xs-min) {
+@include bp($from: xs-min) {
   .page {
+    @include res(standard) {
+      background-image: url("/android-chrome-512x512.png");
+      // background-image: url("/images/res-standard/bg-image-768x800.webp");
+    }
+    @include res(high) {
+      background-image: url("/images/car-wreck.png");
+      // background-image: url("/images/res-high/bg-image-1536x1600.webp");
+    }
     min-height: 100vh;
-    background-image: url("/images/car-wreck.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -65,21 +72,26 @@
   }
 }
 
-@include mq($from: md-min) {
-  .page {
-    background-image: url("/android-chrome-512x512.png");
-  }
-}
+// @include bp($from: md-min) {
+//   .page {
+//     @include res(standard) {
+//       background-image: url("/images/res-standard/bg-image-1280x1280.webp");
+//     }
+//     @include res(high) {
+//       background-image: url("/images/res-high/bg-image-2560x2560.webp");
+//     }
+//     height: 75vh;
+//   }
+// }
 
-@include mq($from: xl-min) {
-  @include res(standard) {
-    .hero-image {
-      background-image: url("/images/res-standard/bg-image-2048x1080.webp");
-    }
-  }
-  @include res(high) {
-    .hero-image {
-      background-image: url("/images/res-high/bg-image-4096x2160.webp");
-    }
-  }
-}
+// @include bp($from: xl-min) {
+//   .page {
+//     @include res(standard) {  
+//       background-image: url("/images/res-standard/bg-image-2048x1080.webp");
+//     }
+//     @include res(high) {
+//       background-image: url("/images/res-high/bg-image-4096x2160.webp");
+//     }
+//     height: 50vh;
+//   }
+// }

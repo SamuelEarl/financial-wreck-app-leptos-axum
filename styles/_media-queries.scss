@@ -1,11 +1,39 @@
-// How to use sass-mq:
-// https://github.com/sass-mq/sass-mq
-
 @use "sass:meta";
 @use "sass:string";
 @use "sass:math";
 @use "sass:map";
 @use "sass:list";
+
+// ************************************************************
+// BREAKPOINTS MEDIA QUERIES
+// The bp() mixin checks screen sizes of output devices
+
+// How to use sass-mq:
+// https://github.com/sass-mq/sass-mq
+// ************************************************************
+
+// ------------------------------------------------------------------------------------------------
+// Media Query Breakpoints - Borrowed from Tailwind CSS (https://tailwindcss.com/docs/breakpoints)
+// ------------------------------------------------------------------------------------------------
+// xsmall: 0px - 639px | Extra small devices (phones, 600px and smaller)
+// small  : 640px - 767px | Small devices (portrait tablets and large phones, 601px and larger)
+// medium : 768px - 1023px | Medium devices (landscape tablets, 768px and larger)
+// large  : 1024px - 1279px | Large devices (laptops/desktops, 993px and larger)
+// xlarge: 1280px - 1535px | Extra large devices (large laptops and desktops, 1200px and larger)
+// xxlarge: 1536px and larger
+
+// -------------------------------------------------------------------
+// For reference, here are the viewport sizes of some common devices:
+// -------------------------------------------------------------------
+// * iPhone 8: 375px wide x 667px high (xsmall range)
+// * iPad (in portrait mode): 768px wide x 1024px high (medium range)
+// * iPad Pro (in portrait mode): 1024px wide x 1366px high (large range)
+// * Macbook Pro 15": 1440px wide x 900px high (xlarge range)
+
+// NOTES:
+// (1) The preferred way to use media queries when creating style rules in your components is to use the bp() mixin to define breakpoints for `xs-min`, `md-min`, and `xl-min`. Then create styles for each of those breakpoints. The `min` and `max` breakpoints are available for situations where you might need to create styles for only one viewport size. For example: @include bp($from: xs-min, $until: md-min) {...}
+// (2) To be explicit with your CSS styles, please use the @include `bp($from: xs-min)` mixin to define all base styles in your component. Then use the larger breakpoints to change styles for larger viewports, when necessary. This also helps to give the styles for different breakpoints the same indentation, which makes it is easier to find styles for matching elements at a glance.
+// (3) I usually create styles for the xs, md, and xl breakpoints and then use the other breakpoints for special or unique cases.
 
 /// Breakpoint list
 ///
@@ -16,10 +44,6 @@
 /// @type Map
 /// @link https://github.com/sass-mq/sass-mq#seeing-the-currently-active-breakpoint Full documentation and examples
 $breakpoints: (
-  // mobile: 320px,
-  // tablet: 740px,
-  // desktop: 980px,
-  // wide: 1300px,
   xs-min: 0px,
   xs-max: 639px,
   sm-min: 640px,
@@ -37,10 +61,10 @@ $breakpoints: (
 ///
 /// If you want to display the currently active breakpoint in the top
 /// right corner of your site during development, add the breakpoints
-/// to this list, ordered by width. For example: (mobile, tablet, desktop).
+/// to this list, ordered by width. For example: (xs-min, md-min, xl-min).
 ///
 /// @example scss
-///   @use "path/to/mq" with ($show-breakpoints: ("mobile", "tablet", "desktop"));
+///   @use "path/to/media-queries" with ($show-breakpoints: ("xs-min", "md-min", "xl-min"));
 ///
 ///
 /// @type map
@@ -63,7 +87,7 @@ $show-breakpoints: (
 ///
 /// If you want to override the media type, you can use this option.
 /// @example scss
-///   @use "path/to/mq" with ($media-type: "screen");
+///   @use "path/to/media-queries" with ($media-type: "screen");
 ///
 /// @type String
 /// @link https://github.com/sass-mq/sass-mq#changing-media-type Full documentation and example
@@ -96,8 +120,8 @@ $media-type: all !default;
 /// @param {String} $name - Name of the breakpoint. One of $breakpoints
 ///
 /// @example scss
-///  $tablet-width: get-breakpoint-width(tablet);
-///  @media (min-width: get-breakpoint-width(tablet)) {}
+///  $md-min-width: get-breakpoint-width(md-min);
+///  @media (min-width: get-breakpoint-width(md-min)) {}
 ///
 /// @requires {Variable} $breakpoints
 ///
@@ -131,33 +155,37 @@ $media-type: all !default;
 /// @link https://github.com/sass-mq/sass-mq#responsive-mode-on-default Full documentation and examples
 ///
 /// @example scss
-///  @use "path/to/mq" as *;
+///  @use "path/to/media-queries" as *;
+/// 
 ///  .element {
-///    @include mq($from: mobile) {
+///    @include bp($from: xs-min) {
 ///      color: red;
 ///    }
-///    @include mq($until: tablet) {
+///    @include bp($until: md-min) {
 ///      color: blue;
 ///    }
-///    @include mq(mobile, tablet) {
+///    @include bp($from: xs-min, $until: md-min) {
+///      color: purple;
+///    }
+///    @include bp(xs-min, md-min) {
 ///      color: green;
 ///    }
-///    @include mq($from: tablet, $and: "(orientation: landscape)") {
+///    @include bp($from: md-min, $and: "(orientation: landscape)") {
 ///      color: teal;
 ///    }
-///    @include mq(950px) {
+///    @include bp(950px) {
 ///      color: hotpink;
 ///    }
-///    @include mq(tablet, $media-type: screen) {
+///    @include bp(md-min, $media-type: screen) {
 ///      color: hotpink;
 ///    }
 ///    // Advanced use:
 ///    $my-breakpoints: (L: 900px, XL: 1200px);
-///    @include mq(L, $breakpoints: $my-breakpoints) {
+///    @include bp(L, $breakpoints: $my-breakpoints) {
 ///      color: hotpink;
 ///    }
 ///  }
-@mixin mq(
+@mixin bp(
   $from: false,
   $until: false,
   $and: false,
@@ -276,7 +304,7 @@ $media-type: all !default;
 ///
 /// @example scss
 ///  @include add-breakpoint(tvscreen, 1920px);
-///  @include mq(tvscreen) {}
+///  @include bp(tvscreen) {}
 @mixin add-breakpoint($name, $width) {
   $new-breakpoint: (
     $name: $width,
@@ -320,7 +348,7 @@ $media-type: all !default;
     // Loop through the breakpoints that should be shown
     @each $show-breakpoint in $show-breakpoints {
       $width: get-breakpoint-width($show-breakpoint, $breakpoints);
-      @include mq($show-breakpoint, $breakpoints: $breakpoints) {
+      @include bp($show-breakpoint, $breakpoints: $breakpoints) {
         content: "#{$show-breakpoint} ≥ #{$width} (#{px2em($width)})";
       }
     }
@@ -329,4 +357,84 @@ $media-type: all !default;
 
 @if list.length($show-breakpoints) > 0 {
   @include show-breakpoints;
+}
+
+
+// ************************************************************
+// RESOLUTIONS MEDIA QUERIES
+// The res() Mixin - checks pixel densities of output devices
+// ************************************************************
+
+// List of allowed resolution values. SCSS does not have enums, but this list acts as an enum.
+$resolutions: (standard, high);
+
+@function assert-resolution($value) {
+  @if index($resolutions, $value) == null {
+    @error "Invalid resolution `#{$value}`. Expected: #{ $resolutions }";
+  }
+  @return $value;
+}
+
+/// res() Mixin - A media query mixin for screen resolutions (i.e. checks pixel densities of output devices).
+/// You can use a breakpoint media query in combination with a resolution media query for the `background-image` property so standard displays will download standard resolution images and HiDPI displays (a.k.a. retina displays) will download higher resolution images.
+///
+/// @param {String} $type - One of $resolutions
+/// 
+/// @requires {function} assert-resolution
+/// 
+/// @example scss
+///  @use "path/to/media-queries" as *;
+///  
+///  @include bp($from: xs-min) {
+///    .hero-image-container {
+///      @include res(standard) {    
+///        background-image: url("/images/res-standard/bg-image-768x800.webp");
+///      }
+///      @include res(high) {
+///        background-image: url("/images/res-high/bg-image-1536x1600.webp");
+///      }
+///      // The rest of your SCSS code goes here...
+///      height: 100vh;
+///      background-repeat: no-repeat;
+///      background-position: center;
+///      background-size: cover;
+///    }
+///  }
+/// 
+///  @include bp($from: md-min) {
+///    .hero-image-container {
+///      @include res(standard) {
+///        background-image: url("/images/res-standard/bg-image-1280x1280.webp");
+///      }
+///      @include res(high) {
+///        background-image: url("/images/res-high/bg-image-2560x2560.webp");
+///      }
+///      height: 75vh;
+///    }
+///  }
+/// 
+///  @include bp($from: xl-min) {
+///    .hero-image-container {
+///      @include res(standard) {
+///        background-image: url("/images/res-standard/bg-image-2048x1080.webp");
+///      }
+///      @include res(high) {
+///        background-image: url("/images/res-high/bg-image-4096x2160.webp");
+///      }
+///      height: 50vh;
+///    }
+///  }
+@mixin res($type) {
+  $type: assert-resolution($type);
+
+  @if $type == standard {
+    @media (max-resolution: 191dpi) {
+      @content;
+    }
+  }
+  @else if $type == high {
+    @media (min-resolution: 192dpi) {
+      @content;
+    }
+  }
 }

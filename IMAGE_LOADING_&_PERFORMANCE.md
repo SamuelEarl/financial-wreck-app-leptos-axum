@@ -1,5 +1,7 @@
 # IMAGE LOADING & PERFORMANCE NOTES
 
+**NOTE: I have Chrome bookmarks (in my "Image Editing" bookmark folder) for videos that explain how to optimize images for the web using GIMP and WebP images.**
+
 ## 4K Images
 
 A 4K image is an image with a resolution of approximately 4,000 pixels horizontally, most commonly specified as 3840 x 2160 pixels. This resolution contains about 8.3 million pixels, which is four times the number of pixels in a Full HD image, resulting in sharper, more detailed visuals. The "4K" term refers to the horizontal resolution of around 4,000 pixels, making it the standard for high-definition displays like TVs, monitors, and cameras. 
@@ -36,9 +38,6 @@ Yes, using 4K images for high-resolution displays like Apple's Retina is a good 
 * Use modern image formats: Consider using modern formats like WebP or AVIF instead of JPG for better compression and quality.
 * Optimize with compression: Use image compression to reduce file size without a significant loss of quality.
 * Consider your audience: If your audience is primarily using high-density displays, you may need to serve larger images, but always have smaller fallbacks for those with lower-spec devices. 
-
-**NOTE: The following notes are also in my media-queries.scss file with examples of how to use media queries for standard and high resolution. I also have Chrome bookmarks (in my Image Editing folder) for videos that explain how to optimize images for the web using GIMP and WebP images.**
-
 * The images for retina displays need to be 2x resolution, which means that the image has twice the width and twice the height of a standard "1x" image, resulting in a total of four times the number of pixels. You can use a free AI image upscaler online to convert standard-resolution images to high-resolution images. For example, Pixelcut.ai has a free image upscaler: https://www.pixelcut.ai/image-upscaler. Pixelcut.ai says that you have 3 downloads per day, but something is wrong with that feature because you are not able to download more than once. This is what you can do to fix that:
     * In Pexelcut.ai, go to the dashboard by clicking the "Create" button. 
     * Click the "Upscale" feature.
