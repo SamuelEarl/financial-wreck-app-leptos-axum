@@ -84,7 +84,7 @@ NOTES:
 
 /*
 ----------------------------
-Resolutions (i.e. testing pixel densities of output devices)
+Resolutions (i.e. checking pixel densities of output devices)
 
 You can use a breakpoint media query in combination with a resolution media query for the `background-image` property so standard displays will download standard resolution images and HiDPI displays (a.k.a. retina displays) will download higher resolution images.
 ----------------------------

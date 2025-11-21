@@ -70,3 +70,16 @@
     background-image: url("/android-chrome-512x512.png");
   }
 }
+
+@include mq($from: xl-min) {
+  @include res(standard) {
+    .hero-image {
+      background-image: url("/images/res-standard/bg-image-2048x1080.webp");
+    }
+  }
+  @include res(high) {
+    .hero-image {
+      background-image: url("/images/res-high/bg-image-4096x2160.webp");
+    }
+  }
+}
