@@ -7,7 +7,7 @@ leptos-watch:
 	cargo leptos watch
 	
 stylance-watch:
-	stylance --watch . --output-dir ./src/styles/
+	stylance --watch . --output-dir ./styles/
 
 trigger-leptos-reload:
 	cargo run --manifest-path tools/trigger_leptos_reload/Cargo.toml
@@ -22,7 +22,7 @@ leptos-build:
 	cargo leptos build --release -vv
 
 stylance-build:
-	stylance . --output-dir ./src/styles/
+	stylance . --output-dir ./styles/
 
 build:
 	make --jobs=2 leptos-build stylance-build

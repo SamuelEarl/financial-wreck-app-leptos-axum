@@ -8,18 +8,18 @@ These are some additional notes for this app:
     * So it is unnecessary to do something like this:
         * Import styles for pages into the head element using the [Stylesheet component](https://docs.rs/leptos_meta/latest/leptos_meta/fn.Stylesheet.html) and...
         * Import styles for components into the components using Stylance's [import_style!()](https://github.com/basro/stylance-rs?tab=readme-ov-file#proc-macro) macro.
-* All the styles are concatenated into the `src/styles/main.scss` file.
+* All the styles are concatenated into the `styles/main.scss` file.
 * The Leptos and Stylance configs inside the `Cargo.toml` file reflect this organization:
 
 ```toml
 [package.metadata.leptos]
 ...
-style-file = "src/styles/main.scss"
+style-file = "styles/main.scss"
 
 
 [package.metadata.stylance]
 ...
-output_dir = "./src/styles/"
+output_dir = "./styles/"
 
 folders = ["./src/"]
 ```

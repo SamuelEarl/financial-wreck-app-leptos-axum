@@ -52,7 +52,7 @@ site-root = "target/site"
 site-pkg-dir = "pkg"
 
 # [Optional] The source CSS file. If it ends with .sass or .scss then it will be compiled by dart-sass into CSS. The CSS is optimized by Lightning CSS before being written to <site-root>/<site-pkg>/<your-app>.css
-style-file = "src/styles/main.scss"
+style-file = "styles/main.scss"
 
 # Assets source dir. All files found here will be copied and synchronized to site-root.
 # The assets-dir cannot have a sub directory with the same name/path as site-pkg-dir.
@@ -122,7 +122,7 @@ lib-profile-release = "wasm-release"
 # and one _index.scss file that contains one `@use "file.module-hash.scss";` statement
 # per module file.
 # You can use that file to import all your modules into your main scss project.
-output_dir = "./src/styles/"
+output_dir = "./styles/"
 
 # folders
 # folders in which stylance cli will look for css module files.
