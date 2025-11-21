@@ -1,5 +1,6 @@
 @use "preflight";
-// @use "sass-mq";
+@use "mq-breakpoints";
+// @use "mq-resolutions";
 // @use "media-queries";
 @use "fonts";
 @use "icons";
@@ -7,4 +8,3 @@
 @use "utility-classes";
 @use "base";
 @use "stylance";
-// This comment is added and removed when SCSS modules are updated, which will trigger Leptos hot reloading.
