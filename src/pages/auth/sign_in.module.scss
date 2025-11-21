@@ -1,7 +1,7 @@
 @include bp($from: xs-min) {
   .page {
     @include res(standard) {
-      background-image: url("/android-chrome-512x512.png");
+      background-image: url("/images/car-wreck.png");
       // background-image: url("/images/res-standard/bg-image-768x800.webp");
     }
     @include res(high) {
