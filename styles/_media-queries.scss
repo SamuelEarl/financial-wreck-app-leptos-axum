@@ -51,8 +51,10 @@ $breakpoints: (
   md-min: 768px,
   md-max: 1023px,
   lg-min: 1024px,
+  // ipad-pro-min: 1024px,
   lg-max: 1279px,
   xl-min: 1280px,
+  // ipad-pro-max: 1366px,
   xl-max: 1535px,
   xxl-min: 1536px,
 ) !default;

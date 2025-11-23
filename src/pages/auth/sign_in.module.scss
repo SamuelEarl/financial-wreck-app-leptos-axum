@@ -84,6 +84,19 @@
 //   }
 // }
 
+// TODO: Should I create a new breakpoint range for iPad Pro that will handle background images for an iPad Pro either in protrait or landscape orientation? The breakpoints and media queries would probably look like the following example. Would this even work for iPad Pros to download the correct images or would it get overridden by other breakpoints?
+// The image would be a 2x image for the screen size. How should I handle the orientation? Should I create other media queries that target different orientations so I can properly position the background image where it needs to be?
+// TODO: I should probably consider a similar approach for background images for each of the xs, md, and xl breakpoints. The dimensions of the 2x images need to be based on the widest possible width for each breakpoint.
+// ipad-pro-min: 1024px,
+// ipad-pro-max: 1366px,
+// @include bp($from: ipad-pro-min, $until: ipad-pro-max) {
+//   .page {
+//     @include res(high) {
+//       background-image: url("/images/res-high/bg-image-2732x2048.webp");
+//     }
+//   }
+// }
+
 // @include bp($from: xl-min) {
 //   .page {
 //     @include res(standard) {  
