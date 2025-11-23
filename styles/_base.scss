@@ -1,13 +1,15 @@
-/* Default HTML element styles go in this file. */
-/* The `preflight.css` file clears some of the default styles for HTML elements, so you need to define default styles for your HTML elements in this file. */
-/* These form the base styles that can be modified in your .svelte files. */
-/* NOTE: I haven't been able to figure out how to get CSS nesting to work outside of Svelte components. */
+// Default HTML element styles go in this file.
+// The `preflight.css` file clears some of the default styles for HTML elements, so you need to define default styles for your HTML elements in this file.
+// These form the base styles that can be modified in your .svelte files.
+// NOTE: I haven't been able to figure out how to get CSS nesting to work outside of Svelte components.
+
+@use "theme" as *;
 
 html,
 body {
-	font-family: var(--sans-serif);
+	font-family: $sans-serif;
 	font-size: 100%;
-	color: var(--text-color);
+	color: $text-color;
 	font-weight: normal;
 }
 
@@ -17,41 +19,41 @@ h3,
 h4,
 h5,
 h6 {
-	margin-bottom: var(--margin-bottom);
-	font-family: var(--vintage);
+	margin-bottom: $margin-bottom;
+	font-family: $vintage;
 }
 
 h1 {
-	font-size: var(--size-9);
+	font-size: $size-9;
 }
 
 h2 {
-	font-size: var(--size-8);
+	font-size: $size-8;
 }
 
 h3 {
-	font-size: var(--size-7);
+	font-size: $size-7;
 }
 
 h4 {
-	font-size: var(--size-6);
+	font-size: $size-6;
 }
 
 h5 {
-	font-size: var(--size-5);
+	font-size: $size-5;
 }
 
 h6 {
-	font-size: var(--size-4);
+	font-size: $size-4;
 }
 
 p {
-	margin-bottom: var(--margin-bottom);
+	margin-bottom: $margin-bottom;
 }
 
 ul, ol {
   list-style-position: outside;
-  /* This margin style will keep the space between <li> elements equal, even if those <li> elements are nested. */
+  // This margin style will keep the space between <li> elements equal, even if those <li> elements are nested.
   margin: 10px 0;
   padding-left: 30px;
 }
@@ -69,9 +71,9 @@ li {
 }
 
 a.table-link {
-	color: var(--primary-bg);
+	color: $primary-bg;
 	text-decoration-line: none;
-	border-bottom: 1px dotted var(--primary-bg);
+	border-bottom: 1px dotted $primary-bg;
 	cursor: pointer;
 }
 
@@ -79,76 +81,76 @@ a.table-link:hover {
 	border-bottom-color: transparent !important;
 }
 
-/* Many of the default button styles are removed or set in the preflight.css file,
-so there is no need to remove those default styles here. */
+// Many of the default button styles are removed or set in the preflight.css file,
+// so there is no need to remove those default styles here.
 button.link-styles {
 	text-align: left;
-	color: var(--text-color);
-	border-bottom: 1px dotted var(--text-color);
+	color: $text-color;
+	border-bottom: 1px dotted $text-color;
 }
 
 button.link-styles.primary {
-	color: var(--primary-bg);
-	border-bottom-color: var(--primary-bg);
+	color: $primary-bg;
+	border-bottom-color: $primary-bg;
 }
 
 button.link-styles.secondary {
-	color: var(--secondary-bg);
-	border-bottom-color: var(--secondary-bg);
+	color: $secondary-bg;
+	border-bottom-color: $secondary-bg;
 }
 
 button.link-styles.tertiary {
-	color: var(--tertiary-bg);
-	border-bottom-color: var(--tertiary-bg);
+	color: $tertiary-bg;
+	border-bottom-color: $tertiary-bg;
 }
 
-/* Hide the border-bottom on hover, unless the button is disabled. */
+// Hide the border-bottom on hover, unless the button is disabled.
 button.link-styles:hover :not(:disabled) {
-  /* If the border-bottom-color is set in a component, then it won't change to 
-  transparent when a user hovers over it. But adding `!important` fixes that. */
+  // If the border-bottom-color is set in a component, then it won't change to 
+  // transparent when a user hovers over it. But adding `!important` fixes that.
   border-bottom-color: transparent !important;
 }
 
 br {
-	line-height: 0; /* Firefox adds a line-height to <br> tags, so this removes that. */
-	margin-bottom: var(--margin-bottom);
+	line-height: 0; // Firefox adds a line-height to <br> tags, so this removes that.
+	margin-bottom: $margin-bottom;
 }
 
 hr {
 	margin: 30px 0;
 	border: none;
-	border-top: var(--border);
+	border-top: $border;
 }
 
-/* <pre> or triple backticks. */
+// <pre> or triple backticks.
 pre, code {
-	font-family: var(--monospace);
-	border-radius: var(--radius);
-	background-color: var(--element-bg);
+	font-family: $monospace;
+	border-radius: $radius;
+	background-color: $element-bg;
 }
 
 pre {
 	padding: 10px;
-	margin-bottom: var(--margin-bottom);
+	margin-bottom: $margin-bottom;
 }
 
 
-/* <code> or single backticks. */
+// <code> or single backticks.
 code {
 	padding: 0 2px;
 }
 
-/* --------------------------------------------------------------------- */
-/* TABLE STYLES */
-/* TODO: The following table styles should be used in a table component. */
-/* --------------------------------------------------------------------- */
+// ---------------------------------------------------------------------
+// TABLE STYLES
+// TODO: The following table styles should be used in a table component.
+// ---------------------------------------------------------------------
 table {
 	width: 100%;
 	border-collapse: collapse;
 }
 
 tr {
-	border-bottom: var(--border);
+	border-bottom: $border;
 }
 
 tbody tr:last-child {
