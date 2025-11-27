@@ -13,7 +13,7 @@ pub fn HeaderMobile(nav: [NavLink; 4]) -> impl IntoView {
         <header class=style::mobile_header>
             <div class=style::content>
                 <div class="open_menu_btn_container">
-                    <button>OPEN</button>
+                    <button>"OPEN"</button>
                 </div>
             </div>
             <ul>

@@ -1,11 +1,11 @@
 @include bp($from: xs-min) {
   .page {
     @include res(standard) {
-      background-image: url("/images/retirees-on-moped.png");
+      background-image: url("/images/retirees-on-moped-2:1-ratio.png");
       // background-image: url("/images/res-standard/bg-image-768x800.webp");
     }
     @include res(high) {
-      background-image: url("/images/retirees-on-moped.png");
+      background-image: url("/images/retirees-on-moped-2:1-ratio.png");
       // background-image: url("/images/res-high/bg-image-1536x1600.webp");
     }
     min-height: 100vh;
@@ -17,7 +17,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       padding: 15px;
       background-color: $secondary-bg;
       /* background-color is --secondary-bg with transparency. */
