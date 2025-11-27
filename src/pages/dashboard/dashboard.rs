@@ -4,7 +4,6 @@ use stylance::*;
 
 import_style!(style, "dashboard.module.scss");
 
-/// Shows progress toward a goal.
 #[component]
 pub fn Dashboard() -> impl IntoView {
     provide_meta_context();

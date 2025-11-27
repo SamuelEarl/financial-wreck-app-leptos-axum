@@ -4,7 +4,6 @@ use stylance::*;
 
 import_style!(style, "goals.module.scss");
 
-/// Shows progress toward a goal.
 #[component]
 pub fn Goals() -> impl IntoView {
     provide_meta_context();

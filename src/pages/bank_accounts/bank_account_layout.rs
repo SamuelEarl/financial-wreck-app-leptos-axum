@@ -4,7 +4,6 @@ use stylance::*;
 
 import_style!(style, "bank_account_layout.module.scss");
 
-/// Shows progress toward a goal.
 #[component]
 pub fn BankAccountLayout() -> impl IntoView {
     view! {

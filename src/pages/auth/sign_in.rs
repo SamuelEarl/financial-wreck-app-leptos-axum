@@ -5,7 +5,6 @@ use stylance::*;
 
 import_style!(style, "sign_in.module.scss");
 
-/// Shows progress toward a goal.
 #[component]
 pub fn SignIn() -> impl IntoView {
     provide_meta_context();

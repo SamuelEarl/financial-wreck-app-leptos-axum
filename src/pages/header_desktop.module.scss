@@ -1,0 +1,15 @@
+@include bp($from: xs-min) {
+  .desktop_header {
+    display: none;
+  }
+}
+
+// @include bp($from: md-min) {
+
+// }
+
+@include bp($from: xl-min) {
+  .desktop_header {
+    display: block;
+  }
+}

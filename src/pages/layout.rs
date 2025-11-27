@@ -2,15 +2,14 @@ use leptos::prelude::*;
 use leptos_router::components::Outlet;
 use stylance::*;
 
+use crate::pages::header::Header;
+
 import_style!(style, "layout.module.scss");
 
-/// Shows progress toward a goal.
 #[component]
 pub fn Layout() -> impl IntoView {
     view! {
-        <nav>
-            "Main Nav"
-        </nav>
+        <Header />
         <main>
             <Outlet />
         </main>

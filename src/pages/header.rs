@@ -1,26 +1,25 @@
 use leptos::prelude::*;
-use leptos_router::components::Outlet;
-use stylance::*;
 
 use crate::pages::header_mobile::HeaderMobile;
 use crate::pages::header_desktop::HeaderDesktop;
 
-struct Link {
-    label: &str,
-    url: &str,
+#[derive(Debug, Clone)]
+pub struct NavLink {
+    pub label: String,
+    pub url: String,
 }
 
 #[component]
 pub fn Header() -> impl IntoView {
-    let main_nav: [Link; 4] = [
-        Link { label: "Dashboard", url: "/dashboard" },
-        Link { label: "Net Worth", url: "/net-worth" },
-        Link { label: "Bank Accounts", url: "/bank-accounts" },
-        Link { label: "Budgets", url: "/budgets" },
+    let main_nav: [NavLink; 4] = [
+        NavLink { label: String::from("Dashboard"), url: String::from("/dashboard"), },
+        NavLink { label: String::from("Net Worth"), url: String::from("/net-worth"), },
+        NavLink { label: String::from("Transactions"), url: String::from("/transactions"), },
+        NavLink { label: String::from("Budgets"), url: String::from("/budgets"), },
     ];
 
     view! {
-        <HeaderMobile />
-        <HeaderDesktop />
+        <HeaderMobile nav=main_nav.clone() />
+        <HeaderDesktop nav=main_nav.clone() />
     }
 }

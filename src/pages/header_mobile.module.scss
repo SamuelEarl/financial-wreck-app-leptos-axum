@@ -1,0 +1,30 @@
+@include bp($from: xs-min) {
+  .mobile_header {
+    display: block;
+    position: sticky;
+    top: 0;
+    background-color: $black;
+    z-index: 100;
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: $lg-max;
+      margin: 0 auto;
+      padding: 0 15px;
+      color: $white;
+      position: relative;
+    }
+  }
+}
+
+// @include bp($from: md-min) {
+
+// }
+
+@include bp($from: xl-min) {
+  .mobile_header {
+    display: none;
+  }
+}

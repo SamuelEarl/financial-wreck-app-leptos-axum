@@ -4,7 +4,6 @@ use stylance::*;
 
 import_style!(style, "transactions.module.scss");
 
-/// Shows progress toward a goal.
 #[component]
 pub fn Transactions() -> impl IntoView {
     provide_meta_context();
