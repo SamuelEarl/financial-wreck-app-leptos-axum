@@ -94,7 +94,7 @@ $element-bg-disabled: $neutral-4;
 $element-border-color-disabled: $element-bg-disabled;
 $element-text-color-disabled: $neutral-1;
 
-// TODO: Look at SCSS options for setting lighter and darker values for disabled styles. I should probably use a mixin for all the repeated disabled styles.
+// TODO: Look at SCSS options for darken and lighten values in disabled styles. I should probably use a mixin for all the repeated disabled styles.
 
 // This is how to use this variable: filter: $disabled-filter;
 // Multiple filters can be added. See https://www.w3schools.com/cssref/css3_pr_filter.php
