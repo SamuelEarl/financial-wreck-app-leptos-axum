@@ -1,11 +1,11 @@
 @include bp($from: xs-min) {
   .page {
     @include res(standard) {
-      background-image: url("/images/retirees-on-moped-2:1-ratio.png");
+      background-image: url("/images/retirees-on-moped.png");
       // background-image: url("/images/res-standard/bg-image-768x800.webp");
     }
     @include res(high) {
-      background-image: url("/images/retirees-on-moped-2:1-ratio.png");
+      background-image: url("/images/retirees-on-moped.png");
       // background-image: url("/images/res-high/bg-image-1536x1600.webp");
     }
     min-height: 100vh;
@@ -21,7 +21,7 @@
       padding: 15px;
       background-color: $secondary-bg;
       /* background-color is --secondary-bg with transparency. */
-      background-color: rgba($secondary-bg, 0.85);
+      background-color: rgba($secondary-bg, 0.8);
 
       .logo_container {
         display: flex;
@@ -37,7 +37,7 @@
         margin-bottom: 20px;
 
         h1, h2 {
-          font-family: $sans-serif;
+          font-family: $body-font;
           font-weight: 300;
           text-align: center;
           color: $white;
@@ -45,6 +45,10 @@
 
         h1 {
           font-size: 2rem;
+
+          .bold {
+            font-weight: 600;
+          }
         }
 
         h2 {

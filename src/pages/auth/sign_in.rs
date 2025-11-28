@@ -23,8 +23,8 @@ pub fn SignIn() -> impl IntoView {
                     // <h2>"Have a financial wreck?"</h2>
                     // <h2>"Manage your personal finances and become a"</h2>
                     // <h1>"Carefree Retiree!"</h1>
-                    <h1>"Go from Financial Wreck to"</h1>
-                    <h1>"Carefree Retiree!"</h1>
+                    <h1>"Go from "<span class=style::bold>"Financial Wreck"</span>" to"</h1>
+                    <h1><span class=style::bold>"Carefree Retiree"</span>"!"</h1>
                 </div>
                 <div class=style::btns_container>
                     <div class=style::auth_btns>
