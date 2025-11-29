@@ -127,7 +127,6 @@ $outline-offset: 3px;
 // This style is not currently used, but I am leaving it here in case I want to add it to the :hover, :focus styles to add some animation.
 $outline-transition: all 0.1s linear; // transition: $outline-transition;
 
-
 // -----
 // SIZES
 // -----
@@ -232,3 +231,7 @@ $lg-max: 1279px;
 $xl-min: 1280px;
 $xl-max: 1535px;
 $xxl-min: 1536px;
+
+:where(html) {
+  --size-8: 2rem;
+}

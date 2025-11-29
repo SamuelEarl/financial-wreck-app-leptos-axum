@@ -19,6 +19,14 @@ pub mod pages {
         pub mod budget;
     }
 }
+pub mod components {
+    pub mod icons {
+        pub mod icon;
+    }
+    pub mod progress_bars {
+        pub mod progress_bar;
+    }
+}
 
 #[cfg(feature = "hydrate")]
 #[wasm_bindgen::prelude::wasm_bindgen]

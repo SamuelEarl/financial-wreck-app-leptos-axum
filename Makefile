@@ -1,4 +1,4 @@
-.PHONY: dev build build-preview
+.PHONY: dev build build-preview generate-css-icons
 
 # =========================
 # DEVELOPMENT
@@ -14,6 +14,9 @@ trigger-leptos-reload:
 
 dev:
 	make --jobs=3 leptos-watch stylance-watch trigger-leptos-reload
+
+generate-css-icons:
+	cd generate-css-icons && node index.js
 
 # =========================
 # PRODUCTION BUILD
