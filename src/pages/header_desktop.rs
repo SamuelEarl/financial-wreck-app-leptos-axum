@@ -9,7 +9,7 @@ import_style!(css, "header_desktop.module.scss");
 #[component]
 pub fn HeaderDesktop(nav: [NavLink; 4]) -> impl IntoView {
     view! {
-        <header class=css::desktop_header>
+        <header class={css::desktop_header}>
             <div>"Header Desktop"</div>
             <ul>
                 {

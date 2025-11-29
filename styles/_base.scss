@@ -7,9 +7,9 @@
 
 html,
 body {
-	font-family: $body-font;
+	font-family: var(--body-font);
 	font-size: 100%;
-	color: $text-color;
+	color: var(--text-color);
 	font-weight: normal;
 }
 
@@ -19,36 +19,36 @@ h3,
 h4,
 h5,
 h6 {
-	margin-bottom: $margin-bottom;
-	font-family: $heading-font;
+	margin-bottom: var(--margin-bottom);
+	font-family: var(--heading-font);
 }
 
 h1 {
-	font-size: $size-9;
+	font-size: var(--size-9);
 }
 
 h2 {
-	font-size: $size-8;
+	font-size: var(--size-8);
 }
 
 h3 {
-	font-size: $size-7;
+	font-size: var(--size-7);
 }
 
 h4 {
-	font-size: $size-6;
+	font-size: var(--size-6);
 }
 
 h5 {
-	font-size: $size-5;
+	font-size: var(--size-5);
 }
 
 h6 {
-	font-size: $size-4;
+	font-size: var(--size-4);
 }
 
 p {
-	margin-bottom: $margin-bottom;
+	margin-bottom: var(--margin-bottom);
 }
 
 ul, ol {
@@ -71,9 +71,9 @@ li {
 }
 
 a.table-link {
-	color: $primary-bg;
+	color: var(--primary-bg);
 	text-decoration-line: none;
-	border-bottom: 1px dotted $primary-bg;
+	border-bottom: 1px dotted var(--primary-bg);
 	cursor: pointer;
 }
 
@@ -85,23 +85,23 @@ a.table-link:hover {
 // so there is no need to remove those default styles here.
 button.link-styles {
 	text-align: left;
-	color: $text-color;
-	border-bottom: 1px dotted $text-color;
+	color: var(--text-color);
+	border-bottom: 1px dotted var(--text-color);
 }
 
 button.link-styles.primary {
-	color: $primary-bg;
-	border-bottom-color: $primary-bg;
+	color: var(--primary-bg);
+	border-bottom-color: var(--primary-bg);
 }
 
 button.link-styles.secondary {
-	color: $secondary-bg;
-	border-bottom-color: $secondary-bg;
+	color: var(--secondary-bg);
+	border-bottom-color: var(--secondary-bg);
 }
 
 button.link-styles.tertiary {
-	color: $tertiary-bg;
-	border-bottom-color: $tertiary-bg;
+	color: var(--tertiary-bg);
+	border-bottom-color: var(--tertiary-bg);
 }
 
 // Hide the border-bottom on hover, unless the button is disabled.
@@ -113,25 +113,25 @@ button.link-styles:hover :not(:disabled) {
 
 br {
 	line-height: 0; // Firefox adds a line-height to <br> tags, so this removes that.
-	margin-bottom: $margin-bottom;
+	margin-bottom: var(--margin-bottom);
 }
 
 hr {
 	margin: 30px 0;
 	border: none;
-	border-top: $border;
+	border-top: var(--border);
 }
 
 // <pre> or triple backticks.
 pre, code {
-	font-family: $monospace;
-	border-radius: $radius;
-	background-color: $element-bg;
+	font-family: var(--monospace);
+	border-radius: var(--radius);
+	background-color: var(--element-bg);
 }
 
 pre {
 	padding: 10px;
-	margin-bottom: $margin-bottom;
+	margin-bottom: var(--margin-bottom);
 }
 
 
@@ -150,7 +150,7 @@ table {
 }
 
 tr {
-	border-bottom: $border;
+	border-bottom: var(--border);
 }
 
 tbody tr:last-child {

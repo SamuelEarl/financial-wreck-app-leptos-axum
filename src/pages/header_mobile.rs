@@ -10,8 +10,8 @@ import_style!(css, "header_mobile.module.scss");
 #[component]
 pub fn HeaderMobile(nav: [NavLink; 4]) -> impl IntoView {
     view! {
-        <header class=css::mobile_header>
-            <div class=css::content>
+        <header class={css::mobile_header}>
+            <div class={css::content}>
                 <div class="open_menu_btn_container">
                     <button>
                         <Icon

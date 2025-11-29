@@ -17,7 +17,7 @@ pub fn ProgressBar(
         <progress
             max=max
             value=progress
-            class=css::progress_bar
+            class={css::progress_bar}
         />
         <br/>
     }

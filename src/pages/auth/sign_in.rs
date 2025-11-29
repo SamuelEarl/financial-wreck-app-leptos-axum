@@ -14,20 +14,20 @@ pub fn SignIn() -> impl IntoView {
 
         // <img src="/images/car-wreck.png" alt="background" />
 
-        <div class=css::page>
-            <div class=css::content_container>
-                <div class=css::logo_container>
-                    <img class=css::logo src="/images/logo-white.svg" alt="logo" />
+        <div class={css::page}>
+            <div class={css::content_container}>
+                <div class={css::logo_container}>
+                    <img class={css::logo} src="/images/logo-white.svg" alt="logo" />
                 </div>
-                <div class=css::title_container>
+                <div class={css::title_container}>
                     // <h2>"Have a financial wreck?"</h2>
                     // <h2>"Manage your personal finances and become a"</h2>
                     // <h1>"Carefree Retiree!"</h1>
-                    <h1>"Go from "<span class=css::bold>"Financial Wreck"</span>" to"</h1>
-                    <h1><span class=css::bold>"Carefree Retiree"</span>"!"</h1>
+                    <h1>"Go from "<span class={css::bold}>"Financial Wreck"</span>" to"</h1>
+                    <h1><span class={css::bold}>"Carefree Retiree"</span>"!"</h1>
                 </div>
-                <div class=css::btns_container>
-                    <div class=css::auth_btns>
+                <div class={css::btns_container}>
+                    <div class={css::auth_btns}>
                         <div class="sign_in_btn">
                             <A href="dashboard">Sign In</A>
                             // <Link
@@ -44,14 +44,14 @@ pub fn SignIn() -> impl IntoView {
                             //     {#snippet disabledContent()}
                             //         Sign In
                             //         {#if activeLink === "signIn"}
-                            //             <Icon icon="icomoon-free:spinner2" class=css::fp_spin" />
+                            //             <Icon icon="icomoon-free:spinner2" class="fp_spin" />
                             //         {:else}
                             //             <Icon icon="ri:login-circle-line" />
                             //         {/if}
                             //     {/snippet}
                             // </Link>
                         </div>
-                        // <div class=css::register_btn>
+                        // <div class={css::register_btn}>
                         //     <Link
                         //         href="__API_DOMAIN__/api/auth/register"
                         //         btnStyles
@@ -66,7 +66,7 @@ pub fn SignIn() -> impl IntoView {
                         //         {#snippet disabledContent()}
                         //             Register
                         //             {#if activeLink === "register"}
-                        //                 <Icon icon="icomoon-free:spinner2" class=css::fp_spin />
+                        //                 <Icon icon="icomoon-free:spinner2" class="fp_spin" />
                         //             {:else}
                         //                 <Icon icon="ri:account-circle-line" />
                         //             {/if}
@@ -74,7 +74,7 @@ pub fn SignIn() -> impl IntoView {
                         //     </Link>
                         // </div>
                     </div>
-                    // <div class=css::mobile_btn>
+                    // <div class={css::mobile_btn}>
                     //     <Button
                     //     colors={secondaryWithTransparency}
                     //     {sizes}
@@ -92,7 +92,7 @@ pub fn SignIn() -> impl IntoView {
                     //     Add to Home Screen
                     //     </Button>
                     // </div>
-                    // <div class=css::desktop_btn>
+                    // <div class={css::desktop_btn}>
                     //     <Button
                     //     colors={secondaryWithTransparency}
                     //     {sizes}

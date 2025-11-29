@@ -11,6 +11,6 @@ pub fn Transactions() -> impl IntoView {
     view! {
         <Title text="Financial Wreck | Transactions"/>
 
-        <h1 class=css::title>"Transactions"</h1>
+        <h1 class={css::title}>"Transactions"</h1>
     }
 }
