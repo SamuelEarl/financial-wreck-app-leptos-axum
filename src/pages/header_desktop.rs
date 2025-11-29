@@ -4,12 +4,12 @@ use stylance::*;
 
 use crate::pages::header::NavLink;
 
-import_style!(style, "header_desktop.module.scss");
+import_style!(css, "header_desktop.module.scss");
 
 #[component]
 pub fn HeaderDesktop(nav: [NavLink; 4]) -> impl IntoView {
     view! {
-        <header class=style::desktop_header>
+        <header class=css::desktop_header>
             <div>"Header Desktop"</div>
             <ul>
                 {

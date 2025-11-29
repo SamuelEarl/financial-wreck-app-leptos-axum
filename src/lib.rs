@@ -20,12 +20,16 @@ pub mod pages {
     }
 }
 pub mod components {
+    pub mod buttons {
+        pub mod button;
+    }
     pub mod icons {
         pub mod icon;
     }
     pub mod progress_bars {
         pub mod progress_bar;
     }
+    pub mod colors_and_sizes;
 }
 
 #[cfg(feature = "hydrate")]

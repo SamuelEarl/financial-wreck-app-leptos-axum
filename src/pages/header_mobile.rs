@@ -5,13 +5,13 @@ use stylance::*;
 use crate::pages::header::NavLink;
 use crate::components::icons::icon::Icon;
 
-import_style!(style, "header_mobile.module.scss");
+import_style!(css, "header_mobile.module.scss");
 
 #[component]
 pub fn HeaderMobile(nav: [NavLink; 4]) -> impl IntoView {
     view! {
-        <header class=style::mobile_header>
-            <div class=style::content>
+        <header class=css::mobile_header>
+            <div class=css::content>
                 <div class="open_menu_btn_container">
                     <button>
                         <Icon

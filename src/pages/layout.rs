@@ -4,7 +4,7 @@ use stylance::*;
 
 use crate::pages::header::Header;
 
-import_style!(style, "layout.module.scss");
+import_style!(css, "layout.module.scss");
 
 #[component]
 pub fn Layout() -> impl IntoView {

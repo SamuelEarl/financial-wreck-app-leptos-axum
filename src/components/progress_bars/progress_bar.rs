@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use stylance::*;
 
-import_style!(style, "progress_bar.module.scss");
+import_style!(css, "progress_bar.module.scss");
 
 /// Shows progress toward a goal.
 #[component]
@@ -17,7 +17,7 @@ pub fn ProgressBar(
         <progress
             max=max
             value=progress
-            class=style::progress_bar
+            class=css::progress_bar
         />
         <br/>
     }

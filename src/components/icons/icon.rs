@@ -16,14 +16,12 @@ use leptos::prelude::*;
 use leptos::attr::any_attribute::AnyAttribute;
 use stylance::*;
 
-import_style!(style, "icon.module.scss");
+import_style!(css, "icon.module.scss");
 
 #[component]
 pub fn Icon(
     icon: String,
-    // #[prop(optional)]
-    // style: String,
-    /// This captures all attributes that are not specifically defined on this component.
+    /// This captures all the other attributes that are not specifically defined on this component.
     #[prop(attrs)]
     attributes: Vec<AnyAttribute>,
 ) -> impl IntoView {
@@ -32,7 +30,6 @@ pub fn Icon(
     view! {
         <span
             class=format!("icon--{icon_set} icon--{icon_set}--{icon_name}")
-            // style=format!("{style}")
             // This spreads the attributes that are captured in the `attributes` prop.
             {..attributes}
         ></span>

@@ -3,7 +3,7 @@ use leptos_meta::{provide_meta_context, Title};
 use leptos_router::components::A;
 use stylance::*;
 
-import_style!(style, "sign_in.module.scss");
+import_style!(css, "sign_in.module.scss");
 
 #[component]
 pub fn SignIn() -> impl IntoView {
@@ -14,20 +14,20 @@ pub fn SignIn() -> impl IntoView {
 
         // <img src="/images/car-wreck.png" alt="background" />
 
-        <div class=style::page>
-            <div class=style::content_container>
-                <div class=style::logo_container>
-                    <img class=style::logo src="/images/logo-white.svg" alt="logo" />
+        <div class=css::page>
+            <div class=css::content_container>
+                <div class=css::logo_container>
+                    <img class=css::logo src="/images/logo-white.svg" alt="logo" />
                 </div>
-                <div class=style::title_container>
+                <div class=css::title_container>
                     // <h2>"Have a financial wreck?"</h2>
                     // <h2>"Manage your personal finances and become a"</h2>
                     // <h1>"Carefree Retiree!"</h1>
-                    <h1>"Go from "<span class=style::bold>"Financial Wreck"</span>" to"</h1>
-                    <h1><span class=style::bold>"Carefree Retiree"</span>"!"</h1>
+                    <h1>"Go from "<span class=css::bold>"Financial Wreck"</span>" to"</h1>
+                    <h1><span class=css::bold>"Carefree Retiree"</span>"!"</h1>
                 </div>
-                <div class=style::btns_container>
-                    <div class=style::auth_btns>
+                <div class=css::btns_container>
+                    <div class=css::auth_btns>
                         <div class="sign_in_btn">
                             <A href="dashboard">Sign In</A>
                             // <Link
@@ -44,14 +44,14 @@ pub fn SignIn() -> impl IntoView {
                             //     {#snippet disabledContent()}
                             //         Sign In
                             //         {#if activeLink === "signIn"}
-                            //             <Icon icon="icomoon-free:spinner2" class=style::fp_spin" />
+                            //             <Icon icon="icomoon-free:spinner2" class=css::fp_spin" />
                             //         {:else}
                             //             <Icon icon="ri:login-circle-line" />
                             //         {/if}
                             //     {/snippet}
                             // </Link>
                         </div>
-                        // <div class=style::register_btn>
+                        // <div class=css::register_btn>
                         //     <Link
                         //         href="__API_DOMAIN__/api/auth/register"
                         //         btnStyles
@@ -66,7 +66,7 @@ pub fn SignIn() -> impl IntoView {
                         //         {#snippet disabledContent()}
                         //             Register
                         //             {#if activeLink === "register"}
-                        //                 <Icon icon="icomoon-free:spinner2" class=style::fp_spin />
+                        //                 <Icon icon="icomoon-free:spinner2" class=css::fp_spin />
                         //             {:else}
                         //                 <Icon icon="ri:account-circle-line" />
                         //             {/if}
@@ -74,7 +74,7 @@ pub fn SignIn() -> impl IntoView {
                         //     </Link>
                         // </div>
                     </div>
-                    // <div class=style::mobile_btn>
+                    // <div class=css::mobile_btn>
                     //     <Button
                     //     colors={secondaryWithTransparency}
                     //     {sizes}
@@ -92,7 +92,7 @@ pub fn SignIn() -> impl IntoView {
                     //     Add to Home Screen
                     //     </Button>
                     // </div>
-                    // <div class=style::desktop_btn>
+                    // <div class=css::desktop_btn>
                     //     <Button
                     //     colors={secondaryWithTransparency}
                     //     {sizes}

@@ -2,7 +2,7 @@ use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, Title};
 use stylance::*;
 
-import_style!(style, "goals.module.scss");
+import_style!(css, "goals.module.scss");
 
 #[component]
 pub fn Goals() -> impl IntoView {
@@ -11,6 +11,6 @@ pub fn Goals() -> impl IntoView {
     view! {
         <Title text="Financial Wreck | Goals"/>
 
-        <h1 class=style::title>"Goals"</h1>
+        <h1 class=css::title>"Goals"</h1>
     }
 }
