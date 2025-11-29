@@ -15,13 +15,15 @@ trigger-leptos-reload:
 dev:
 	make --jobs=3 leptos-watch stylance-watch trigger-leptos-reload
 
+# ---------------------------------------------------------------
 # Node.js processes for working with CSS icons during development
-
+# ---------------------------------------------------------------
 install-node-packages:
 	cd generate-css-icons && npm install
 
 generate-css-icons:
 	cd generate-css-icons && node index.js
+
 
 # =========================
 # PRODUCTION BUILD
