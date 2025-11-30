@@ -1,5 +1,108 @@
 use std::fmt;
 
+// The Sizes input structure
+#[derive(Clone, Debug, Default)]
+pub struct Sizes {
+    pub fs: Option<i32>,    // Font size
+    pub fw: Option<String>, // Font weight
+    pub pv: Option<i32>,    // Padding vertical
+    pub ph: Option<i32>,    // Padding horizontal
+    // pub gp: Option<i32>,    // Gap (flexbox)
+}
+
+/// A function that returns the default Sizes struct.
+/// This should be used in components to provide the default size values for applicable components.
+pub fn default_sizes() -> Sizes {
+    Sizes {
+        fs: Some(4),
+        fw: Some("normal".to_string()),
+        pv: Some(2),
+        ph: Some(3),
+        // gp: Some(4),
+    }
+}
+
+// The ElementSizes return structure
+#[derive(Clone, Debug)]
+pub struct ElementSizes {
+    pub all: String,
+    pub fs: String,
+    pub fw: String,
+    pub pv: String,
+    pub ph: String,
+}
+
+pub fn get_element_sizes(sizes: Option<Sizes>, is_btn: bool) -> ElementSizes {
+    // Helper to safely access options without deep nesting.
+    // If sizes is None, this acts as if all fields are None.
+    let s = sizes.as_ref();
+
+    // -- Font Size Logic --
+    // Extract fs, defaulting to -1 if None
+    let fs_val = s.and_then(|x| x.fs).unwrap_or(-1);
+    
+    let font_size = if fs_val > -1 {
+        format!("var(--size-{});", fs_val)
+    } else {
+        "var(--size-base);".to_string()
+    };
+
+    // -- Font Weight Logic --
+    // Logic: If fw exists, use it. Else if is_btn is true, "bold". Else "normal".
+    let fw_val = s.and_then(|x| x.fw.clone());
+    
+    let font_weight = if let Some(fw) = fw_val {
+        fw
+    } else if is_btn {
+        "bold".to_string()
+    } else {
+        "normal".to_string()
+    };
+
+    // -- Padding Logic --
+    let pv_val = s.and_then(|x| x.pv).unwrap_or(-1);
+    let padding_v = if pv_val > -1 {
+        format!("var(--size-{});", pv_val)
+    } else {
+        "var(--padding-v-default);".to_string()
+    };
+
+    let ph_val = s.and_then(|x| x.ph).unwrap_or(-1);
+    let padding_h = if ph_val > -1 {
+        format!("var(--size-{});", ph_val)
+    } else {
+        "var(--padding-h-default);".to_string()
+    };
+
+    // -- Construct the 'all' string --
+    let mut all = format!(
+        "font-size: {}; font-weight: {}; padding: {} {}",
+        font_size, font_weight, padding_v, padding_h
+    );
+
+    // -- Gap Logic --
+    let gap = if fs_val > -1 {
+        format!("var(--size-{});", fs_val)
+    } else {
+        "var(--size-base);".to_string()
+    };
+
+    // If the element that is retrieving the size styles is a button, then add a `gap` (flexbox) style.
+    if is_btn {
+        all.push_str(&format!(" gap: {}", gap));
+    }
+
+    // -- Return the struct --
+    ElementSizes {
+        all,
+        fs: font_size,
+        fw: font_weight,
+        pv: padding_v,
+        ph: padding_h,
+    }
+}
+
+
 // The custom colors structure
 #[derive(Clone, Debug)]
 pub struct Colors {
@@ -62,25 +165,16 @@ pub fn get_btn_colors(
     }
 }
 
-// enum Colors {
-//   bg: string, // background color
-//   fg: string, // foreground color
-//   br: string, // border color
-//   ol: string, // outline color
-// };
 
-// pub fn get_btn_colors(colors: Colors | null = null, variant: string, inverted: boolean) {
-//   // Return custom colors.
-//   if (colors) {
-//     return format!("background-color: {colors::bg}; color: {colors::fg}; border-color: {colors::br}; outline-color: {colors::ol};");
-//   }
-//   // Return pre-defined colors, which have already been defined in the theme.css file.
-//   else {
-//     if (inverted) {
-//       return format!(" background-color: var(--{variant}-fg); color: var(--{variant}-bg); border-color: var(--{variant}-fg); outline-color: var(--{variant}-fg);");
-//     }
-//     else {
-//       return format!(" background-color: var(--{variant}-bg); color: var(--{variant}-fg); border-color: var(--{variant}-bg); outline-color: var(--{variant}-bg);");
-//     }
-//   }
-// }
+#[derive(Clone, Debug, PartialEq)]
+pub enum ElementWidths {
+    Auto,
+    Full,
+}
+
+pub fn get_element_width(width: ElementWidths) -> &'static str {
+    match width {
+        ElementWidths::Full => "width: 100%",
+        ElementWidths::Auto => "",
+    }
+}
