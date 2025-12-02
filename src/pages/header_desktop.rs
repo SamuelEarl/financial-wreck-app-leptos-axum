@@ -15,7 +15,7 @@ pub fn HeaderDesktop(nav: [NavLink; 4]) -> impl IntoView {
                 {
                     nav.into_iter()
                         .map(|link| view! {
-                            <li><A href={link.url}>{link.label}</A></li>
+                            <li><A href={link.url}>{link.text}</A></li>
                         })
                         .collect_view()
                 }

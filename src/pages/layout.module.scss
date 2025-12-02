@@ -1,0 +1,21 @@
+@include bp($from: xs-min) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+
+    main {
+      padding: 20px 15px;
+    }
+  }
+}
+
+// @include bp($from: md-min) {
+
+// }
+
+@include bp($from: xl-min) {
+  .layout {
+    flex-direction: row;
+    // padding-left: 20vw;
+  }
+}

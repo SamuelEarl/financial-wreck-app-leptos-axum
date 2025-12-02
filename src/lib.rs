@@ -1,9 +1,8 @@
 pub mod app;
 pub mod pages {
     pub mod layout;
-    pub mod header;
-    pub mod header_mobile;
-    pub mod header_desktop;
+    pub mod mobile_header;
+    pub mod sidebar_nav;
     pub mod auth {
         pub mod sign_in;
     }

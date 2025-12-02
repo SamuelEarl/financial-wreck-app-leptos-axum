@@ -1,22 +1,18 @@
 use leptos::prelude::*;
+// use leptos::logging::log;
 use leptos_router::components::A;
-use leptos::logging::log;
 use stylance::*;
 
-use crate::pages::header::NavLink;
-use crate::components::{
-    buttons::button::Button,
-    icons::icon::Icon,
-};
 use crate::components::colors_and_sizes::{Colors, Sizes};
+use crate::components::{buttons::button::Button, icons::icon::Icon};
 
-import_style!(css, "header_mobile.module.scss");
+import_style!(css, "mobile_header.module.scss");
 
 #[component]
-pub fn HeaderMobile(nav: [NavLink; 4]) -> impl IntoView {
+pub fn MobileHeader(#[prop(into)] set_nav_is_open: WriteSignal<bool>) -> impl IntoView {
     view! {
         <header class={css::mobile_header}>
-            <div class={css::content}>
+            <div class={css::header_content}>
                 <div class="open_menu_btn_container">
                     <Button
                         sizes=Some(Sizes {
@@ -30,7 +26,8 @@ pub fn HeaderMobile(nav: [NavLink; 4]) -> impl IntoView {
                             br: "transparent".to_string(),
                             ol: "transparent".to_string(),
                         })
-                        on:click=move |_| { log!("CLICKED"); }
+                        // Open menu
+                        on:click=move |_| set_nav_is_open.set(true)
                     >
                         <Icon
                             icon="material-symbols:menu".to_string()
@@ -39,7 +36,7 @@ pub fn HeaderMobile(nav: [NavLink; 4]) -> impl IntoView {
                     </Button>
                 </div>
                 <div class={css::logo_wrapper}>
-                    <A href="/">
+                    <A href="/dashboard">
                         <img class={css::logo} src="/images/logo-white.svg" alt="logo" />
                     </A>
                 </div>
@@ -50,15 +47,6 @@ pub fn HeaderMobile(nav: [NavLink; 4]) -> impl IntoView {
                     />
                 </div>
             </div>
-            <ul>
-                {
-                    nav.into_iter()
-                        .map(|link| view! {
-                            <li><A href={link.url}>{link.label}</A></li>
-                        })
-                        .collect_view()
-                }
-            </ul>
         </header>
     }
 }
