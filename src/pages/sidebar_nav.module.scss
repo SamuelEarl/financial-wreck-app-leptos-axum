@@ -1,13 +1,13 @@
 @include bp($from: xs-min) {
   .nav_container {
-    // position: absolute;
-    // top: 0;
-    // right: 110vw;
-    // width: 100vw;
-    // height: 100vh;
+    position: absolute;
+    top: 0;
+    right: 110vw;
+    width: 100vw;
+    height: 100vh;
     background-color: var(--secondary-bg);
-    // z-index: 100;
-    // transition: right 0.25s ease;
+    z-index: 100;
+    transition: right 0.25s ease;
 
     .nav_container_header {
       display: flex;
@@ -32,6 +32,7 @@
     nav {
       flex: 1;
       padding: 15px;
+      padding-right: 0;
       overflow-y: auto;
       color: var(--white);
 
@@ -46,11 +47,10 @@
           a {
             display: block;
             padding: 10px;
-            border-top: 2px solid transparent;
-            border-bottom: 2px solid transparent;
 
             &:hover {
-              border-color: var(--black);
+              background-color: var(--secondary-fg);
+              color: var(--secondary-bg);
             }
           }
         }
@@ -65,12 +65,12 @@
 
 @include bp($from: xl-min) {
   .nav_container {
-    position: absolute !important;
-    left: 0 !important;
+    position: relative !important;
+    right: auto !important;
     width: 20vw !important;
 
     .nav_container_header {
-      justify-content: center;
+      justify-content: center !important;
 
       .close_menu_btn_container, .spacer {
         display: none !important;
