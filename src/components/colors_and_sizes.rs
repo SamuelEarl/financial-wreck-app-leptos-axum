@@ -1,7 +1,7 @@
 use std::fmt;
 
 // The Sizes input structure
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug)]
 pub struct Sizes {
     pub fs: Option<i32>,    // Font size
     pub fw: Option<String>, // Font weight
@@ -10,17 +10,29 @@ pub struct Sizes {
     // pub gp: Option<i32>,    // Gap (flexbox)
 }
 
-/// A function that returns the default Sizes struct.
-/// This should be used in components to provide the default size values for applicable components.
-pub fn default_sizes() -> Sizes {
-    Sizes {
-        fs: Some(4),
-        fw: Some("normal".to_string()),
-        pv: Some(2),
-        ph: Some(3),
-        // gp: Some(4),
+impl Default for Sizes {
+    fn default() -> Self {
+        Self {
+            fs: Some(4),
+            fw: Some("normal".to_string()),
+            pv: Some(2),
+            ph: Some(3),
+        }
     }
 }
+
+// /// A function that returns the default Sizes struct.
+// /// This should be used in components to provide the default size values for applicable components.
+// /// UPDATE: Maybe this is not necessary because of the "impl Default for Sizes".
+// pub fn default_sizes() -> Sizes {
+//     Sizes {
+//         fs: Some(4),
+//         fw: Some("normal".to_string()),
+//         pv: Some(2),
+//         ph: Some(3),
+//         // gp: Some(4),
+//     }
+// }
 
 // The ElementSizes return structure
 #[derive(Clone, Debug)]

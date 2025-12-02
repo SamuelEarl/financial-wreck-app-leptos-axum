@@ -26,17 +26,17 @@ pub fn Dashboard() -> impl IntoView {
 
         <div class={css::btn_wrapper}>
             <Button
-                colors=Some(Colors {
-                    bg: "var(--dark-red)".to_string(),
-                    fg: "var(--white)".to_string(),
-                    br: "var(--black)".to_string(),
-                    ol: "var(--black)".to_string(),
-                })
                 sizes=Some(Sizes {
                     fs: Some(5),
                     fw: Some("bold".to_string()),
                     pv: Some(5),
                     ph: Some(5),
+                })
+                colors=Some(Colors {
+                    bg: "var(--dark-red)".to_string(),
+                    fg: "var(--white)".to_string(),
+                    br: "var(--black)".to_string(),
+                    ol: "var(--black)".to_string(),
                 })
                 on:click=move |_| { log!("CLICKED"); }
                 on:mouseenter=move |_| { log!("HOVERED"); }

@@ -3,7 +3,7 @@
     display: block;
     position: sticky;
     top: 0;
-    background-color: var(--black);
+    background-color: var(--secondary-bg);
     z-index: 100;
 
     .content {
@@ -13,8 +13,20 @@
       max-width: var(--lg-max);
       margin: 0 auto;
       padding: 0 15px;
-      color: var(--white);
       position: relative;
+
+      .logo-wrapper {
+        padding: 10px 0;
+
+        .logo {
+          height: 40px;
+        }
+      }
+    }
+
+    // TODO: Move these style rules when I update the HTML.
+    ul {
+      color: var(--white);
     }
   }
 }
