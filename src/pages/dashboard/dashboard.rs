@@ -22,7 +22,7 @@ pub fn Dashboard() -> impl IntoView {
     view! {
         <Title text="Financial Wreck | Dashboard"/>
 
-        <h1 class={css::title}>"Dashboard"</h1>
+        <h1>"Dashboard"</h1>
 
         <div class={css::btn_wrapper}>
             <Button

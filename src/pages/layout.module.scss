@@ -16,5 +16,9 @@
 @include bp($from: xl-min) {
   .layout {
     flex-direction: row !important;
+
+    main {
+      flex: 1;
+    }
   }
 }

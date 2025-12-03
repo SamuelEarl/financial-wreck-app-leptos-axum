@@ -1,4 +1,5 @@
 pub mod app;
+pub mod app_router;
 pub mod pages {
     pub mod layout;
     pub mod mobile_header;
@@ -12,10 +13,17 @@ pub mod pages {
     pub mod goals {
         pub mod goals;
     }
+    pub mod net_worth {
+        pub mod net_worth;
+    }
     pub mod bank_accounts {
-        pub mod bank_account_layout;
+        pub mod bank_transactions_and_budgets_list;
+        pub mod transactions_budget_wrapper;
         pub mod transactions;
         pub mod budget;
+    }
+    pub mod errors {
+        pub mod not_found;
     }
 }
 pub mod components {

@@ -70,47 +70,6 @@ li {
 	margin-bottom: 10px;
 }
 
-a.table-link {
-	color: var(--primary-bg);
-	text-decoration-line: none;
-	border-bottom: 1px dotted var(--primary-bg);
-	cursor: pointer;
-}
-
-a.table-link:hover {
-	border-bottom-color: transparent !important;
-}
-
-// Many of the default button styles are removed or set in the preflight.css file,
-// so there is no need to remove those default styles here.
-button.link-styles {
-	text-align: left;
-	color: var(--text-color);
-	border-bottom: 1px dotted var(--text-color);
-}
-
-button.link-styles.primary {
-	color: var(--primary-bg);
-	border-bottom-color: var(--primary-bg);
-}
-
-button.link-styles.secondary {
-	color: var(--secondary-bg);
-	border-bottom-color: var(--secondary-bg);
-}
-
-button.link-styles.tertiary {
-	color: var(--tertiary-bg);
-	border-bottom-color: var(--tertiary-bg);
-}
-
-// Hide the border-bottom on hover, unless the button is disabled.
-button.link-styles:hover :not(:disabled) {
-  // If the border-bottom-color is set in a component, then it won't change to 
-  // transparent when a user hovers over it. But adding `!important` fixes that.
-  border-bottom-color: transparent !important;
-}
-
 br {
 	line-height: 0; // Firefox adds a line-height to <br> tags, so this removes that.
 	margin-bottom: var(--margin-bottom);

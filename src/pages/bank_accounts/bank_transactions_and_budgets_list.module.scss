@@ -1,0 +1,35 @@
+@include bp($from: xs-min) {
+  .bank_accounts_list {
+    list-style-type: none;
+    padding: 0;
+    // width: 50%;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+
+      .bank_account_name {
+        flex: 1;
+      }
+
+      .transactions_budget_container {
+        display: flex;
+        gap: 20px;
+
+        a {
+          border-bottom: 1px dotted var(--primary-bg);
+
+          &:hover {
+            border-bottom-color: transparent;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include bp($from: xl-min) {
+  .bank_accounts_list {
+    width: 50%;
+  }
+}

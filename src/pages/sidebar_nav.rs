@@ -8,7 +8,7 @@ use crate::components::{buttons::button::Button, icons::icon::Icon};
 
 import_style!(css, "sidebar_nav.module.scss");
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct NavLink {
     pub text: String,
     pub url: String,
@@ -21,9 +21,9 @@ pub fn SidebarNav(
 ) -> impl IntoView {
     let main_nav: [NavLink; 4] = [
         NavLink { text: String::from("Dashboard"), url: String::from("/dashboard"), },
-        NavLink { text: String::from("Net Worth"), url: String::from("/net-worth"), },
-        NavLink { text: String::from("Transactions"), url: String::from("/transactions"), },
-        NavLink { text: String::from("Budgets"), url: String::from("/budgets"), },
+        NavLink { text: String::from("Goals"), url: String::from("/goals"), },
+        NavLink { text: String::from("Accounts & Net Worth"), url: String::from("/net-worth"), },
+        NavLink { text: String::from("Transactions & Budgets"), url: String::from("/bank-transactions-and-budgets-list"), },
     ];
 
     view! {
