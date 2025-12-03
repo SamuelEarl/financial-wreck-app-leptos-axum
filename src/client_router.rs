@@ -19,7 +19,7 @@ use crate::pages::bank_accounts::{
 // use crate::pages::errors::not_found::NotFound;
 
 #[component]
-pub fn AppRouter() -> impl IntoView {
+pub fn ClientRouter() -> impl IntoView {
     view! {
         <Router>
             <Routes fallback=|| "Page not found.".into_view()>

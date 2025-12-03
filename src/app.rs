@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 
-use crate::app_router::AppRouter;
+use crate::client_router::ClientRouter;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -34,6 +34,6 @@ pub fn App() -> impl IntoView {
         // sets the document title
         <Title text="Financial Wreck"/>
 
-        <AppRouter />     
+        <ClientRouter />     
     }
 }

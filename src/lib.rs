@@ -1,5 +1,5 @@
 pub mod app;
-pub mod app_router;
+pub mod client_router;
 pub mod pages {
     pub mod layout;
     pub mod mobile_header;
