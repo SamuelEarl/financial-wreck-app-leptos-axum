@@ -18,3 +18,8 @@ styles/stylance/
 
 # JavaScript packages
 node_modules/
+
+# env
+.env
+.env.*
+!.env.example
