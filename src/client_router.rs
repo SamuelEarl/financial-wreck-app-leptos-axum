@@ -18,6 +18,11 @@ use crate::pages::bank_accounts::{
 };
 // use crate::pages::errors::not_found::NotFound;
 
+// Import docs only if feature is enabled
+#[cfg(feature = "docs")]
+use crate::docs::docs_layout::DocsLayout;
+use crate::docs::home::DocsHome;
+
 #[component]
 pub fn ClientRouter() -> impl IntoView {
     view! {
@@ -42,6 +47,13 @@ pub fn ClientRouter() -> impl IntoView {
                     // path="*any": The * tells the router this is a wildcard. The text after the asterisk (e.g., any) is the name of the parameter if you wanted to access the bad URL string (e.g., to print "The page /foo/bar does not exist").
                     // ResponseOptions: This is essential for SEO. If a bot crawls a bad link and gets a 200 OK, it may index your error page as valid content. Setting the status to NOT_FOUND prevents this.
                     // <Route path=path!("*any") view=NotFound />
+                </ParentRoute>
+
+                // Conditional Docs Route
+                // If feature is OFF, this block disappears from the binary entirely.
+                #[cfg(feature = "docs")] // TODO: Comment this out to remove the error. But will the docs routes be included in the production build?
+                <ParentRoute path=path!("/component-library") view=DocsLayout>
+                    <Route path=path!("/") view=DocsHome />
                 </ParentRoute>
             </Routes>
         </Router>

@@ -4,7 +4,7 @@
 # DEVELOPMENT
 # =========================
 leptos-watch:
-	cargo leptos watch
+	cargo leptos watch --features docs
 	
 stylance-watch:
 	stylance --watch . --output-dir ./styles/

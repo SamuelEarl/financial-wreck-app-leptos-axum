@@ -14,6 +14,13 @@ pub mod components {
     }
 }
 
+// Only compile this module if the feature is active.
+#[cfg(feature = "docs")]
+pub mod docs {
+    pub mod docs_layout;
+    pub mod home;
+}
+
 pub mod pages {
     pub mod auth {
         pub mod sign_in;
