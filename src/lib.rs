@@ -41,6 +41,9 @@ pub mod pages {
     pub mod sidebar_nav;
 }
 
+pub mod utils {
+    pub mod format_currency;
+}
 
 #[cfg(feature = "hydrate")]
 #[wasm_bindgen::prelude::wasm_bindgen]
