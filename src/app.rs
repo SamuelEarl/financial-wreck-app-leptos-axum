@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
+use leptos::logging::log;
 
 use crate::client_router::ClientRouter;
 
@@ -25,6 +26,9 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
+
+    let leptos_env = env!("LEPTOS_ENV");
+    log!("leptos_env: {:?}", leptos_env);
 
     view! {
         // injects a stylesheet into the document <head>

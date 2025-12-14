@@ -2,9 +2,10 @@ use leptos::prelude::*;
 use leptos_router::{
     components::{Route, ParentRoute},
     // StaticSegment,
-    MatchNestedRoutes,
     path,
 };
+#[cfg(not(feature = "docs"))]
+use leptos_router::MatchNestedRoutes;
 
 use crate::pages::layout::Layout;
 use crate::pages::dashboard::dashboard::Dashboard;
@@ -33,6 +34,7 @@ pub fn PagesRoutes() -> impl MatchNestedRoutes + Clone {
                 <Route path=path!("/transactions") view=Transactions />
                 <Route path=path!("/budget") view=Budget />
             </ParentRoute>
+            // TODO:
             // I have recorded the fix for the catch-all route in the src/pages/errors/404_ROUTE_FIX.md file. I can implement it after I have implemented the server code.
             // Key Details
             // path="*any": The * tells the router this is a wildcard. The text after the asterisk (e.g., any) is the name of the parameter if you wanted to access the bad URL string (e.g., to print "The page /foo/bar does not exist").

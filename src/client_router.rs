@@ -6,12 +6,8 @@ use leptos_router::{
 };
 
 use crate::pages::auth::sign_in::SignIn;
-// Import the DocsRoutes only if the docs feature is enabled.
-#[cfg(feature = "docs")]
 use crate::routes::docs_routes::DocsRoutes;
 use crate::routes::pages_routes::PagesRoutes;
-
-// use crate::pages::errors::not_found::NotFound;
 
 #[component]
 pub fn ClientRouter() -> impl IntoView {
@@ -23,8 +19,9 @@ pub fn ClientRouter() -> impl IntoView {
                 
                 <PagesRoutes />
 
-                // TODO: Figure out how to conditionally compile DocsRoutes so it is excluded in a production build.
-                // #[cfg(feature = "docs")]
+                // The DocsRoutes will only be included during development
+                // and will be left out of the compiled bundle during production builds.
+                // See the routes/docs_routes.rs file.
                 <DocsRoutes />
             </Routes>
         </Router>

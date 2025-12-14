@@ -4,7 +4,7 @@
 # DEVELOPMENT
 # =========================
 leptos-watch:
-	cargo leptos watch --features docs
+	LEPTOS_ENV=development cargo leptos watch --features docs
 	
 stylance-watch:
 	stylance --watch . --output-dir ./styles/
@@ -29,8 +29,7 @@ generate-css-icons:
 # PRODUCTION BUILD
 # =========================
 leptos-build:
-# 	cargo leptos build --release -vv
-	cargo leptos build --release
+	LEPTOS_ENV=production cargo leptos build --release -vv
 
 stylance-build:
 	stylance . --output-dir ./styles/

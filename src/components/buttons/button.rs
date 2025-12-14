@@ -10,8 +10,15 @@ import_style!(css, "button.module.scss");
 
 // #[derive(strum_macros::Display)]
 // pub enum Variant { Primary, Secondary, Tertiary, Alert }
-// TODO: Import the 
-use crate::components::colors_and_sizes::{BtnVariant, Colors, Sizes, ElementWidths, get_btn_colors, get_element_sizes, get_element_width};
+use crate::components::colors_and_sizes::{
+    BtnVariant, 
+    Colors, 
+    Sizes, 
+    ElementWidths, 
+    get_btn_colors, 
+    get_element_sizes, 
+    get_element_width
+};
 
 #[component]
 pub fn Button(
