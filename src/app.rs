@@ -34,6 +34,6 @@ pub fn App() -> impl IntoView {
         // sets the document title
         <Title text="Financial Wreck"/>
 
-        <ClientRouter />     
+        <ClientRouter />
     }
 }

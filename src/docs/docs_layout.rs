@@ -10,6 +10,7 @@ use crate::pages::sidebar_nav::SidebarNav;
 
 import_style!(css, "docs_layout.module.scss");
 
+#[cfg(feature = "docs")]
 #[component]
 pub fn DocsLayout() -> impl IntoView {
     let (nav_is_open, set_nav_is_open) = signal(false);

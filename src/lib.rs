@@ -48,6 +48,11 @@ pub mod pages {
     pub mod sidebar_nav;
 }
 
+pub mod routes {
+    pub mod docs_routes;
+    pub mod pages_routes;
+}
+
 pub mod utils {
     pub mod format_currency;
 }

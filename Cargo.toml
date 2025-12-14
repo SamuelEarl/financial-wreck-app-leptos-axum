@@ -38,7 +38,7 @@ ssr = [
 ]
 # Default is empty, so "docs" is EXCLUDED in production builds automatically
 # default = []
-# When we run with --features docs, this is enabled
+# This feature is off by default. When we run with --features docs, this is enabled
 docs = []
 
 # Defines a size-optimized profile for the WASM bundle in release mode
