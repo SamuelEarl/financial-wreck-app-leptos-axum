@@ -19,14 +19,10 @@ import_style!(css, "sidebar_nav.module.scss");
 #[component]
 pub fn SidebarNav(
     nav: &'static[NavLink],
-    #[prop(into)] nav_is_open: Signal<bool>,
     set_nav_is_open: WriteSignal<bool>,
 ) -> impl IntoView {
     view! {
-        <div
-            class={css::nav_container}
-            style:right=move || if nav_is_open.get() { "0" } else { "110vw" }
-        >
+        <div class={css::nav_container}>
             <div class={css::nav_container_header}>
                 <div class={css::close_menu_btn_container}>
                     <Button
@@ -63,7 +59,7 @@ pub fn SidebarNav(
                 </div>
             </div>
             <nav>
-                <ul class={css::main_list}>
+                <ul class={css::nav_list}>
                     {
                         nav.iter()
                             .map(|link| view! {

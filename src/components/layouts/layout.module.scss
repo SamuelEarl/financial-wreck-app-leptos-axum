@@ -1,9 +1,24 @@
 @include bp($from: xs-min) {
   .layout {
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 
+    nav.layout_nav {
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 110vw;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--secondary-bg);
+      z-index: 100;
+      transition: right 0.25s ease;
+    }
+
     main {
+      overflow-y: auto;
       padding: 20px 15px;
       background-color: var(--neutral-1);
     }
@@ -17,6 +32,12 @@
 @include bp($from: xl-min) {
   .layout {
     flex-direction: row !important;
+
+    nav.layout_nav {
+      position: relative !important;
+      right: auto !important;
+      width: 20vw !important;
+    }
 
     main {
       flex: 1;

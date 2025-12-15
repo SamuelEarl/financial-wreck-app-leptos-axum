@@ -1,15 +1,9 @@
-// Usage Example:
-// <Button
-// />
-
 use leptos::prelude::*;
 use leptos::attr::any_attribute::AnyAttribute;
 use stylance::*;
 
 import_style!(css, "button.module.scss");
 
-// #[derive(strum_macros::Display)]
-// pub enum Variant { Primary, Secondary, Tertiary, Alert }
 use crate::components::colors_and_sizes::{
     BtnVariant, 
     Colors, 
@@ -34,10 +28,10 @@ pub fn Button(
     view! {
         <button
             class={css::btn}
-            // style=format!("{get_btn_colors(colors, variant, inverted)} {get_element_sizes(sizes, true).all} {get_element_width(width)}")
             style=format!("{} {} {}", get_btn_colors(colors, variant, inverted), get_element_sizes(sizes, true).all, get_element_width(width))
             // attr:disabled=(move || disabled || form_is_valid())
-            // This spreads the attributes that are captured in the `attributes` prop.
+            // This spreads the attributes that are captured in the `attributes` prop,
+            // including any on:<event> attributes.
             {..attributes}
         >
             {children()}

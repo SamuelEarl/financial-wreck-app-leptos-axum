@@ -47,11 +47,15 @@ pub fn Layout(nav: &'static[NavLink]) -> impl IntoView {
     view! {
         <div class={css::layout}>
             <MobileHeader set_nav_is_open=set_nav_is_open />
-            <SidebarNav
-                nav=nav
-                nav_is_open=nav_is_open 
-                set_nav_is_open=set_nav_is_open
-            />
+            <nav 
+                class={css::layout_nav}
+                style:right=move || if nav_is_open.get() { "0" } else { "110vw" }
+            >
+                <SidebarNav
+                    nav=nav
+                    set_nav_is_open=set_nav_is_open
+                />
+            </nav>
             <main>
                 <Outlet />
             </main>

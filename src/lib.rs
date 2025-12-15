@@ -23,7 +23,8 @@ pub mod components {
 // Only compile this module if the feature is active.
 #[cfg(feature = "docs")]
 pub mod docs {
-    pub mod home;
+    pub mod home_docs;
+    pub mod buttons_docs;
 }
 
 pub mod pages {

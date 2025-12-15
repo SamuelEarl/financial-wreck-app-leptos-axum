@@ -1,5 +1,69 @@
 use std::fmt;
 
+
+// The custom colors structure
+#[derive(Clone, Debug)]
+pub struct Colors {
+    pub bg: String, // background color
+    pub fg: String, // foreground color
+    pub br: String, // border color
+    pub ol: String, // outline color
+}
+
+// Button variants
+#[derive(Clone, Debug)]
+pub enum BtnVariant {
+    Primary,
+    Secondary,
+    Tertiary,
+    Alert,
+}
+
+// Helper to convert the enum to a lowercase string (e.g., "primary")
+impl fmt::Display for BtnVariant {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            BtnVariant::Primary => write!(f, "primary"),
+            BtnVariant::Secondary => write!(f, "secondary"),
+            BtnVariant::Tertiary => write!(f, "tertiary"),
+            BtnVariant::Alert => write!(f, "alert"),
+        }
+    }
+}
+
+pub fn get_btn_colors(
+    colors: Option<Colors>, 
+    variant: BtnVariant, 
+    inverted: bool
+) -> String {
+    // Case A: Custom colors provided
+    if let Some(c) = colors {
+        return format!(
+            "background-color: {}; color: {}; border-color: {}; outline-color: {};",
+            c.bg, c.fg, c.br, c.ol
+        );
+    }
+    
+    // Case B: Use pre-defined CSS variables based on variant
+    // Note: Rust's format! macro handles the Display trait implementation automatically
+    if inverted {
+        format!(
+            "background-color: var(--{variant}-fg); \
+             color: var(--{variant}-bg); \
+             border-color: var(--{variant}-fg); \
+             outline-color: var(--{variant}-fg);"
+        )
+    } else {
+        format!(
+            "background-color: var(--{variant}-bg); \
+             color: var(--{variant}-fg); \
+             border-color: var(--{variant}-bg); \
+             outline-color: var(--{variant}-bg);"
+        )
+    }
+}
+
+
 // The Sizes input structure
 #[derive(Clone, Debug)]
 pub struct Sizes {
@@ -74,21 +138,21 @@ pub fn get_element_sizes(sizes: Option<Sizes>, is_btn: bool) -> ElementSizes {
     // -- Padding Logic --
     let pv_val = s.and_then(|x| x.pv).unwrap_or(-1);
     let padding_v = if pv_val > -1 {
-        format!("var(--size-{});", pv_val)
+        format!("var(--size-{})", pv_val)
     } else {
-        "var(--padding-v-default);".to_string()
+        "var(--padding-v-default)".to_string()
     };
 
     let ph_val = s.and_then(|x| x.ph).unwrap_or(-1);
     let padding_h = if ph_val > -1 {
-        format!("var(--size-{});", ph_val)
+        format!("var(--size-{})", ph_val)
     } else {
-        "var(--padding-h-default);".to_string()
+        "var(--padding-h-default)".to_string()
     };
 
     // -- Construct the 'all' string --
     let mut all = format!(
-        "font-size: {}; font-weight: {}; padding: {} {}",
+        "font-size: {}; font-weight: {}; padding: {} {};",
         font_size, font_weight, padding_v, padding_h
     );
 
@@ -111,69 +175,6 @@ pub fn get_element_sizes(sizes: Option<Sizes>, is_btn: bool) -> ElementSizes {
         fw: font_weight,
         pv: padding_v,
         ph: padding_h,
-    }
-}
-
-
-// The custom colors structure
-#[derive(Clone, Debug)]
-pub struct Colors {
-    pub bg: String, // background color
-    pub fg: String, // foreground color
-    pub br: String, // border color
-    pub ol: String, // outline color
-}
-
-// Button variants
-#[derive(Clone, Debug)]
-pub enum BtnVariant {
-    Primary,
-    Secondary,
-    Tertiary,
-    Alert,
-}
-
-// Helper to convert the enum to a lowercase string (e.g., "primary")
-impl fmt::Display for BtnVariant {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            BtnVariant::Primary => write!(f, "primary"),
-            BtnVariant::Secondary => write!(f, "secondary"),
-            BtnVariant::Tertiary => write!(f, "tertiary"),
-            BtnVariant::Alert => write!(f, "alert"),
-        }
-    }
-}
-
-pub fn get_btn_colors(
-    colors: Option<Colors>, 
-    variant: BtnVariant, 
-    inverted: bool
-) -> String {
-    // Case A: Custom colors provided
-    if let Some(c) = colors {
-        return format!(
-            "background-color: {}; color: {}; border-color: {}; outline-color: {};",
-            c.bg, c.fg, c.br, c.ol
-        );
-    }
-    
-    // Case B: Use pre-defined CSS variables based on variant
-    // Note: Rust's format! macro handles the Display trait implementation automatically
-    if inverted {
-        format!(
-            "background-color: var(--{variant}-fg); \
-             color: var(--{variant}-bg); \
-             border-color: var(--{variant}-fg); \
-             outline-color: var(--{variant}-fg);"
-        )
-    } else {
-        format!(
-            "background-color: var(--{variant}-bg); \
-             color: var(--{variant}-fg); \
-             border-color: var(--{variant}-bg); \
-             outline-color: var(--{variant}-bg);"
-        )
     }
 }
 

@@ -11,6 +11,22 @@ body {
 	font-size: 100%;
 	color: var(--text-color);
 	font-weight: normal;
+
+	::-webkit-scrollbar {
+		width: 7px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: var(--white);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--neutral-8);
+
+		&:hover {
+			background: var(--neutral-6);
+		}
+	}
 }
 
 h1,
@@ -91,6 +107,7 @@ pre, code {
 pre {
 	padding: 10px;
 	margin-bottom: var(--margin-bottom);
+	overflow-x: auto;
 }
 
 
