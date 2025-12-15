@@ -34,6 +34,8 @@ width: `Auto` (default), `Full`
 </Button>
 ```
 
+<br />
+
 ## Colors & Sizes
 
 You can create buttons with custom colors by passing values to the `colors` prop.
@@ -51,6 +53,8 @@ You can create buttons with custom sizes by passing values to the `sizes` prop.
 * `fw`: font weight
 * `pv`: padding vertical
 * `ph`: padding horizontal
+
+<br />
 
 {{
     <Button

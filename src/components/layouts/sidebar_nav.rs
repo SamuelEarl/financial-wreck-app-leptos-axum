@@ -1,6 +1,9 @@
 use leptos::prelude::*;
 // use leptos::logging::log;
-use leptos_router::components::A;
+use leptos_router::{
+    components::A,
+    hooks::use_location,
+};
 use stylance::*;
 
 use crate::nav_links::NavLink;
@@ -21,6 +24,9 @@ pub fn SidebarNav(
     nav: &'static[NavLink],
     set_nav_is_open: WriteSignal<bool>,
 ) -> impl IntoView {
+    // 1. Get the location signal.
+    let location = use_location();
+
     view! {
         <div class={css::nav_container}>
             <div class={css::nav_container_header}>
@@ -71,9 +77,24 @@ pub fn SidebarNav(
                 {
                     #[cfg(feature = "docs")]
                     view! {
-                        <ul>
-                            <li><A href="/docs">Docs</A></li>
-                        </ul>
+                        // 2. Reactive Check
+                        {
+                            move || {
+                                // Get the current path string
+                                let path = location.pathname.get();
+
+                                // 3. The If Statement
+                                if !path.starts_with("/docs") {
+                                    Some(view! { 
+                                        <ul>
+                                            <li><A href="/docs">Docs</A></li>
+                                        </ul> 
+                                    })
+                                } else {
+                                    None // Render nothing if we are in /docs
+                                }
+                            }
+                        }
                     }
                 }
             </nav>
