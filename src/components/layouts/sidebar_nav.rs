@@ -3,29 +3,25 @@ use leptos::prelude::*;
 use leptos_router::components::A;
 use stylance::*;
 
+use crate::nav_links::NavLink;
+
 use crate::components::colors_and_sizes::{Colors, Sizes};
 use crate::components::{buttons::button::Button, icons::icon::Icon};
 
 import_style!(css, "sidebar_nav.module.scss");
 
-#[derive(Debug)]
-pub struct NavLink {
-    pub text: String,
-    pub url: String,
-}
+// #[derive(Debug)]
+// pub struct NavLink {
+//     pub text: String,
+//     pub url: String,
+// }
 
 #[component]
 pub fn SidebarNav(
+    nav: &'static[NavLink],
     #[prop(into)] nav_is_open: Signal<bool>,
     set_nav_is_open: WriteSignal<bool>,
 ) -> impl IntoView {
-    let main_nav: [NavLink; 4] = [
-        NavLink { text: String::from("Dashboard"), url: String::from("/dashboard"), },
-        NavLink { text: String::from("Goals"), url: String::from("/goals"), },
-        NavLink { text: String::from("Net Worth & Accounts"), url: String::from("/net-worth"), },
-        NavLink { text: String::from("Transactions & Budgets"), url: String::from("/bank-transactions-and-budgets-list"), },
-    ];
-
     view! {
         <div
             class={css::nav_container}
@@ -67,15 +63,23 @@ pub fn SidebarNav(
                 </div>
             </div>
             <nav>
-                <ul>
+                <ul class={css::main_list}>
                     {
-                        main_nav.into_iter()
+                        nav.iter()
                             .map(|link| view! {
                                 <li><A href={link.url}>{link.text}</A></li>
                             })
                             .collect_view()
                     }
                 </ul>
+                {
+                    #[cfg(feature = "docs")]
+                    view! {
+                        <ul>
+                            <li><A href="/docs">Docs</A></li>
+                        </ul>
+                    }
+                }
             </nav>
         </div>
     }

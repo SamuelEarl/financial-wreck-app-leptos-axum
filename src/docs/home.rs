@@ -9,11 +9,7 @@ pub fn DocsHome() -> impl IntoView {
     view! {
         <div class="docs-container">
             <h1>"Component Library"</h1>
-            <nav>
-                <a href="/component-library/buttons">"Buttons"</a>
-                <a href="/component-library/inputs">"Inputs"</a>
-            </nav>
-            <Outlet/> // Allows nested routing for specific components
+            <p>"Welcome..."</p>
         </div>
     }
 }

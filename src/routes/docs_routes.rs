@@ -10,9 +10,12 @@ use leptos_router::MatchNestedRoutes;
 
 #[cfg(feature = "docs")]
 use crate::docs::{
-    docs_layout::DocsLayout,
     home::DocsHome,
 };
+#[cfg(feature = "docs")]
+use crate::nav_links::DOCS_NAV;
+#[cfg(feature = "docs")]
+use crate::components::layouts::layout::Layout;
 
 // Import docs only if feature is enabled
 #[component(transparent)]
@@ -26,7 +29,7 @@ pub fn DocsRoutes() -> impl MatchNestedRoutes + Clone {
     view! {
         // Conditional DocsRoutes
         // If the docs feature is OFF, then this block disappears from the binary entirely.
-        <ParentRoute path=path!("/docs") view=DocsLayout>
+        <ParentRoute path=path!("/docs") view=move || view! { <Layout nav=&DOCS_NAV /> }>
             <Route path=path!("/") view=DocsHome />
         </ParentRoute>
     }

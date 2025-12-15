@@ -7,7 +7,9 @@ use leptos_router::{
 #[cfg(not(feature = "docs"))]
 use leptos_router::MatchNestedRoutes;
 
-use crate::pages::layout::Layout;
+use crate::nav_links::MAIN_NAV;
+
+use crate::components::layouts::layout::Layout;
 use crate::pages::dashboard::dashboard::Dashboard;
 use crate::pages::goals::goals::Goals;
 use crate::pages::net_worth::net_worth::NetWorth;
@@ -22,7 +24,7 @@ use crate::pages::bank_accounts::{
 #[component(transparent)]
 pub fn PagesRoutes() -> impl MatchNestedRoutes + Clone {
     view! {
-        <ParentRoute path=path!("/") view=Layout>
+        <ParentRoute path=path!("/") view=move || view! { <Layout nav=&MAIN_NAV /> }>
             <Route path=path!("/dashboard") view=Dashboard />
             <Route path=path!("/goals") view=Goals />
             <Route path=path!("/net-worth") view=NetWorth />

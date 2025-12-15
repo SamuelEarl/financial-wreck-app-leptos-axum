@@ -1,5 +1,6 @@
 pub mod app;
 pub mod client_router;
+pub mod nav_links;
 
 pub mod components {
     pub mod buttons {
@@ -9,6 +10,11 @@ pub mod components {
     pub mod icons {
         pub mod icon;
     }
+    pub mod layouts {
+        pub mod layout;
+        pub mod mobile_header;
+        pub mod sidebar_nav;
+    }
     pub mod progress_bars {
         pub mod progress_bar;
     }
@@ -17,7 +23,6 @@ pub mod components {
 // Only compile this module if the feature is active.
 #[cfg(feature = "docs")]
 pub mod docs {
-    pub mod docs_layout;
     pub mod home;
 }
 
@@ -40,12 +45,9 @@ pub mod pages {
     pub mod goals {
         pub mod goals;
     }
-    pub mod layout;
-    pub mod mobile_header;
     pub mod net_worth {
         pub mod net_worth;
     }
-    pub mod sidebar_nav;
 }
 
 pub mod routes {

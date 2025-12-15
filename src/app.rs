@@ -27,8 +27,8 @@ pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
 
-    let leptos_env = env!("LEPTOS_ENV");
-    log!("leptos_env: {:?}", leptos_env);
+    let app_env = env!("APP_ENV");
+    log!("app_env: {:?}", app_env);
 
     view! {
         // injects a stylesheet into the document <head>

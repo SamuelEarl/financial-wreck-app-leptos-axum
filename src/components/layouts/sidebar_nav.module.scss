@@ -8,6 +8,8 @@
     background-color: var(--secondary-bg);
     z-index: 100;
     transition: right 0.25s ease;
+    display: flex;
+    flex-direction: column;
 
     .nav_container_header {
       display: flex;
@@ -31,6 +33,9 @@
 
     nav {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       padding: 15px;
       padding-right: 0;
       overflow-y: auto;
@@ -59,6 +64,10 @@
             }
           }
         }
+      }
+
+      ul.main_list {
+        flex: 1;
       }
     }
   }

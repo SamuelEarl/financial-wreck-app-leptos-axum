@@ -5,14 +5,17 @@ use leptos_use::use_window;
 use leptos::logging::log;
 use stylance::*;
 
-use crate::pages::mobile_header::MobileHeader;
-use crate::pages::sidebar_nav::SidebarNav;
+use crate::nav_links::NavLink;
 
-import_style!(css, "docs_layout.module.scss");
+use crate::components::layouts::{
+    mobile_header::MobileHeader,
+    sidebar_nav::SidebarNav,
+};
 
-#[cfg(feature = "docs")]
+import_style!(css, "layout.module.scss");
+
 #[component]
-pub fn DocsLayout() -> impl IntoView {
+pub fn Layout(nav: &'static[NavLink]) -> impl IntoView {
     let (nav_is_open, set_nav_is_open) = signal(false);
 
     // 1. Get the location signal.
@@ -45,6 +48,7 @@ pub fn DocsLayout() -> impl IntoView {
         <div class={css::layout}>
             <MobileHeader set_nav_is_open=set_nav_is_open />
             <SidebarNav
+                nav=nav
                 nav_is_open=nav_is_open 
                 set_nav_is_open=set_nav_is_open
             />
