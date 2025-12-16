@@ -24,6 +24,9 @@ width: `Auto` (default), `Full`
 <br />
 
 ```rust
+use crate::components::buttons::button::Button;
+use crate::components::colors_and_sizes::{BtnVariant, Colors, Sizes, ElementWidths};
+
 <Button
     variant={BtnVariant::Primary}
     inverted={false}
@@ -79,6 +82,7 @@ You can create buttons with custom sizes by passing values to the `sizes` prop.
 <br />
 
 ```rust
+
 <Button
     colors=Some(Colors {
         bg: "var(--primary-bg)".to_string(),

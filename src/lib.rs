@@ -3,6 +3,9 @@ pub mod client_router;
 pub mod nav_links;
 
 pub mod components {
+    pub mod accordions {
+        pub mod accordion;
+    }
     pub mod buttons {
         pub mod button;
     }
@@ -15,6 +18,9 @@ pub mod components {
         pub mod mobile_header;
         pub mod sidebar_nav;
     }
+    pub mod modals {
+        pub mod modal;
+    }
     pub mod progress_bars {
         pub mod progress_bar;
     }
@@ -24,7 +30,9 @@ pub mod components {
 #[cfg(feature = "docs")]
 pub mod docs {
     pub mod home_docs;
+    pub mod accordions_docs;
     pub mod buttons_docs;
+    pub mod modals_docs;
 }
 
 pub mod pages {

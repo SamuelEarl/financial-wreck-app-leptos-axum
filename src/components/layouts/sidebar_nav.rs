@@ -13,19 +13,15 @@ use crate::components::{buttons::button::Button, icons::icon::Icon};
 
 import_style!(css, "sidebar_nav.module.scss");
 
-// #[derive(Debug)]
-// pub struct NavLink {
-//     pub text: String,
-//     pub url: String,
-// }
-
 #[component]
 pub fn SidebarNav(
     nav: &'static[NavLink],
     set_nav_is_open: WriteSignal<bool>,
 ) -> impl IntoView {
-    // 1. Get the location signal.
+    // Get the location signal.
     let location = use_location();
+    // Create a derived signal for readability
+    let not_docs = move || !location.pathname.get().starts_with("/docs");
 
     view! {
         <div class={css::nav_container}>
@@ -77,24 +73,16 @@ pub fn SidebarNav(
                 {
                     #[cfg(feature = "docs")]
                     view! {
-                        // 2. Reactive Check
-                        {
-                            move || {
-                                // Get the current path string
-                                let path = location.pathname.get();
-
-                                // 3. The If Statement
-                                if !path.starts_with("/docs") {
-                                    Some(view! { 
-                                        <ul>
-                                            <li><A href="/docs">Docs</A></li>
-                                        </ul> 
-                                    })
-                                } else {
-                                    None // Render nothing if we are in /docs
-                                }
-                            }
-                        }
+                        <Show
+                            // If this is TRUE, show children
+                            when=not_docs 
+                            // If FALSE, show nothing (or put a specific fallback view here)
+                            fallback=|| view! {} 
+                        >
+                            <ul>
+                                <li><A href="/docs">Docs</A></li>
+                            </ul>
+                        </Show>
                     }
                 }
             </nav>

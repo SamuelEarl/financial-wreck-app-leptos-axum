@@ -32,7 +32,7 @@ pub fn Layout(nav: &'static[NavLink]) -> impl IntoView {
         // Example: Log to console (or send to Google Analytics).
         log!("Navigated to: {}", current_path);
 
-         // Returns `UseWindow` which wraps `Option<Window>`
+        // Returns `UseWindow` which wraps `Option<Window>`
         let window = use_window();
 
         // Scroll to top of window

@@ -11,7 +11,8 @@ use leptos_router::MatchNestedRoutes;
 #[cfg(feature = "docs")]
 use crate::docs::{
     home_docs::HomeDocs,
-    buttons_docs::ButtonsDocs
+    accordions_docs::AccordionsDocs,
+    buttons_docs::ButtonsDocs,
 };
 #[cfg(feature = "docs")]
 use crate::nav_links::DOCS_NAV;
@@ -32,6 +33,7 @@ pub fn DocsRoutes() -> impl MatchNestedRoutes + Clone {
         // If the docs feature is OFF, then this block disappears from the binary entirely.
         <ParentRoute path=path!("/docs") view=move || view! { <Layout nav=&DOCS_NAV /> }>
             <Route path=path!("/") view=HomeDocs />
+            <Route path=path!("/accordions") view=AccordionsDocs />
             <Route path=path!("/buttons") view=ButtonsDocs />
         </ParentRoute>
     }
