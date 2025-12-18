@@ -1,0 +1,85 @@
+// The dark overlay
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+// The main container box
+.content {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: calc(100vw - 20px);
+  max-width: 950px;
+  display: flex;
+  flex-direction: column;
+  
+  // Logic: Shrink to fit content, but cap at screen height - 20px
+  height: auto;
+  max-height: calc(100vh - 20px);
+  
+  animation: scaleIn 0.3s ease-out;
+}
+
+// Structural wrappers
+.header {
+  padding: 15px 20px;
+  flex-shrink: 0; // Don't shrink header
+}
+
+.title {
+  margin: 0;
+  font-size: var(--size-5);
+  font-weight: 600;
+}
+
+.description {
+  margin: 5px 0 0 0;
+  font-size: 0.875rem;
+  color: var(--neutral-8)
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; // Contain the scroll area
+  flex: 1; // Take available space
+}
+
+// This is the specific scrollable area
+.scroll_area {
+  padding: 15px 20px;
+  overflow-y: auto; // SCROLL HERE
+  overscroll-behavior: contain;
+  border-top: var(--border);
+  border-bottom: var(--border);
+}
+
+.footer {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-shrink: 0; // Don't shrink footer
+}
+
+// Utility for trigger buttons (optional, can be overridden)
+.trigger {
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

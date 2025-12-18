@@ -6,7 +6,6 @@
     flex-direction: column;
 
     nav.layout_nav {
-      height: 100%;
       position: absolute;
       top: 0;
       right: 110vw;
@@ -18,6 +17,7 @@
     }
 
     main {
+      height: 100vh;
       overflow-y: auto;
       padding: 20px 15px;
       background-color: var(--neutral-1);

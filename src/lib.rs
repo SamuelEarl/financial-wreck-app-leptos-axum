@@ -18,8 +18,8 @@ pub mod components {
         pub mod mobile_header;
         pub mod sidebar_nav;
     }
-    pub mod modals {
-        pub mod modal;
+    pub mod dialogs {
+        pub mod dialog;
     }
     pub mod progress_bars {
         pub mod progress_bar;
@@ -32,7 +32,7 @@ pub mod docs {
     pub mod home_docs;
     pub mod accordions_docs;
     pub mod buttons_docs;
-    pub mod modals_docs;
+    pub mod dialogs_docs;
 }
 
 pub mod pages {

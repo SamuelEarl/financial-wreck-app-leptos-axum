@@ -4,9 +4,13 @@ use leptos::logging::log;
 use stylance::*;
 
 use crate::components::{
+    colors_and_sizes::BtnVariant,
     accordions::accordion::AccordionItem,
     buttons::button::Button,
-    colors_and_sizes::BtnVariant,
+    dialogs::dialog::{ 
+        Dialog, DialogTrigger, DialogContent, DialogBody, DialogHeader, 
+        DialogTitle, DialogDescription, ScrollArea, DialogFooter, DialogClose
+    },
 };
 use crate::utils::format_currency::{format_currency};
 
@@ -47,5 +51,63 @@ pub fn NetWorth() -> impl IntoView {
         <br />
 
         <h2 class={css::underline}>"Liabilities"</h2>
+
+        <Dialog>
+            // 1. The button that sits on your page
+            <DialogTrigger>
+                <Button
+                    variant={BtnVariant::Primary}
+                >
+                    "Open Terms of Service"
+                </Button>
+            </DialogTrigger>
+
+            // 2. The Modal Content
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>"Terms of Service"</DialogTitle>
+                    <DialogDescription>
+                        "Please read these terms carefully before agreeing."
+                    </DialogDescription>
+                </DialogHeader>
+
+                <DialogBody>
+                    <ScrollArea>
+                        // <p style="margin-bottom: 10px; color: #555;">
+                        //     "This content is inside the scroll area."
+                        //     "It will scroll automatically if the screen is too short."
+                        // </p>
+                        {
+                            (0..20).map(|i| view! {
+                                <p style="margin-bottom: 10px; color: #555;">
+                                    "Paragraph #" {i} ": This content is inside the scroll area. "
+                                    "It will scroll automatically if the screen is too short."
+                                </p>
+                            }).collect_view()
+                        }
+                    </ScrollArea>
+                </DialogBody>
+
+                <DialogFooter>
+                    <DialogClose>
+                        <Button
+                            variant={BtnVariant::Tertiary}
+                        >
+                            "Decline"
+                        </Button>
+                    </DialogClose>
+                    
+                    // Note: Since this is "Accept", you might want custom logic here
+                    // besides just closing, but for now we just wrap a button.
+                    <DialogClose>
+                        <Button
+                            variant={BtnVariant::Secondary}
+                        >
+                            "Accept"
+                        </Button>
+                    </DialogClose>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     }
 }
