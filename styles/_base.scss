@@ -4,6 +4,7 @@
 // NOTE: I haven't been able to figure out how to get CSS nesting to work outside of Svelte components.
 
 @use "theme" as *;
+@use "sass:color";
 
 html,
 body {
@@ -17,14 +18,14 @@ body {
 	}
 
 	::-webkit-scrollbar-track {
-		background: var(--white);
+		background-color: var(--white);
 	}
 
 	::-webkit-scrollbar-thumb {
-		background: var(--neutral-8);
+		background-color: var(--primary-bg);
 
 		&:hover {
-			background: var(--neutral-6);
+			background: color-mix(in srgb, var(--primary-bg), white 20%);
 		}
 	}
 }

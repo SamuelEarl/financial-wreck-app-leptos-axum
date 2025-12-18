@@ -4,11 +4,13 @@
 
 ## Variants, Inverted & Widths
 
-variant: `Primary`, `Secondary`, `Tertiary`, `Alert`
+`variant`: `Primary`, `Secondary`, `Tertiary`, `Alert`
 
-inverted: An inverted button will switch the background and foreground colors. NOTE: If you want to create a button with a transparent background then you will have to create a button with custom colors (see below).
+`inverted`: `true` (default), `false`
 
-width: `Auto` (default), `Full`
+* An inverted button will switch the background and foreground colors. NOTE: If you want to create a button with a transparent background then you will have to create a button with custom colors (see below).
+
+`width`: `Auto` (default), `Full`
 
 {{
     <Button
@@ -25,7 +27,7 @@ width: `Auto` (default), `Full`
 
 ```rust
 use crate::components::buttons::button::Button;
-use crate::components::colors_and_sizes::{BtnVariant, Colors, Sizes, ElementWidths};
+use crate::components::colors_and_sizes::{BtnVariant, ElementWidths};
 
 <Button
     variant={BtnVariant::Primary}
@@ -62,10 +64,10 @@ You can create buttons with custom sizes by passing values to the `sizes` prop.
 {{
     <Button
         colors=Some(Colors {
-            bg: "var(--primary-bg)".to_string(),
-            fg: "var(--primary-fg)".to_string(),
-            br: "var(--primary-bg)".to_string(),
-            ol: "var(--primary-bg)".to_string(),
+            bg: "var(--dark-red)".to_string(),
+            fg: "var(--white)".to_string(),
+            br: "var(--dark-red)".to_string(),
+            ol: "var(--dark-red)".to_string(),
         })
         sizes=Some(Sizes {
             fs: Some(4),
@@ -82,13 +84,15 @@ You can create buttons with custom sizes by passing values to the `sizes` prop.
 <br />
 
 ```rust
+use crate::components::buttons::button::Button;
+use crate::components::colors_and_sizes::{Colors, Sizes};
 
 <Button
     colors=Some(Colors {
-        bg: "var(--primary-bg)".to_string(),
-        fg: "var(--primary-fg)".to_string(),
-        br: "var(--primary-bg)".to_string(),
-        ol: "var(--primary-bg)".to_string(),
+        bg: "var(--dark-red)".to_string(),
+        fg: "var(--white)".to_string(),
+        br: "var(--dark-red)".to_string(),
+        ol: "var(--dark-red)".to_string(),
     })
     sizes=Some(Sizes {
         fs: Some(4),
@@ -121,6 +125,9 @@ NOTE: The `sizes` prop has default values. So if you want to specify values for 
 <br />
 
 ```rust
+use crate::components::buttons::button::Button;
+use crate::components::colors_and_sizes::{BtnVariant, Sizes};
+
 <Button
     variant={BtnVariant::Primary}
     sizes=Some(Sizes {

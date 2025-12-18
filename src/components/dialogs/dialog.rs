@@ -3,7 +3,7 @@ use stylance::*;
 
 import_style!(css, "dialog.module.scss");
 
-// 1. CONTEXT
+// CONTEXT
 // This allows the Trigger to tell the Content to open/close
 #[derive(Clone, Copy)]
 struct DialogContext {
@@ -11,7 +11,7 @@ struct DialogContext {
     set_is_open: WriteSignal<bool>,
 }
 
-// 2. ROOT COMPONENT
+// ROOT COMPONENT
 #[component]
 pub fn Dialog(children: Children) -> impl IntoView {
     // We hold the state here
@@ -38,7 +38,7 @@ pub fn Dialog(children: Children) -> impl IntoView {
     }
 }
 
-// 3. TRIGGER (The button that opens it)
+// TRIGGER (The button that opens it)
 #[component]
 pub fn DialogTrigger(children: Children) -> impl IntoView {
     let ctx = use_context::<DialogContext>().expect("DialogTrigger must be inside <Dialog/>");
@@ -53,7 +53,7 @@ pub fn DialogTrigger(children: Children) -> impl IntoView {
     }
 }
 
-// 4. CONTENT (The Modal itself)
+// CONTENT (The Modal itself)
 #[component]
 pub fn DialogContent(
     children: ChildrenFn,
@@ -83,21 +83,7 @@ pub fn DialogContent(
     }
 }
 
-// 5. BODY & SCROLL AREA
-#[component]
-pub fn DialogBody(children: Children) -> impl IntoView {
-    view! { <div class={css::body}>{children()}</div> }
-}
-
-#[component]
-pub fn ScrollArea(
-    children: Children, 
-    #[prop(optional, into)] class: String
-) -> impl IntoView {
-    view! { <div class=format!("{} {}", css::scroll_area, class)>{children()}</div> }
-}
-
-// 6. HEADER COMPONENTS
+// HEADER COMPONENTS
 #[component]
 pub fn DialogHeader(children: Children) -> impl IntoView {
     view! { <div class={css::header}>{children()}</div> }
@@ -113,7 +99,21 @@ pub fn DialogDescription(children: Children) -> impl IntoView {
     view! { <p class={css::description}>{children()}</p> }
 }
 
-// 7. FOOTER & CLOSE BUTTON
+// BODY & SCROLL AREA
+#[component]
+pub fn DialogBody(children: Children) -> impl IntoView {
+    view! { <div class={css::body}>{children()}</div> }
+}
+
+// #[component]
+// pub fn ScrollArea(
+//     children: Children, 
+//     #[prop(optional, into)] class: String
+// ) -> impl IntoView {
+//     view! { <div class=format!("{} {}", css::scroll_area, class)>{children()}</div> }
+// }
+
+// FOOTER & CLOSE BUTTON
 #[component]
 pub fn DialogFooter(children: Children) -> impl IntoView {
     view! { <div class={css::footer}>{children()}</div> }

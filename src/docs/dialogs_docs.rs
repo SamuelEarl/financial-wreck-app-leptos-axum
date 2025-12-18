@@ -5,12 +5,15 @@ use markdown_view_leptos::markdown_view;
 // Even though we don't use <Alert> explicitly in the view! below,
 // the markdown_view! macro will generate code that uses it.
 use crate::components::{
-    colors_and_sizes::BtnVariant,
+    colors_and_sizes::{
+        BtnVariant,
+        Colors,
+    },
     buttons::button::Button,
 };
 use crate::components::dialogs::dialog::{ 
     Dialog, DialogTrigger, DialogContent, DialogBody, DialogHeader, 
-    DialogTitle, DialogDescription, ScrollArea, DialogFooter, DialogClose
+    DialogTitle, DialogDescription, DialogFooter, DialogClose
 };
 
 #[component]

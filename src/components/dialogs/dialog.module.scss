@@ -1,3 +1,18 @@
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+// Utility for trigger buttons (optional, can be overridden)
+.trigger {
+  cursor: pointer;
+}
+
 // The dark overlay
 .backdrop {
   position: fixed;
@@ -19,11 +34,9 @@
   max-width: 950px;
   display: flex;
   flex-direction: column;
-  
   // Logic: Shrink to fit content, but cap at screen height - 20px
   height: auto;
   max-height: calc(100vh - 20px);
-  
   animation: scaleIn 0.3s ease-out;
 }
 
@@ -48,18 +61,22 @@
 .body {
   display: flex;
   flex-direction: column;
-  overflow: hidden; // Contain the scroll area
-  flex: 1; // Take available space
-}
-
-// This is the specific scrollable area
-.scroll_area {
+  flex: 1;
   padding: 15px 20px;
-  overflow-y: auto; // SCROLL HERE
-  overscroll-behavior: contain;
+  overflow-y: auto;
+  overscroll-behavior: contain; // Underlying elements will not scroll. 
   border-top: var(--border);
   border-bottom: var(--border);
 }
+
+// This is the specific scrollable area
+// .scroll_area {
+//   padding: 15px 20px;
+//   overflow-y: auto; // SCROLL HERE
+//   overscroll-behavior: contain;
+//   border-top: var(--border);
+//   border-bottom: var(--border);
+// }
 
 .footer {
   padding: 15px 20px;
@@ -67,19 +84,4 @@
   justify-content: flex-end;
   gap: 12px;
   flex-shrink: 0; // Don't shrink footer
-}
-
-// Utility for trigger buttons (optional, can be overridden)
-.trigger {
-  cursor: pointer;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes scaleIn {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
 }

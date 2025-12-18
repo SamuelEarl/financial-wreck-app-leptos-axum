@@ -5,9 +5,7 @@
 {{
     <Dialog>
         <DialogTrigger>
-            <Button
-                variant={BtnVariant::Primary}
-            >
+            <Button variant={BtnVariant::Primary}>
                 "Open Terms of Service"
             </Button>
         </DialogTrigger>
@@ -19,34 +17,35 @@
                 </DialogDescription>
             </DialogHeader>
             <DialogBody>
-                <ScrollArea>
-                    <p>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."</p>
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 
-                    <p>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."</p>
-                    
-                    <p>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."</p>
-                    
-                    <p>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."</p>
-                    
-                    <p>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."</p>
-                    
-                    <p>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."</p>
-                    
-                    <p>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."</p>
-                </ScrollArea>
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
             </DialogBody>
             <DialogFooter>
                 <DialogClose>
                     <Button
-                        variant={BtnVariant::Tertiary}
+                        colors=Some(Colors {
+                            bg: "transparent".to_string(),
+                            fg: "var(--secondary-bg)".to_string(),
+                            br: "var(--secondary-bg)".to_string(),
+                            ol: "var(--secondary-bg)".to_string(),
+                        })
                     >
                         "Decline"
                     </Button>
                 </DialogClose>
                 <DialogClose>
-                    <Button
-                        variant={BtnVariant::Secondary}
-                    >
+                    <Button variant={BtnVariant::Secondary}>
                         "Accept"
                     </Button>
                 </DialogClose>
@@ -57,7 +56,7 @@
 
 <br />
 
-The height of the dialog adjusts to fit to the content. However, if there is more content than the dialog body can hold, then the dialog height will fill the available screen space and the dialog content will scroll so it doesn't overflow the available space.
+The height of the dialog adjusts to fit to the content. However, if there is more content than the dialog body can hold, then the height of the dialog will fill the available screen space and the dialog content will scroll so it doesn't overflow the available space.
 
 ```rust
 use crate::components::{
@@ -66,17 +65,18 @@ use crate::components::{
 };
 use crate::components::dialogs::dialog::{ 
     Dialog, DialogTrigger, DialogContent, DialogBody, DialogHeader, 
-    DialogTitle, DialogDescription, ScrollArea, DialogFooter, DialogClose
+    DialogTitle, DialogDescription, DialogFooter, DialogClose
 };
 
 <Dialog>
+    // The button that sits on the page.
     <DialogTrigger>
-        <Button
-            variant={BtnVariant::Primary}
-        >
+        <Button variant={BtnVariant::Primary}>
             "Open Terms of Service"
         </Button>
     </DialogTrigger>
+
+    // The dialog content
     <DialogContent>
         <DialogHeader>
             <DialogTitle>"Terms of Service"</DialogTitle>
@@ -85,52 +85,32 @@ use crate::components::dialogs::dialog::{
             </DialogDescription>
         </DialogHeader>
         <DialogBody>
-            <ScrollArea>
-                <p style="margin-bottom: 10px; color: #555;">
-                    "Paragraph: This content is inside the scroll area."
-                    "It will scroll automatically if the screen is too short."
-                </p>
-                <p style="margin-bottom: 10px; color: #555;">
-                    "Paragraph: This content is inside the scroll area."
-                    "It will scroll automatically if the screen is too short."
-                </p>
-                <p style="margin-bottom: 10px; color: #555;">
-                    "Paragraph: This content is inside the scroll area."
-                    "It will scroll automatically if the screen is too short."
-                </p>
-                <p style="margin-bottom: 10px; color: #555;">
-                    "Paragraph: This content is inside the scroll area."
-                    "It will scroll automatically if the screen is too short."
-                </p>
-                <p style="margin-bottom: 10px; color: #555;">
-                    "Paragraph: This content is inside the scroll area."
-                    "It will scroll automatically if the screen is too short."
-                </p>
-                <p style="margin-bottom: 10px; color: #555;">
-                    "Paragraph: This content is inside the scroll area."
-                    "It will scroll automatically if the screen is too short."
-                </p>
-                <p style="margin-bottom: 10px; color: #555;">
-                    "Paragraph: This content is inside the scroll area."
-                    "It will scroll automatically if the screen is too short."
-                </p>
-                <p style="margin-bottom: 10px; color: #555;">
-                    "Paragraph: This content is inside the scroll area."
-                    "It will scroll automatically if the screen is too short."
-                </p>
-            </ScrollArea>
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+            
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
         </DialogBody>
         <DialogFooter>
             <DialogClose>
-                <button style="padding: 8px 16px;">"Decline"</button>
+                <Button
+                    colors=Some(Colors {
+                        bg: "transparent".to_string(),
+                        fg: "var(--secondary-bg)".to_string(),
+                        br: "var(--secondary-bg)".to_string(),
+                        ol: "var(--secondary-bg)".to_string(),
+                    })
+                >
+                    "Decline"
+                </Button>
             </DialogClose>
 
             // Note: Since this is "Accept", you might want custom logic here
-            // besides just closing, but for now we just wrap a button.
+            // besides just closing, but for this example we just wrap a button.
             <DialogClose>
-                <button style="background: black; color: white; padding: 8px 16px;">
+                <Button variant={BtnVariant::Secondary}>
                     "Accept"
-                </button>
+                </Button>
             </DialogClose>
         </DialogFooter>
     </DialogContent>
