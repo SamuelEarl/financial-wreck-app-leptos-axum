@@ -24,7 +24,7 @@
       }
     }
 
-    nav {
+    .sidebar_nav {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -34,12 +34,12 @@
       overflow-y: auto;
       overscroll-behavior: contain; // Underlying elements will not scroll. 
 
-      ul {
+      ul.nav_list, ul.dev_list {
         list-style-type: none;
         font-size: var(--size-5);
         padding: 0;
 
-        li {
+        li.list_item {
           margin: 0;
 
           a {

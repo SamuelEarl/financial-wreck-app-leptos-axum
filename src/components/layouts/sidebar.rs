@@ -11,10 +11,10 @@ use crate::nav_links::NavLink;
 use crate::components::colors_and_sizes::{Colors, Sizes};
 use crate::components::{buttons::button::Button, icons::icon::Icon};
 
-import_style!(css, "sidebar_nav.module.scss");
+import_style!(css, "sidebar.module.scss");
 
 #[component]
-pub fn SidebarNav(
+pub fn Sidebar(
     nav: &'static[NavLink],
     set_nav_is_open: WriteSignal<bool>,
 ) -> impl IntoView {
@@ -60,12 +60,12 @@ pub fn SidebarNav(
                     />
                 </div>
             </div>
-            <nav>
+            <nav class={css::sidebar_nav}>
                 <ul class={css::nav_list}>
                     {
                         nav.iter()
                             .map(|link| view! {
-                                <li><A href={link.url}>{link.text}</A></li>
+                                <li class={css::list_item}><A href={link.url}>{link.text}</A></li>
                             })
                             .collect_view()
                     }
@@ -79,8 +79,8 @@ pub fn SidebarNav(
                             // If FALSE, show nothing (or put a specific fallback view here)
                             fallback=|| view! {} 
                         >
-                            <ul>
-                                <li><A href="/docs">Docs</A></li>
+                            <ul class={css::dev_list}>
+                                <li class={css::list_item}><A href="/docs">Docs</A></li>
                             </ul>
                         </Show>
                     }

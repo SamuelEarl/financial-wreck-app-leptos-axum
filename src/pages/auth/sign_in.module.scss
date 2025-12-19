@@ -35,14 +35,15 @@
       .title_container {
         margin-bottom: 20px;
 
-        h1, h2 {
+        // .h1, .h2 {
+        .h1 {
           font-family: var(--body-font);
           font-weight: 300;
           text-align: center;
           color: var(--white);
         }
 
-        h1 {
+        .h1 {
           font-size: 2rem;
 
           .bold {
@@ -50,10 +51,10 @@
           }
         }
 
-        h2 {
-          font-size: 1.5rem;
-          font-style: italic;
-        }
+        // .h2 {
+        //   font-size: 1.5rem;
+        //   font-style: italic;
+        // }
       }
 
       .btns_container {
@@ -70,6 +71,7 @@
           color: var(--white);
         }
 
+        // TODO: If these style rules are used, then I need to create a class for these style rules so the styles are isolated from other parts of the app.
         // div {
         //   width: 100%;
         //   max-width: 350px;

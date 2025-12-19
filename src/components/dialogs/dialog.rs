@@ -14,24 +14,26 @@ struct DialogContext {
 // ROOT COMPONENT
 #[component]
 pub fn Dialog(children: Children) -> impl IntoView {
-    // We hold the state here
+    // The `is_open` state is held here.
     let (is_open, set_is_open) = signal(false);
 
-    // We provide the state to all children via Context
+    // The `is_open` state is provided to all children via Context.
     provide_context(DialogContext { is_open: is_open.into(), set_is_open });
 
     // Handle body scroll locking
-    Effect::new(move |_| {
-        if is_open.get() {
-            if let Some(doc) = document().body() {
-                let _ = doc.style().set_property("overflow", "hidden");
-            }
-        } else {
-            if let Some(doc) = document().body() {
-                let _ = doc.style().remove_property("overflow");
-            }
-        }
-    });
+    // This adds the CSS rule overflow: hidden; to the <body> tag. This cuts off any content that goes outside the screen edges and removes the scrollbars, which prevents the user from scrolling the page content.
+    // NOTE: This doesn't actually seem to do anything, but I am leaving it here in case I run into scrolling issues later.
+    // Effect::new(move |_| {
+    //     if is_open.get() {
+    //         if let Some(doc) = document().body() {
+    //             let _ = doc.style().set_property("overflow", "hidden");
+    //         }
+    //     } else {
+    //         if let Some(doc) = document().body() {
+    //             let _ = doc.style().remove_property("overflow");
+    //         }
+    //     }
+    // });
 
     view! {
         {children()}
@@ -57,7 +59,7 @@ pub fn DialogTrigger(children: Children) -> impl IntoView {
 #[component]
 pub fn DialogContent(
     children: ChildrenFn,
-    #[prop(optional, into)] class: String, // Allow custom classes like width
+    #[prop(optional, into)] class: String, // Allow custom classes like width.
 ) -> impl IntoView {
     let ctx = use_context::<DialogContext>().expect("DialogContent must be inside <Dialog/>");
 
@@ -99,12 +101,13 @@ pub fn DialogDescription(children: Children) -> impl IntoView {
     view! { <p class={css::description}>{children()}</p> }
 }
 
-// BODY & SCROLL AREA
+// BODY
 #[component]
 pub fn DialogBody(children: Children) -> impl IntoView {
     view! { <div class={css::body}>{children()}</div> }
 }
 
+// SCROLL AREA
 // #[component]
 // pub fn ScrollArea(
 //     children: Children, 

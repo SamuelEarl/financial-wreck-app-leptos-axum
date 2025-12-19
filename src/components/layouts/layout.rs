@@ -9,7 +9,7 @@ use crate::nav_links::NavLink;
 
 use crate::components::layouts::{
     mobile_header::MobileHeader,
-    sidebar_nav::SidebarNav,
+    sidebar::Sidebar,
 };
 
 import_style!(css, "layout.module.scss");
@@ -40,7 +40,7 @@ pub fn Layout(nav: &'static[NavLink]) -> impl IntoView {
             win.scroll_to_with_x_and_y(0.0, 0.0);
         }
 
-        // Close the sidebar_nav after navigation. (This only matters for mobile screens.)
+        // Close the sidebar after navigation. (This only matters for mobile screens.)
         set_nav_is_open.set(false);
     });
 
@@ -51,12 +51,12 @@ pub fn Layout(nav: &'static[NavLink]) -> impl IntoView {
                 class={css::layout_nav}
                 style:right=move || if nav_is_open.get() { "0" } else { "110vw" }
             >
-                <SidebarNav
+                <Sidebar
                     nav=nav
                     set_nav_is_open=set_nav_is_open
                 />
             </nav>
-            <main>
+            <main class={css::layout_main}>
                 <Outlet />
             </main>
         </div>

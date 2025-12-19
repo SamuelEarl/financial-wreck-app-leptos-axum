@@ -16,7 +16,7 @@ pub mod components {
     pub mod layouts {
         pub mod layout;
         pub mod mobile_header;
-        pub mod sidebar_nav;
+        pub mod sidebar;
     }
     pub mod dialogs {
         pub mod dialog;
@@ -56,6 +56,7 @@ pub mod pages {
     }
     pub mod net_worth {
         pub mod net_worth;
+        pub mod net_worth_article;
     }
 }
 

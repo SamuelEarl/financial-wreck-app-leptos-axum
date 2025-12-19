@@ -28,6 +28,8 @@ generate-css-icons:
 # =========================
 # PRODUCTION BUILD
 # =========================
+# The --release flag creates an optimized, production-ready binary version.
+# The -vv flag means to use very verbose output.
 leptos-build:
 	APP_ENV=production cargo leptos build --release -vv
 

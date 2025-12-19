@@ -5,8 +5,6 @@ use serde::{Deserialize, Serialize};
 use stylance::*;
 // use chrono::{Datelike, Local}; // Import Datelike to use .year()
 
-// use crate::pages::sidebar_nav::NavLink;
-
 import_style!(css, "bank_transactions_and_budgets_list.module.scss");
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -46,7 +44,7 @@ pub fn bankTransactionsAndBudgetsList() -> impl IntoView {
                         <ul class={css::bank_accounts_list}>
                             {
                                 bank_accounts.into_iter().map(|account| view! {
-                                    <li>
+                                    <li class={css::bank_accounts_list_item}>
                                         <div class={css::bank_account_name}>{account.name}</div> 
                                         <div class={css::transactions_budget_container}>
                                             // URLs to the Transactions and Budgets tabs/pages.

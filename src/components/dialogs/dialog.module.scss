@@ -42,7 +42,7 @@
 
 // Structural wrappers
 .header {
-  padding: 15px 20px;
+  padding: 15px;
   flex-shrink: 0; // Don't shrink header
 }
 
@@ -62,7 +62,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 15px 20px;
+  padding: 15px;
   overflow-y: auto;
   overscroll-behavior: contain; // Underlying elements will not scroll. 
   border-top: var(--border);
@@ -71,7 +71,7 @@
 
 // This is the specific scrollable area
 // .scroll_area {
-//   padding: 15px 20px;
+//   padding: 15px;
 //   overflow-y: auto; // SCROLL HERE
 //   overscroll-behavior: contain;
 //   border-top: var(--border);
@@ -79,9 +79,9 @@
 // }
 
 .footer {
-  padding: 15px 20px;
+  padding: 15px;
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
+  gap: var(--size-3);
   flex-shrink: 0; // Don't shrink footer
 }

@@ -20,11 +20,11 @@ pub fn SignIn() -> impl IntoView {
                     <img class={css::logo} src="/images/logo-white.svg" alt="logo" />
                 </div>
                 <div class={css::title_container}>
-                    // <h2>"Have a financial wreck?"</h2>
-                    // <h2>"Manage your personal finances and become a"</h2>
-                    // <h1>"Carefree Retiree!"</h1>
-                    <h1>"Go from "<span class={css::bold}>"Financial Wreck"</span>" to"</h1>
-                    <h1><span class={css::bold}>"Carefree Retiree"</span>"!"</h1>
+                    // <h2 class={css::h2}>"Have a financial wreck?"</h2>
+                    // <h2 class={css::h2}>"Manage your personal finances and become a"</h2>
+                    // <h1 class={css::h1}>"Carefree Retiree!"</h1>
+                    <h1 class={css::h1}>"Go from "<span class={css::bold}>"Financial Wreck"</span>" to"</h1>
+                    <h1 class={css::h1}><span class={css::bold}>"Carefree Retiree"</span>"!"</h1>
                 </div>
                 <div class={css::btns_container}>
                     <div class={css::auth_btns}>
