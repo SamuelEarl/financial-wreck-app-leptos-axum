@@ -67,6 +67,7 @@ pub mod routes {
 
 pub mod utils {
     pub mod format_currency;
+    pub mod dates;
 }
 
 #[cfg(feature = "hydrate")]
