@@ -10,6 +10,9 @@ pub mod components {
         pub mod button;
     }
     pub mod colors_and_sizes;
+    pub mod dialogs {
+        pub mod dialog;
+    }
     pub mod icons {
         pub mod icon;
     }
@@ -18,11 +21,11 @@ pub mod components {
         pub mod mobile_header;
         pub mod sidebar;
     }
-    pub mod dialogs {
-        pub mod dialog;
-    }
     pub mod progress_bars {
         pub mod progress_bar;
+    }
+    pub mod selects {
+        pub mod select;
     }
 }
 
@@ -57,6 +60,7 @@ pub mod pages {
     pub mod net_worth {
         pub mod net_worth;
         pub mod net_worth_article;
+        pub mod net_worth_models;
     }
 }
 

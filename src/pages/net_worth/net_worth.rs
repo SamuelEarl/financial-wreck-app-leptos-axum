@@ -2,25 +2,55 @@ use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, Title};
 use leptos::logging::{log, error};
 use leptos::task::spawn_local;
-use stylance::*;
 use uuid::Uuid;
 use serde::{Deserialize, Serialize};
+use std::str::FromStr;
+use stylance::*;
 
 use crate::components::{
     colors_and_sizes::{BtnVariant, Sizes},
     buttons::button::Button,
+    selects::select::{Select, OptionData},
 };
 use crate::utils::{
     format_currency::format_currency,
     dates::get_utc_iso_date,
 };
-use crate::pages::net_worth::net_worth_article::NetWorthArticle;
+use crate::pages::net_worth::{
+    net_worth_article::NetWorthArticle,
+    // net_worth_models::AssetCategory,
+};
 
 import_style!(css, "net_worth.module.scss");
 
 #[component]
 pub fn NetWorth() -> impl IntoView {
     provide_meta_context();
+
+    let asset_options = vec![
+        OptionData { group: None, value: "bank_account".to_string(), label: "Bank Account (checking, savings)".to_string(), },
+        OptionData { group: None, value: "retirement_investment".to_string(), label: "Retirement Investment (401k, IRA)".to_string(), },
+        OptionData { group: None, value: "non_retirement_investment".to_string(), label: "Non-Retirement Investment (mutual funds, stocks, bonds)".to_string(), },
+        OptionData { group: None, value: "cod".to_string(), label: "Certificate of Deposit".to_string(), },
+        OptionData { group: None, value: "cash_value".to_string(), label: "Cash Value of Life Insurance".to_string(), },
+        OptionData { group: None, value: "annuity".to_string(), label: "Annuity".to_string(), },
+        OptionData { group: None, value: "pension".to_string(), label: "Pension".to_string(), },
+        OptionData { group: None, value: "hsa".to_string(), label: "Health Savings Account (HSA)".to_string(), },
+        OptionData { group: None, value: "cryptocurrency".to_string(), label: "Cryptocurrency".to_string(), },
+        OptionData { group: None, value: "cash".to_string(), label: "Cash On-Hand".to_string(), },
+        OptionData { group: None, value: "real_estate".to_string(), label: "Real Estate".to_string(), },
+        OptionData { group: None, value: "vehicle".to_string(), label: "Vehicle".to_string(), },
+        OptionData { group: None, value: "personal_item".to_string(), label: "Personal Item".to_string(), },
+        OptionData { group: None, value: "business".to_string(), label: "A Business (your portion only)".to_string(), },
+        OptionData { group: None, value: "money_owed_to_you".to_string(), label: "Money Owed To You".to_string(), },
+        OptionData { group: None, value: "other_asset".to_string(), label: "Other Asset".to_string(), },
+    ];
+
+    let liability_options = vec![
+        OptionData { group: None, value: "loan".to_string(), label: "Loan (mortgage, car, education, etc)".to_string(), },
+        OptionData { group: None, value: "credit_card".to_string(), label: "Credit Card".to_string(), },
+        OptionData { group: None, value: "other_liability".to_string(), label: "Other Liability".to_string(), },
+    ];
 
     let (net_worth, set_net_worth) = signal(0);
     set_net_worth.set(1_000_000);
@@ -37,29 +67,19 @@ pub fn NetWorth() -> impl IntoView {
 
         <br />
 
+        <Select
+            options=asset_options
+            placeholder="Select an Asset"
+            label="Assets"
+            on_change=Callback::new(|val| log!("Selected: {}", val))
+        />
+
+        <br />
+
+        // <AssetSelector />
+
         <p>"Add financial accounts, transfer money between accounts, and add bill pay alerts"</p>
 
-        // <div class={css::al_wrapper}>
-        //     <h2 class={css::h2}>"Assets"</h2>
-        //     <div class={css::btns_container}>
-        //         <Button
-        //             variant={BtnVariant::Primary}
-        //             sizes=Some(Sizes {
-        //                 pv: Some(0),
-        //                 ph: Some(2),
-        //                 ..Default::default()
-        //             })
-        //             on:click=move |_| { 
-        //                 spawn_local(async {
-        //                     let new_asset = create_asset().await;
-
-        //                 });
-        //             }
-        //         >
-        //             "Add"
-        //         </Button>
-        //     </div>
-        // </div>
         <AssetList />
         
         <br />
@@ -84,49 +104,52 @@ pub fn NetWorth() -> impl IntoView {
     }
 }
 
-#[derive(Debug)]
-pub struct NetWorthCategory {
-    pub category: &'static str,
-    pub label: &'static str,
-}
+// #[component]
+// pub fn AssetSelector() -> impl IntoView {
+//     // 1. Create a signal to hold the selected enum
+//     // Default to the first item (BankAccount), or whatever you prefer
+//     let (selected_asset_opt, set_selected_asset_opt) = signal(AssetCategory::BankAccount);
 
-static ASSET_CATEGORIES: [NetWorthCategory; 16] = [
-    NetWorthCategory { category: "bank_account", label: "Bank Account (checking, savings)", },
-    NetWorthCategory { category: "retirement_investment", label: "Retirement Investment (401k, IRA)", },
-    NetWorthCategory { category: "non_retirement_investment", label: "Non-Retirement Investment (mutual funds, stocks, bonds)", },
-    NetWorthCategory { category: "cod", label: "Certificate of Deposit", },
-    NetWorthCategory { category: "cash_value", label: "Cash Value of Life Insurance", },
-    NetWorthCategory { category: "annuity", label: "Annuity", },
-    NetWorthCategory { category: "pension", label: "Pension", },
-    NetWorthCategory { category: "hsa", label: "Health Savings Account (HSA)", },
-    NetWorthCategory { category: "cryptocurrency", label: "Cryptocurrency", },
-    NetWorthCategory { category: "cash", label: "Cash On-Hand", },
-    NetWorthCategory { category: "real_estate", label: "Real Estate", },
-    NetWorthCategory { category: "vehicle", label: "Vehicle", },
-    NetWorthCategory { category: "personal_item", label: "Personal Item", },
-    NetWorthCategory { category: "business", label: "A Business (your portion only)", },
-    NetWorthCategory { category: "money_owed_to_you", label: "Money Owed To You", },
-    NetWorthCategory { category: "other_asset", label: "Other Asset", },
-];
+//     view! {
+//         <div class="input-group">
+//             <label for="category">"Asset Category"</label>
+            
+//             <select
+//                 id="category"
+//                 class="form-select" // Your styling class here
+                
+//                 // 2. Handle the change event
+//                 on:change=move |ev| {
+//                     // event_target_value helper gets the string value from the event
+//                     let val = event_target_value(&ev);
+//                     // Parse string back to Enum
+//                     if let Ok(cat) = AssetCategory::from_str(&val) {
+//                         set_selected_asset_opt.set(cat);
+//                     }
+//                 }
+                
+//                 // 3. Control the value so it syncs with signal (optional but good practice)
+//                 prop:value=move || selected_asset_opt.get().option_value()
+//             >
+//                 // 4. Iterate over the Enum to generate options
+//                 {AssetCategory::all().iter().map(|category| {
+//                     view! {
+//                         <option value={category.option_value()}>
+//                             {category.option_text()}
+//                         </option>
+//                     }
+//                 }).collect::<Vec<_>>()}
+//             </select>
 
-static LIABILITY_CATEGORIES: [NetWorthCategory; 3] = [
-    NetWorthCategory { category: "loan", label: "Loan (mortgage, car, education, etc)", },
-    NetWorthCategory { category: "credit_card", label: "Credit Card", },
-    NetWorthCategory { category: "other_liability", label: "Other Liability", },
-];
+//             // Debugging: Show what is currently selected
+//             <p style="margin-top: 10px; color: #666;">
+//                 "Selected Enum: " 
+//                 <strong>{move || format!("{:?}", selected_asset_opt.get())}</strong>
+//             </p>
+//         </div>
+//     }
+// }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-pub struct Asset {
-  uuid: Uuid,
-  category: String,
-//   subcategory: String,
-  name: String,
-  value: i64,
-  login_url: String,
-  sort_order: u64,
-  created_at: String,
-  calculated_bank_balance: bool,
-}
 
 #[component]
 pub fn AssetList() -> impl IntoView {
@@ -196,7 +219,7 @@ pub fn AssetList() -> impl IntoView {
                                             <div class="asset-card">
                                                 <h4>{asset.name}</h4>
                                                 <p>"Value: $" {asset.value}</p>
-                                                <p>"Category: " {asset.category}</p>
+                                                <p>"Type: " {asset.asset_type}</p>
                                             </div>
                                         }
                                     />
@@ -211,14 +234,26 @@ pub fn AssetList() -> impl IntoView {
     }
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct Asset {
+  uuid: Uuid,
+  asset_type: String,
+//   asset_subtype: String,
+  name: String,
+  value: i64,
+  login_url: String,
+  sort_order: u64,
+  created_at: String,
+  calculated_bank_balance: bool,
+}
+
 #[server(name = CreateAsset, prefix = "/api/create-asset")]
 pub async fn create_asset() -> Result<Asset, ServerFnError> {
     // Define the data as requested
     let asset = Asset { 
         // uuid: Some(Uuid::now_v7().to_string()),
         uuid: Uuid::now_v7(),
-        // TODO: I probably need to turn the categories array into an enum.
-        category: String::from("Bank Account"),
+        asset_type: String::from("Bank Account"),
         name: String::from("USAA Savings"),
         value: 1_000_000, // $10,000.00
         login_url: String::from("https://usaa.com"),
@@ -239,8 +274,7 @@ pub async fn get_assets() -> Result<Vec<Asset>, ServerFnError> {
         Asset { 
             // uuid: Some(Uuid::now_v7().to_string()),
             uuid: Uuid::now_v7(),
-            // TODO: I probably need to turn the categories array into an enum.
-            category: String::from("Bank Account"),
+            asset_type: String::from("Bank Account"),
             name: String::from("USAA Savings"),
             value: 1_000_000, // $10,000.00
             login_url: String::from("https://usaa.com"),
@@ -251,8 +285,7 @@ pub async fn get_assets() -> Result<Vec<Asset>, ServerFnError> {
         Asset { 
             // uuid: Some(Uuid::now_v7().to_string()),
             uuid: Uuid::now_v7(),
-            // TODO: I probably need to turn the categories array into an enum.
-            category: String::from("IRA"),
+            asset_type: String::from("IRA"),
             name: String::from("Vangard"),
             value: 10_000_000, // $10,000.00
             login_url: String::from("https://vangard.com"),
