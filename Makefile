@@ -1,5 +1,13 @@
-.PHONY: dev build build-preview generate-css-icons
+# The .DEFAULT_GOAL defines which target is run when no target is specified. In the following example, the default is the build target.
+# .DEFAULT_GOAL := build
 
+# The .PHONY line keeps `make` from getting confused if a directory or file in your project has the same name as one of the listed targets.
+.PHONY: kill dev build build-preview generate-css-icons
+
+# Each possible operation is called a target and the following definitions are the target definitions. 
+# The word before the colon (:) is the name of the target. 
+# Any words after the target (like `kill` in the line `dev: kill`) are the other targets that must be run before the specified target runs. 
+# The tasks that are performed by the target are on the indented lines after the target.
 # =========================
 # DEVELOPMENT
 # =========================
@@ -12,7 +20,13 @@ stylance-watch:
 trigger-leptos-reload:
 	cargo run --manifest-path tools/trigger_leptos_reload/Cargo.toml
 
-dev:
+# Kill any orphan processes.
+# The `-` at the start and `|| true` at the end prevent the Makefile from stopping if there are no processes to kill (which would normally throw an error).
+kill:
+	-kill -9 $(lsof -t -i:3000) || true
+	-kill -9 $(lsof -t -i:3001) || true
+
+dev: kill
 	make --jobs=3 leptos-watch stylance-watch trigger-leptos-reload
 
 # ----------------------------------------------------------------
