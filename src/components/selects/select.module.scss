@@ -1,58 +1,76 @@
-.select_root {
-  position: relative;
-  display: inline-block;
+// How to style <select> elements:
+// https://una.im/select-updates/
 
-  .select_trigger {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px; 
-    border: 1px solid #ccc; 
-    border-radius: var(--radius);
-    background: var(--white);
-    cursor: pointer;
-    // min-width: 200px;
+// Enter custom mode with `appearance: base-select`.
+select,
+::picker(select) {
+  appearance: base-select;
+  // appearance: menulist-button;
+}
 
-    .select_trigger_arrow {
-      // margin-left: 10px;
-      opacity: 0.5;
-    }
+// The CSS pseudo-element `::select-fallback-button` was part of an earlier proposal for styling <select> elements but has since been removed from the specification. 
+// To customize the appearance of the <select> element's button area, you should apply styles directly to the <select> element itself after setting its appearance to base-select.
+select {
+  width: 100%;
+  border-width: var(--border-width);
+  border-style: var(--border-style);
+  border-radius: var(--radius);
+  outline-width: var(--outline-none);
+  outline-style: var(--outline-style);
+  cursor: pointer;
+
+  &::picker-icon {
+    display: none;
   }
 
-  .select_content {
-    // position: absolute;
-    margin: 4px 0 0 0;
-    padding: 0; 
-    border: 1px solid #ddd; 
-    border-radius: 4px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-    min-width: 200px; 
-    background: white;
-    
-    .select_group {
-  
-      .select_group_label {
-        padding: 8px 12px;
-        font-size: 0.75rem;
-        font-weight: bold;
-        color: #666;
-        text-transform: uppercase;
-      }
-
-      .select_item_wrapper {
-        
-        .select_option {
-          width: 100%;
-          text-align: left;
-          padding: 10px;
-        
-          &:hover {
-            background-color: gray;
-          }
-        }
-      }
-    }
+  &:hover, &:focus {
+    outline-width: var(--outline-width);
+    outline-offset: var(--outline-offset);
   }
+
+  // Disabled styles
+  &:disabled,
+  &[aria-disabled="true"] {
+    // It looks like browsers dim the colors of <select> elements by about 10%, so these styles try to accomodate for that. The `white: 100%` is not a typo.
+    background-color: color-mix(in srgb, black 10%, var(--element-bg-disabled)) !important;
+    border-color: color-mix(in srgb, black 10%, var(--element-border-color-disabled)) !important;
+    color: color-mix(in srgb, white 100%, var(--element-text-color-disabled)) !important;
+    pointer-events: none;
+  }
+}
+
+// Style the picker dropdown.
+::picker(select) {
+  border-width: var(--border-width);
+  border-style: var(--border-style);
+  border-radius: var(--radius);
+  width: 50%;
+}
+
+optgroup {
+  font-weight: bold;
+}
+
+// Style the options.
+option {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+// Style selected option in the dropdown.
+option:checked {
+  background: var(--neutral-4);
+}
+
+// Style the option on hover or focus.
+option:hover,
+option:focus-visible {
+  background-color: var(--neutral-2);
+}
+
+// Style the active option indicator.
+option::before {
+  content: '';
+  // font-size: 80%;
+  // margin-right: 0.5rem;
 }

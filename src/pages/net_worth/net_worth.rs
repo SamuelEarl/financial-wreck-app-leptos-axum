@@ -67,12 +67,13 @@ pub fn NetWorth() -> impl IntoView {
 
         <br />
 
-        <Select
-            options=asset_options
-            placeholder="Select an Asset"
-            label="Assets"
-            on_change=Callback::new(|val| log!("Selected: {}", val))
-        />
+        // <Select
+        //     options=asset_options
+        //     placeholder="Select an Asset"
+        //     label="Assets"
+        //     on_change=Callback::new(|val| log!("Selected: {}", val))
+        // />
+        <Select />
 
         <br />
 
