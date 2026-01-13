@@ -1,0 +1,76 @@
+// Refer to this article for ideas on styling <select> elements:
+// https://una.im/select-updates/
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.select_button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: var(--element-bg);
+  color: var(--element-fg);
+  border: none;
+  border-radius: var(--radius);
+  outline-width: var(--outline-width);
+  outline-style: var(--outline-style);
+  outline-color: transparent;
+
+  &:hover, &:focus {
+    outline-color: var(--outline-color);
+  }
+
+  .arrow {
+    width: 10px;
+    height: 10px;
+    margin-right: 0.5rem;
+    border-left: 2px solid var(--text-color);
+    border-bottom: 2px solid var(--text-color);
+    transform: rotate(-45deg);
+  }
+}
+
+// The dark overlay
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+// The main container box
+.content {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: calc(100vw - 20px);
+  max-width: 950px;
+  display: flex;
+  flex-direction: column;
+  // Logic: Shrink to fit content, but cap at screen height - 20px
+  height: auto;
+  max-height: calc(100vh - 20px);
+  animation: scaleIn 0.3s ease-out;
+}
+
+.optgroup {
+  font-weight: bold;
+}
+
+// Style the options.
+.option {
+  padding: 0.5rem;
+  font-size: 1rem;
+}

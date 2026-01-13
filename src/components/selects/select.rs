@@ -1,12 +1,190 @@
+// NOTES: For grouped options (optgroup), the order of the optgroups will be the same as the `group` property in the options vector that is passed to the `options` prop. In other words, the first group that appears in the vector will be the first optgroup in the dropdown, the second group that appears will be the second optgroup, and so on.
+
+use std::collections::HashMap;
 use leptos::prelude::*;
+use leptos::logging::log;
+use uuid::Uuid;
 use stylance::*;
 
 use crate::components::{
-    colors_and_sizes::{BtnVariant, Colors, Sizes, ElementWidths},
-    buttons::button::Button,
+    colors_and_sizes::{Sizes, get_element_sizes},
 };
 
 import_style!(css, "select.module.scss");
+
+#[derive(Debug)]
+pub struct GroupedItem {
+    pub value: String,
+    pub label: String,
+}
+
+// 1. Context to share state between Button, Content, and Items
+#[derive(Clone, Copy)]
+struct SelectContext {
+    selected_value: Signal<String>,
+    set_selected_value: WriteSignal<String>,
+    // We store the label too so the Button knows what to display
+    selected_label: Signal<String>,
+    set_selected_label: WriteSignal<String>,
+    // Controls the native popover state
+    is_open: Signal<bool>,
+    set_is_open: WriteSignal<bool>,
+    popover_id: Signal<Uuid>,
+    set_popover_id: WriteSignal<Uuid>,
+}
+
+// 2. The Root Component
+#[component]
+pub fn SelectRoot(
+    // Optional: Default value
+    #[prop(optional, into)] default_value: Option<String>,
+    // Optional: Callback when selection changes
+    #[prop(optional, into)] on_change: Option<Callback<String>>,
+    children: Children,
+) -> impl IntoView {
+    let (selected_value, set_selected_value) = signal(default_value.unwrap_or_default());
+    let (selected_label, set_selected_label) = signal(String::new());
+    let (is_open, set_is_open) = signal(false);
+    let (popover_id, set_popover_id) = signal(Uuid::now_v7());
+
+    // Provide context to all children
+    provide_context(SelectContext {
+        selected_value: selected_value.into(),
+        set_selected_value,
+        selected_label: selected_label.into(),
+        set_selected_label,
+        is_open: is_open.into(),
+        set_is_open,
+        popover_id: popover_id.into(), 
+        set_popover_id,
+    });
+
+    // Effect to run the on_change callback
+    Effect::new(move |_| {
+        if let Some(cb) = on_change {
+            cb.run(selected_value.get());
+        }
+    });
+
+    view! {
+        <div class={css::select_root}>
+            {children()}
+        </div>
+    }
+}
+
+// 3. The Button
+#[component]
+pub fn SelectButton(
+    #[prop(default = None)] btn_sizes: Option<Sizes>,
+    children: Children,
+) -> impl IntoView {
+    let ctx = use_context::<SelectContext>().expect("SelectButton must be in <Select>");
+
+    view! {
+        <button
+            class={css::select_button}
+            style=format!("{}", get_element_sizes(btn_sizes, true).all)
+            popovertarget=move || ctx.popover_id.get().to_string()
+        >
+            {children()}
+            <span class={css::select_button_arrow}>"›"</span>
+        </button>
+    }
+}
+
+// 4. The Value Display
+#[component]
+pub fn SelectValue(#[prop(into)] placeholder: String) -> impl IntoView {
+    let ctx = use_context::<SelectContext>().expect("SelectValue must be in <Select>");
+
+    view! {
+        <span>
+            {move || {
+                let label = ctx.selected_label.get();
+                if label.is_empty() { placeholder.clone() } else { label }
+            }}
+        </span>
+    }
+}
+
+// 5. The Content (The Popover)
+#[component]
+pub fn SelectContent(children: Children) -> impl IntoView {
+    let ctx = use_context::<SelectContext>().expect("SelectContent must be in <Select>");
+
+    view! {
+        // Overlay
+        <div class={css::select_overlay}>
+            // Modal window
+            <div
+                // Use the ID from context so it matches the Button
+                id=move || ctx.popover_id.get().to_string()
+                class={css::select_content}
+                popover="auto" 
+            >
+                {children()}
+            </div>
+        </div>
+    }
+}
+
+// 6. Grouping (Optional wrapper)
+#[component]
+pub fn OptGroup(children: Children) -> impl IntoView {
+    view! { <div class={css::opt_group}>{children()}</div> }
+}
+
+// 7. Label for a Group
+#[component]
+pub fn OptGroupLabel(children: Children) -> impl IntoView {
+    view! { 
+        <div class={css::opt_group_label}>
+            {children()}
+        </div> 
+    }
+}
+
+// 8. The Item Wrapper
+#[component]
+pub fn SelectItem(children: Children) -> impl IntoView {
+    view! {
+        <div class={css::select_item}>
+            {children()}
+        </div>
+    }
+}
+
+// 9. The Actual Option Logic
+#[component]
+pub fn SelectOption(
+    #[prop(into)] value: String,
+    #[prop(optional, into)] label: Option<String>, 
+    children: Children
+) -> impl IntoView {
+    let ctx = use_context::<SelectContext>().expect("SelectOption must be in <Select>");
+    
+    // ... existing logic ...
+    let value_clone = value.clone(); // Re-clone for the closure if needed
+    let display_label = label.unwrap_or(value.clone());
+
+    let button_action = move |_| {
+        ctx.set_selected_value.set(value.clone());
+        ctx.set_selected_label.set(display_label.clone());
+    };
+
+    view! {
+        <button
+            class={css::select_option}
+            on:click=button_action
+            // Target the dynamic ID so this button can close the specific popover
+            popovertarget=move || ctx.popover_id.get().to_string()
+            popovertargetaction="hide"
+        >
+            {children()}
+        </button>
+    }
+}
 
 // 1. The Standard Data Structure
 #[derive(Clone, Debug, Default, PartialEq)]
@@ -16,109 +194,90 @@ pub struct OptionData {
     pub label: String,
 }
 
-// CONTEXT
-// This allows the Trigger to tell the Content to open/close
-#[derive(Clone, Copy)]
-struct SelectContext {
-    is_open: Signal<bool>,
-    set_is_open: WriteSignal<bool>,
-}
-
-// ROOT COMPONENT
+// 2. The Reusable Component
 #[component]
-pub fn Select(children: Children) -> impl IntoView {
-    // The `is_open` state is held here.
-    let (is_open, set_is_open) = signal(false);
+pub fn Select(
+    // Accepts any list of objects
+    options: Vec<OptionData>,
+    
+    // Label for the group (optional)
+    #[prop(optional, into)] label: String,
+    
+    // Placeholder text
+    #[prop(optional, into)] placeholder: String,
 
-    // The `is_open` state is provided to all children via Context.
-    provide_context(SelectContext { is_open: is_open.into(), set_is_open });
-
-    // Handle body scroll locking
-    // This adds the CSS rule overflow: hidden; to the <body> tag. This cuts off any content that goes outside the screen edges and removes the scrollbars, which prevents the user from scrolling the page content.
-    // NOTE: This doesn't actually seem to do anything, but I am leaving it here in case I run into scrolling issues later.
-    // Effect::new(move |_| {
-    //     if is_open.get() {
-    //         if let Some(doc) = document().body() {
-    //             let _ = doc.style().set_property("overflow", "hidden");
-    //         }
-    //     } else {
-    //         if let Some(doc) = document().body() {
-    //             let _ = doc.style().remove_property("overflow");
-    //         }
-    //     }
-    // });
-
-    view! {
-        {children()}
-    }
-}
-
-
-// TRIGGER (The button that opens it)
-#[component]
-pub fn SelectText(children: Children) -> impl IntoView {
-    let ctx = use_context::<SelectContext>().expect("SelectText must be inside <Select/>");
-
-    view! {
-        // TODO: Should I replace this <Button> component with a plain button that use standard colors and that can take customizable size props? I could also set `text-align: left` without messing with the <Button> component.
-        <Button
-            colors=Some(Colors {
-                bg: "var(--warning-bg)".to_string(),
-                fg: "var(--warning-fg)".to_string(),
-                br: "var(--warning-bg)".to_string(),
-                ol: "var(--warning-bg)".to_string(),
-            })
-            sizes=Some(Sizes {
-                pv: Some(0),
-                ph: Some(2),
-                ..Default::default()
-            })
-            width={ElementWidths::Full}
-            on:click=move |_| ctx.set_is_open.set(true)
-        >
-            {children()}
-        </Button>
-    }
-}
-
-// CONTENT (The Modal itself)
-#[component]
-pub fn SelectOptions(
-    children: ChildrenFn,
-    #[prop(optional, into)] class: String, // Allow custom classes like width.
+    #[prop(default = None)] btn_sizes: Option<Sizes>,
+    
+    // Callback
+    #[prop(optional, into)] on_change: Option<Callback<String>>,
 ) -> impl IntoView {
-    let ctx = use_context::<SelectContext>().expect("SelectOptions must be inside <Select/>");
+    // Wrap the String in a Signal so it becomes Copy-able
+    let (label_sig, _) = signal(label);
+    // Local variable to track groups during the map loop
+    let mut last_optgroup: Option<String> = None;
+    
+    // We define a listener to update the button label when the value changes.
+    let update_btn_label = {
+        let options_map = options.clone();
+        Callback::new(move |val: String| {
+            // In a real app, you might sync this to the internal context
+            if let Some(cb) = on_change {
+                cb.run(val);
+            }
+        })
+    };
+
+    let mut grouped_options: HashMap<String, Vec<GroupedItem>> = HashMap::new();
+
+    for opt in options {
+        // Default to an empty string if the group is None.
+        let group_name = opt.group.unwrap_or_else(|| "".to_string());
+        
+        let item = GroupedItem {
+            value: opt.value,
+            label: opt.label,
+        };
+
+        grouped_options
+            .entry(group_name)
+            .or_insert_with(Vec::new)
+            .push(item);
+    }
 
     view! {
-        <Show when=move || ctx.is_open.get()>
-            // Backdrop
-            <div 
-                class={css::backdrop} 
-                on:click=move |_| ctx.set_is_open.set(false)
-            >
-                // Modal Window
-                <div 
-                    class=format!("{} {}", css::content, class)
-                    // Prevent clicking the modal from closing it
-                    on:click=move |e| e.stop_propagation() 
-                    role="dialog"
-                    aria-modal="true"
-                >
-                    {children.clone()()}
-                    // TODO: Replace options with radio buttons.
-                    // Replace optgroups with labels.
-                    <div class={css::optgroup}>"Top Group"
-                        <div class={css::option}>"First"</div>
-                        <div class={css::option}>"Second"</div>
-                        <div class={css::option}>"Third"</div>
-                    </div>
-                    <div class={css::optgroup}>"Bottom Group"
-                        <div class={css::option}>"Fourth"</div>
-                        <div class={css::option}>"Fifth"</div>
-                        <div class={css::option}>"Sixth"</div>
-                    </div>
-                </div>
-            </div>
-        </Show>
+        <SelectRoot on_change=update_btn_label>
+            <SelectButton btn_sizes=btn_sizes>
+                <SelectValue placeholder=placeholder />
+            </SelectButton>
+            
+            <SelectContent>
+
+                // TODO: Replace options with radio buttons.
+                // Replace optgroups with labels.
+                // Use the OptionData struct with group, value, label properties.
+
+                {grouped_options.into_iter().map(|(group_name, items)| {
+                    view! {
+                        <OptGroup>
+                            // Only render label if the group_name isn't "None" or empty.
+                            {(!group_name.is_empty()).then(|| view! { 
+                                <OptGroupLabel>{group_name}</OptGroupLabel> 
+                            })}
+                            // <OptGroupLabel>{group_name}</OptGroupLabel>
+                            {items.into_iter().map(|item| {
+                                view! {
+                                    <SelectItem>
+                                        <SelectOption value=item.value label=item.label.clone()>
+                                            {item.label}
+                                        </SelectOption>
+                                    </SelectItem>
+                                }
+                            }).collect_view()}
+                        </OptGroup>
+                    }
+                }).collect_view()}
+                    
+            </SelectContent>
+        </SelectRoot>
     }
 }

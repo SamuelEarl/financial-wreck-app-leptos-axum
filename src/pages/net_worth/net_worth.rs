@@ -10,7 +10,7 @@ use stylance::*;
 use crate::components::{
     colors_and_sizes::{BtnVariant, Colors, Sizes, ElementWidths},
     buttons::button::Button,
-    selects::select::{Select, SelectText, SelectOptions, OptionData},
+    selects::select::{Select, OptionData},
 };
 use crate::utils::{
     format_currency::format_currency,
@@ -46,6 +46,25 @@ pub fn NetWorth() -> impl IntoView {
         OptionData { group: None, value: "other_asset".to_string(), label: "Other Asset".to_string(), },
     ];
 
+    // let asset_options = vec![
+    //     OptionData { group: Some("assets".to_string()), value: "bank_account".to_string(), label: "Bank Account (checking, savings)".to_string(), },
+    //     OptionData { group: Some("assets".to_string()), value: "retirement_investment".to_string(), label: "Retirement Investment (401k, IRA)".to_string(), },
+    //     OptionData { group: Some("assets".to_string()), value: "non_retirement_investment".to_string(), label: "Non-Retirement Investment (mutual funds, stocks, bonds)".to_string(), },
+    //     OptionData { group: Some("assets".to_string()), value: "cod".to_string(), label: "Certificate of Deposit".to_string(), },
+    //     OptionData { group: Some("assets".to_string()), value: "cash_value".to_string(), label: "Cash Value of Life Insurance".to_string(), },
+    //     OptionData { group: Some("assets".to_string()), value: "annuity".to_string(), label: "Annuity".to_string(), },
+    //     OptionData { group: Some("assets".to_string()), value: "pension".to_string(), label: "Pension".to_string(), },
+    //     OptionData { group: Some("assets".to_string()), value: "hsa".to_string(), label: "Health Savings Account (HSA)".to_string(), },
+    //     OptionData { group: Some("assets".to_string()), value: "cryptocurrency".to_string(), label: "Cryptocurrency".to_string(), },
+    //     OptionData { group: Some("liabilities".to_string()), value: "cash".to_string(), label: "Cash On-Hand".to_string(), },
+    //     OptionData { group: Some("liabilities".to_string()), value: "real_estate".to_string(), label: "Real Estate".to_string(), },
+    //     OptionData { group: Some("liabilities".to_string()), value: "vehicle".to_string(), label: "Vehicle".to_string(), },
+    //     OptionData { group: Some("liabilities".to_string()), value: "personal_item".to_string(), label: "Personal Item".to_string(), },
+    //     OptionData { group: Some("liabilities".to_string()), value: "business".to_string(), label: "A Business (your portion only)".to_string(), },
+    //     OptionData { group: Some("liabilities".to_string()), value: "money_owed_to_you".to_string(), label: "Money Owed To You".to_string(), },
+    //     OptionData { group: Some("liabilities".to_string()), value: "other_asset".to_string(), label: "Other Asset".to_string(), },
+    // ];
+
     let liability_options = vec![
         OptionData { group: None, value: "loan".to_string(), label: "Loan (mortgage, car, education, etc)".to_string(), },
         OptionData { group: None, value: "credit_card".to_string(), label: "Credit Card".to_string(), },
@@ -54,6 +73,7 @@ pub fn NetWorth() -> impl IntoView {
 
     let (net_worth, set_net_worth) = signal(0);
     set_net_worth.set(1_000_000);
+    let (selected_asset, set_selected_asset) = signal("");
 
     view! {
         <Title text="Financial Wreck | Net Worth"/>
@@ -67,22 +87,38 @@ pub fn NetWorth() -> impl IntoView {
 
         <br />
 
-        // <Select
-        //     options=asset_options
-        //     placeholder="Select an Asset"
-        //     label="Assets"
-        //     on_change=Callback::new(|val| log!("Selected: {}", val))
-        // />
-        // <Select />
-        <Select>
-            <SelectText>
-                "Select An Option"
-            </SelectText>
+        <Select
+            options=asset_options
+            placeholder="Select an Asset"
+            label="Assets"
+            btn_sizes=Some(Sizes {
+                pv: Some(2),
+                ph: Some(3),
+                ..Default::default()
+            })
+            on_change=Callback::new(move |val: String| {
+                log!("Selected: {}", val);
+                // set_selected_asset.set(val);
+            })
+        />
 
-            <SelectOptions>
-                <div></div>
-            </SelectOptions>
-        </Select>
+        <div>Selected Asset: {selected_asset.get()}</div>
+
+        // <Select>
+        //     <SelectButton
+        //         sizes=Some(Sizes {
+        //             pv: Some(2),
+        //             ph: Some(2),
+        //             ..Default::default()
+        //         })
+        //     >
+        //         "Select An Option"
+        //     </SelectButton>
+
+        //     <SelectOptions
+        //         options=asset_options
+        //     />
+        // </Select>
 
         <br />
 
