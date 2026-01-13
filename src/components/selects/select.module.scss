@@ -1,76 +1,97 @@
-// How to style <select> elements:
-// https://una.im/select-updates/
-
-// Enter custom mode with `appearance: base-select`.
-select,
-::picker(select) {
-  appearance: base-select;
-  // appearance: menulist-button;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-// The CSS pseudo-element `::select-fallback-button` was part of an earlier proposal for styling <select> elements but has since been removed from the specification. 
-// To customize the appearance of the <select> element's button area, you should apply styles directly to the <select> element itself after setting its appearance to base-select.
-select {
-  width: 100%;
-  border-width: var(--border-width);
-  border-style: var(--border-style);
-  border-radius: var(--radius);
-  outline-width: var(--outline-none);
-  outline-style: var(--outline-style);
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+// Utility for trigger buttons (optional, can be overridden)
+.trigger {
   cursor: pointer;
-
-  &::picker-icon {
-    display: none;
-  }
-
-  &:hover, &:focus {
-    outline-width: var(--outline-width);
-    outline-offset: var(--outline-offset);
-  }
-
-  // Disabled styles
-  &:disabled,
-  &[aria-disabled="true"] {
-    // It looks like browsers dim the colors of <select> elements by about 10%, so these styles try to accomodate for that. The `white: 100%` is not a typo.
-    background-color: color-mix(in srgb, black 10%, var(--element-bg-disabled)) !important;
-    border-color: color-mix(in srgb, black 10%, var(--element-border-color-disabled)) !important;
-    color: color-mix(in srgb, white 100%, var(--element-text-color-disabled)) !important;
-    pointer-events: none;
-  }
 }
 
-// Style the picker dropdown.
-::picker(select) {
-  border-width: var(--border-width);
-  border-style: var(--border-style);
+// The dark overlay
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+// The main container box
+.content {
+  background-color: var(--white);
   border-radius: var(--radius);
-  width: 50%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: calc(100vw - 20px);
+  max-width: 950px;
+  display: flex;
+  flex-direction: column;
+  // Logic: Shrink to fit content, but cap at screen height - 20px
+  height: auto;
+  max-height: calc(100vh - 20px);
+  animation: scaleIn 0.3s ease-out;
 }
 
-optgroup {
+.optgroup {
   font-weight: bold;
 }
 
 // Style the options.
-option {
+.option {
   padding: 0.5rem;
   font-size: 1rem;
 }
 
-// Style selected option in the dropdown.
-option:checked {
-  background: var(--neutral-4);
+// Structural wrappers
+.header {
+  padding: 15px;
+  flex-shrink: 0; // Don't shrink header
 }
 
-// Style the option on hover or focus.
-option:hover,
-option:focus-visible {
-  background-color: var(--neutral-2);
+.title {
+  margin: 0;
+  font-size: var(--size-5);
+  font-weight: 600;
 }
 
-// Style the active option indicator.
-option::before {
-  content: '';
-  // font-size: 80%;
-  // margin-right: 0.5rem;
+.description {
+  margin: 5px 0 0 0;
+  font-size: 0.875rem;
+  color: var(--neutral-8)
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  overscroll-behavior: contain; // Underlying elements will not scroll. 
+  border-top: var(--border);
+  border-bottom: var(--border);
+}
+
+// This is the specific scrollable area
+// .scroll_area {
+//   padding: 15px;
+//   overflow-y: auto; // SCROLL HERE
+//   overscroll-behavior: contain;
+//   border-top: var(--border);
+//   border-bottom: var(--border);
+// }
+
+.footer {
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--size-3);
+  flex-shrink: 0; // Don't shrink footer
 }

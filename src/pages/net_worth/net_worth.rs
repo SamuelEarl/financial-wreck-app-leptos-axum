@@ -8,9 +8,9 @@ use std::str::FromStr;
 use stylance::*;
 
 use crate::components::{
-    colors_and_sizes::{BtnVariant, Sizes},
+    colors_and_sizes::{BtnVariant, Colors, Sizes, ElementWidths},
     buttons::button::Button,
-    selects::select::{Select, OptionData},
+    selects::select::{Select, SelectText, SelectOptions, OptionData},
 };
 use crate::utils::{
     format_currency::format_currency,
@@ -73,7 +73,16 @@ pub fn NetWorth() -> impl IntoView {
         //     label="Assets"
         //     on_change=Callback::new(|val| log!("Selected: {}", val))
         // />
-        <Select />
+        // <Select />
+        <Select>
+            <SelectText>
+                "Select An Option"
+            </SelectText>
+
+            <SelectOptions>
+                <div></div>
+            </SelectOptions>
+        </Select>
 
         <br />
 
