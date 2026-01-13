@@ -18,7 +18,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 15px;
+      gap: var(--size-3);
       width: 100%;
       background-color: var(--element-bg);
       color: var(--element-fg);
@@ -62,9 +62,12 @@
       .opt_group {
     
         .opt_group_label {
-          padding: var(--size-2) var(--size-3);
+          padding: var(--size-3);
           font-weight: bold;
           text-transform: uppercase;
+          border-top: 1px solid var(--border-color);
+          border-bottom: 1px solid var(--border-color);
+          background-color: var(--neutral-2);
         }
       }
 
@@ -79,9 +82,9 @@
           width: 100%;
           display: flex;
           align-items: center;
-          gap: 15px;
+          gap: var(--size-3);
           text-align: left;
-          padding: 10px;
+          padding: var(--size-3);
 
           &::before {
             content: "\2714";
