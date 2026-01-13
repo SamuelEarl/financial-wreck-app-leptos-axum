@@ -27,6 +27,9 @@ pub mod components {
     pub mod selects {
         pub mod select;
     }
+    pub mod radio_buttons {
+        pub mod radio_buttons;
+    }
 }
 
 // Only compile this module if the feature is active.

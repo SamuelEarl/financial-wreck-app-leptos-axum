@@ -1,0 +1,107 @@
+// Radio Button Styles: https://www.w3schools.com/howto/howto_css_custom_checkbox.asp
+
+.radio_group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+}
+
+// Customize the label (the container).
+.radio_label_wrapper {
+  margin-bottom: var(--size-2);
+
+  .radio_label {
+    display: inline-block;
+    position: relative;
+    padding-top: 2px;
+    padding-left: var(--size-9);
+    cursor: pointer;
+    font-size: var(--size-base);
+    user-select: none;
+  }
+}
+
+// Hide the browser's default radio button.
+.radio_input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+// Set the base outline styles for the radio.
+.radio_input ~ .radio_checkmark {
+  outline-width: var(--outline-none);
+  outline-style: var(--outline-style);
+  outline-offset: var(--outline-offset);
+}
+
+// When an unchecked radio button is hovered or receives focus, add an outline to the radio button that is the default outline color.
+.radio_input:hover ~ .radio_checkmark,
+.radio_input:focus ~ .radio_checkmark {
+  outline-width: var(--outline-width);
+  outline-color: var(--outline-color);
+}
+
+// When a radio button is checked, add a primary background color and change the border color to match the background color.
+.radio_input:checked ~ .radio_checkmark {
+  background-color: var(--primary-bg);
+  border-color: var(--primary-bg);
+}
+
+// Show the checkmark when checked.
+.radio_input:checked ~ .radio_checkmark:after {
+  display: block;
+}
+
+// When a checked radio button is hovered or receives focus, add an outline to the radio button that is the primary color.
+.radio_input:checked:hover ~ .radio_checkmark,
+.radio_input:checked:focus ~ .radio_checkmark {
+  outline-width: var(--outline-width);
+  outline-color: var(--primary-bg);
+}
+
+// Create a custom radio button.
+// The `top` style below will set the radio button higher or lower in relation to the label text. The font family and font size that you set in your app will affect where the radio buttons are aligned in relation to the label text of the radio buttons.
+.radio_checkmark {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: var(--size-7);
+  width: var(--size-7);
+  border: var(--border);
+  border-radius: 50%;
+  background-color: var(--element-bg);
+}
+
+// Create the checkmark/indicator.
+.radio_checkmark:after {
+  // Hide the checkmark/indicator when not checked.
+  content: "";
+  position: absolute;
+  display: none;
+  // Style the checkmark/indicator.
+  top: 6px;
+  left: 6px;
+  width: var(--size-3);
+  height: var(--size-3);
+  border-radius: 50%;
+  background: white;
+}
+
+// Disabled radio buttons styles
+.radio_input:disabled ~ .radio_checkmark {
+  background-color: var(--element-bg-disabled);
+  color: var(--element-text-color-disabled);
+  border-color: var(--element-border-color-disabled);
+  pointer-events: none;
+}
+// When a disabled radio button is hovered, prevent the thicker outline from appearing around the radio button.
+.radio_input:disabled ~ .radio_checkmark {
+  outline-width: var(--outline-none);
+}
+// Set `cursor: default` on the label text of a disabled radio button.
+.radio_label.disabled {
+  pointer-events: none;
+}

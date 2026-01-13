@@ -11,77 +11,110 @@
   to { transform: scale(1); opacity: 1; }
 }
 
-.select_root {
+@include bp($from: xs-min) {
+  .select_root {
 
-  .select_button {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    width: 100%;
-    background-color: var(--element-bg);
-    color: var(--element-fg);
-    border: none;
-    border-radius: var(--radius);
-    outline-width: var(--outline-width);
-    outline-style: var(--outline-style);
-    outline-color: transparent;
+    .select_button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      background-color: var(--element-bg);
+      color: var(--element-fg);
+      border: none;
+      border-radius: var(--radius);
+      outline-width: var(--outline-width);
+      outline-style: var(--outline-style);
+      outline-color: transparent;
 
-    &:hover, &:focus {
-      outline-color: var(--outline-color);
+      &:hover, &:focus {
+        outline-color: var(--outline-color);
+      }
+
+      .select_button_arrow {
+        font-size: 1.5rem;
+        line-height: 0;
+        transform: rotate(90deg);
+      }
     }
 
-    .select_button_arrow {
-      font-size: 1.5rem;
-      line-height: 0;
-      transform: rotate(90deg);
+    .select_content {
+      background-color: var(--white);
+      padding: 0;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: calc(100vw - 20px);
+      // Logic: Shrink to fit content, but cap at screen height - 20px
+      max-height: calc(100vh - 20px);
+      animation: scaleIn 0.3s ease-out;
+
+      &:popover-open {
+        display: block; // Or your preferred layout when open
+        margin: auto;   // Centers the popover if it's a modal
+      }
+
+      &::backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(1px);
+      }
+      
+      .opt_group {
+    
+        .opt_group_label {
+          padding: var(--size-2) var(--size-3);
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+      }
+
+      .select_item {
+        border-bottom: 1px solid var(--border-color);
+
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        .select_option {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          text-align: left;
+          padding: 10px;
+
+          &::before {
+            content: "\2714";
+            color: transparent;
+          }
+        
+          &:hover {
+            background-color: var(--neutral-3);
+          }
+
+          &.has_opt_group_label {
+            padding-left: 25px !important;
+          }
+
+          &.selected_option {
+            background-color: var(--primary-bg);
+            color: var(--primary-fg);
+
+            &::before {
+              color: var(--primary-fg);
+            }
+          }
+        }
+      }
     }
   }
+}
 
-  .select_content {
-    background-color: var(--white);
-    padding: 0;
-    border-radius: var(--radius);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    max-width: 950px;
-    // Logic: Shrink to fit content, but cap at screen height - 20px
-    max-height: calc(100vh - 20px);
-    animation: scaleIn 0.3s ease-out;
+@include bp($from: lg-min) {
+  .select_root {
 
-    &:popover-open {
-      display: block; // Or your preferred layout when open
-      margin: auto;   // Centers the popover if it's a modal
-    }
-
-    &::backdrop {
-      background-color: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(1px);
-    }
-    
-    .opt_group {
-  
-      .opt_group_label {
-        padding: var(--size-2) var(--size-3);
-        font-weight: bold;
-        text-transform: uppercase;
-      }
-    }
-
-    .select_item {
-      
-      .select_option {
-        width: 100%;
-        text-align: left;
-        padding: 10px;
-      
-        &:hover {
-          background-color: var(--neutral-3);
-        }
-
-        &.has_opt_group_label {
-          padding-left: 25px !important;
-        }
-      }
+    .select_content {
+      max-width: 950px;
     }
   }
 }

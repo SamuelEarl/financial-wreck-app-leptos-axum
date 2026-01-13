@@ -9,6 +9,7 @@ use stylance::*;
 use crate::components::{
     colors_and_sizes::{BtnVariant, Sizes},
     buttons::button::Button,
+    radio_buttons::radio_buttons::{RadioGroup, RadioButton},
     selects::select::{Select, OptionData},
 };
 use crate::utils::{
@@ -70,9 +71,9 @@ pub fn NetWorth() -> impl IntoView {
         OptionData { group: None, value: "other_liability".to_string(), label: "Other Liability".to_string(), },
     ];
 
-    let (net_worth, set_net_worth) = signal(0);
-    set_net_worth.set(1_000_000);
-    // let (selected_asset, set_selected_asset) = signal("");
+    let (net_worth, set_net_worth) = signal(1_000_000);
+    let (selected_asset, set_selected_asset) = signal("".to_string());
+    let (favorite, set_favorite) = signal("rust".to_string());
 
     view! {
         <Title text="Financial Wreck | Net Worth"/>
@@ -96,27 +97,26 @@ pub fn NetWorth() -> impl IntoView {
             })
             on_change=Callback::new(move |val: String| {
                 log!("Selected: {}", val);
-                // set_selected_asset.set(val);
+                set_selected_asset.set(val);
             })
         />
 
-        // <div>Selected Asset: {selected_asset.get()}</div>
+        <div>"Selected Asset: " { move || selected_asset.get() }</div>
 
-        // <Select>
-        //     <SelectButton
-        //         sizes=Some(Sizes {
-        //             pv: Some(2),
-        //             ph: Some(2),
-        //             ..Default::default()
-        //         })
-        //     >
-        //         "Select An Option"
-        //     </SelectButton>
+        <br />
 
-        //     <SelectOptions
-        //         options=asset_options
-        //     />
-        // </Select>
+        <h3>"Select your favorite language:"</h3>
+        <RadioGroup 
+            name="languages" 
+            value=favorite
+            set_value=set_favorite
+        >
+            <RadioButton value="rust" label="Rust" />
+            <RadioButton value="ts" label="TypeScript" />
+            <RadioButton value="python" label="Python" />
+        </RadioGroup>
+
+        <p>"Currently selected: " {move || favorite.get()}</p>
 
         <br />
 

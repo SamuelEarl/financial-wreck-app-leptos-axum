@@ -161,6 +161,10 @@ pub fn SelectOption(
 ) -> impl IntoView {
     let ctx = use_context::<SelectContext>().expect("SelectOption must be in <Select>");
     let display_label = label.unwrap_or(value.clone());
+    // Clone value once for the comparison closure.
+    let current_val = value.clone();
+    // This closure will re-run whenever ctx.selected_value changes.
+    let is_selected = move || ctx.selected_value.get() == current_val;
 
     let button_action = move |_| {
         ctx.set_selected_value.set(value.clone());
@@ -172,6 +176,8 @@ pub fn SelectOption(
             type="button"
             class={css::select_option}
             class=(css::has_opt_group_label, move || has_opt_group_label)
+            // Add the selected class reactively
+            class=(css::selected_option, move || is_selected())
             on:click=button_action
             // Target the dynamic ID so this button can close the specific popover
             popovertarget=move || ctx.popover_id.get().to_string()
@@ -195,12 +201,9 @@ pub struct OptionData {
 pub fn Select(
     // Accepts any list of objects
     options: Vec<OptionData>,
-    
     // Placeholder text
     #[prop(optional, into)] placeholder: String,
-
     #[prop(default = None)] btn_sizes: Option<Sizes>,
-    
     // Callback
     #[prop(optional, into)] on_change: Option<Callback<String>>,
 ) -> impl IntoView {    
@@ -239,10 +242,6 @@ pub fn Select(
             
             <SelectContent>
 
-                // TODO: Replace options with radio buttons.
-                // Replace optgroups with labels.
-                // Use the OptionData struct with group, value, label properties.
-
                 {grouped_options.into_iter().map(|(group_name, items)| {
                     // Check if group_name is empty once here so we can pass a simple bool to the inner loop.
                     let is_grouped = !group_name.is_empty();
@@ -271,6 +270,7 @@ pub fn Select(
                             }).collect_view()}
                         </OptGroup>
                     }
+                    
                 }).collect_view()}
                     
             </SelectContent>
