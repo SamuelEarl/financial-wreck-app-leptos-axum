@@ -2,7 +2,7 @@
 
 use std::collections::HashMap;
 use leptos::prelude::*;
-use leptos::logging::log;
+// use leptos::logging::log;
 use uuid::Uuid;
 use stylance::*;
 
@@ -114,17 +114,13 @@ pub fn SelectContent(children: Children) -> impl IntoView {
     let ctx = use_context::<SelectContext>().expect("SelectContent must be in <Select>");
 
     view! {
-        // Overlay
-        <div class={css::select_overlay}>
-            // Modal window
-            <div
-                // Use the ID from context so it matches the Button
-                id=move || ctx.popover_id.get().to_string()
-                class={css::select_content}
-                popover="auto" 
-            >
-                {children()}
-            </div>
+        <div
+            // Use the ID from context so it matches the Button
+            id=move || ctx.popover_id.get().to_string()
+            class={css::select_content}
+            popover="auto" 
+        >
+            {children()}
         </div>
     }
 }
@@ -160,12 +156,10 @@ pub fn SelectItem(children: Children) -> impl IntoView {
 pub fn SelectOption(
     #[prop(into)] value: String,
     #[prop(optional, into)] label: Option<String>, 
+    has_opt_group_label: bool,
     children: Children
 ) -> impl IntoView {
     let ctx = use_context::<SelectContext>().expect("SelectOption must be in <Select>");
-    
-    // ... existing logic ...
-    let value_clone = value.clone(); // Re-clone for the closure if needed
     let display_label = label.unwrap_or(value.clone());
 
     let button_action = move |_| {
@@ -175,7 +169,9 @@ pub fn SelectOption(
 
     view! {
         <button
+            type="button"
             class={css::select_option}
+            class=(css::has_opt_group_label, move || has_opt_group_label)
             on:click=button_action
             // Target the dynamic ID so this button can close the specific popover
             popovertarget=move || ctx.popover_id.get().to_string()
@@ -200,9 +196,6 @@ pub fn Select(
     // Accepts any list of objects
     options: Vec<OptionData>,
     
-    // Label for the group (optional)
-    #[prop(optional, into)] label: String,
-    
     // Placeholder text
     #[prop(optional, into)] placeholder: String,
 
@@ -210,15 +203,9 @@ pub fn Select(
     
     // Callback
     #[prop(optional, into)] on_change: Option<Callback<String>>,
-) -> impl IntoView {
-    // Wrap the String in a Signal so it becomes Copy-able
-    let (label_sig, _) = signal(label);
-    // Local variable to track groups during the map loop
-    let mut last_optgroup: Option<String> = None;
-    
+) -> impl IntoView {    
     // We define a listener to update the button label when the value changes.
     let update_btn_label = {
-        let options_map = options.clone();
         Callback::new(move |val: String| {
             // In a real app, you might sync this to the internal context
             if let Some(cb) = on_change {
@@ -257,17 +244,26 @@ pub fn Select(
                 // Use the OptionData struct with group, value, label properties.
 
                 {grouped_options.into_iter().map(|(group_name, items)| {
+                    // Check if group_name is empty once here so we can pass a simple bool to the inner loop.
+                    let is_grouped = !group_name.is_empty();
+                    // This is needed for the OptGroupLabel check.
+                    let group_name_for_label = group_name.clone();
+                    
                     view! {
                         <OptGroup>
                             // Only render label if the group_name isn't "None" or empty.
-                            {(!group_name.is_empty()).then(|| view! { 
-                                <OptGroupLabel>{group_name}</OptGroupLabel> 
+                            {is_grouped.then(|| view! { 
+                                <OptGroupLabel>{group_name_for_label}</OptGroupLabel> 
                             })}
-                            // <OptGroupLabel>{group_name}</OptGroupLabel>
                             {items.into_iter().map(|item| {
                                 view! {
                                     <SelectItem>
-                                        <SelectOption value=item.value label=item.label.clone()>
+                                        <SelectOption
+                                            value=item.value 
+                                            label=item.label.clone()
+                                            // is_grouped is a 'bool' (which implements the Copy trait), so it won't trigger a Copy error.
+                                            has_opt_group_label=is_grouped
+                                        >
                                             {item.label}
                                         </SelectOption>
                                     </SelectItem>

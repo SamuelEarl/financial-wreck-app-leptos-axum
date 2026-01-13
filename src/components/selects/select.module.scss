@@ -1,8 +1,17 @@
+// Refer to this article for ideas on styling <select> elements:
+// https://una.im/select-updates/
+
+// @keyframes fadeIn {
+//   from { opacity: 0; }
+//   to { opacity: 1; }
+// }
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
 .select_root {
-  // position: relative;
-  // display: inline-block;
-  // display: flex;
-  // flex-direction: column;
 
   .select_button {
     display: flex;
@@ -29,62 +38,48 @@
     }
   }
 
-  // The dark overlay
-  .select_overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.3s ease-out;
+  .select_content {
+    background-color: var(--white);
+    padding: 0;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    max-width: 950px;
+    // Logic: Shrink to fit content, but cap at screen height - 20px
+    max-height: calc(100vh - 20px);
+    animation: scaleIn 0.3s ease-out;
 
-    .select_content {
-      background-color: var(--white);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      max-width: 950px;
-      display: flex;
-      flex-direction: column;
-      // Logic: Shrink to fit content, but cap at screen height - 20px
-      max-height: calc(100vh - 20px);
-      animation: scaleIn 0.3s ease-out;
+    &:popover-open {
+      display: block; // Or your preferred layout when open
+      margin: auto;   // Centers the popover if it's a modal
+    }
 
-      // top: 0;
-      // left: 0;
-      // // margin: 4px 0 0 0;
-      // // margin: 0 auto;
-      // padding: 0;
-      // border: 1px solid #ddd; 
-      // border-radius: 4px; 
-      // box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      // // width: 100%;
-      // // min-width: 200px; 
-      // background: white;
-      
-      .opt_group {
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(1px);
+    }
     
-        .opt_group_label {
-          padding: 8px 12px;
-          // font-size: 0.75rem;
-          font-weight: bold;
-          // color: #666;
-          text-transform: uppercase;
+    .opt_group {
+  
+      .opt_group_label {
+        padding: var(--size-2) var(--size-3);
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    }
+
+    .select_item {
+      
+      .select_option {
+        width: 100%;
+        text-align: left;
+        padding: 10px;
+      
+        &:hover {
+          background-color: var(--neutral-3);
         }
 
-        .select_item {
-          
-          .select_option {
-            width: 100%;
-            text-align: left;
-            padding: 10px;
-            padding-left: 25px;
-          
-            &:hover {
-              background-color: var(--neutral-3);
-            }
-          }
+        &.has_opt_group_label {
+          padding-left: 25px !important;
         }
       }
     }

@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize}; // Assuming you need this for DB/Frontend
-use std::fmt;
 use std::str::FromStr;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]

@@ -4,11 +4,10 @@ use leptos::logging::{log, error};
 use leptos::task::spawn_local;
 use uuid::Uuid;
 use serde::{Deserialize, Serialize};
-use std::str::FromStr;
 use stylance::*;
 
 use crate::components::{
-    colors_and_sizes::{BtnVariant, Colors, Sizes, ElementWidths},
+    colors_and_sizes::{BtnVariant, Sizes},
     buttons::button::Button,
     selects::select::{Select, OptionData},
 };
@@ -73,7 +72,7 @@ pub fn NetWorth() -> impl IntoView {
 
     let (net_worth, set_net_worth) = signal(0);
     set_net_worth.set(1_000_000);
-    let (selected_asset, set_selected_asset) = signal("");
+    // let (selected_asset, set_selected_asset) = signal("");
 
     view! {
         <Title text="Financial Wreck | Net Worth"/>
@@ -90,7 +89,6 @@ pub fn NetWorth() -> impl IntoView {
         <Select
             options=asset_options
             placeholder="Select an Asset"
-            label="Assets"
             btn_sizes=Some(Sizes {
                 pv: Some(2),
                 ph: Some(3),
@@ -102,7 +100,7 @@ pub fn NetWorth() -> impl IntoView {
             })
         />
 
-        <div>Selected Asset: {selected_asset.get()}</div>
+        // <div>Selected Asset: {selected_asset.get()}</div>
 
         // <Select>
         //     <SelectButton
