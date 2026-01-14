@@ -5,6 +5,12 @@ use stylance::*;
 
 import_style!(css, "radio_buttons.module.scss");
 
+#[derive(Clone, Debug, Default, PartialEq)]
+pub struct RadioButtonData {
+    pub value: String,
+    pub label: String,
+}
+
 #[derive(Clone)]
 struct RadioContext {
     name: String,
@@ -58,5 +64,29 @@ pub fn RadioButton(
                 <span class={css::radio_checkmark}></span>
             </label>
         </div>
+    }
+}
+
+#[component]
+pub fn RadioButtons(
+    group_name: String,
+    // Accepts any list of objects
+    options: Vec<RadioButtonData>,
+    #[prop(optional)] default_value: Option<String>,
+    #[prop(into)] value: ReadSignal<String>,
+    #[prop(into)] set_value: WriteSignal<String>,
+) -> impl IntoView {
+    view! {
+        <RadioGroup
+            name=group_name
+            value=value
+            set_value=set_value
+        >
+            {options.into_iter().map(|opt: RadioButtonData| {
+                view! {
+                    <RadioButton value=opt.value label=opt.label />
+                }
+            }).collect_view()}
+        </RadioGroup>
     }
 }

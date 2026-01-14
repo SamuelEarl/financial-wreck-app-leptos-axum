@@ -21,7 +21,7 @@ pub fn DialogsDocs() -> impl IntoView {
     view! {
         <div class="docs-container">
             // 2. Load the file relative to the project root.
-            // The macro parses the Markdown and injects the <PrimaryButton> 
+            // The macro parses the Markdown and injects the <Component> 
             // where the {{ ... }} tag is.
             {markdown_view!(file = "src/docs/dialogs_docs.md")}
         </div>

@@ -1,5 +1,3 @@
-// NOTES: For grouped options (optgroup), the order of the optgroups will be the same as the `group` property in the options vector that is passed to the `options` prop. In other words, the first group that appears in the vector will be the first optgroup in the dropdown, the second group that appears will be the second optgroup, and so on.
-
 use std::collections::HashMap;
 use leptos::prelude::*;
 // use leptos::logging::log;
@@ -37,13 +35,15 @@ struct SelectContext {
 #[component]
 pub fn SelectRoot(
     // Optional: Default value
-    #[prop(optional, into)] default_value: Option<String>,
+    default_value: Option<String>,
+    initial_label: Option<String>,
     // Optional: Callback when selection changes
     #[prop(optional, into)] on_change: Option<Callback<String>>,
     children: Children,
 ) -> impl IntoView {
     let (selected_value, set_selected_value) = signal(default_value.unwrap_or_default());
-    let (selected_label, set_selected_label) = signal(String::new());
+    // Initialize label with the provided initial_label.
+    let (selected_label, set_selected_label) = signal(initial_label.unwrap_or_default());
     let (is_open, set_is_open) = signal(false);
     let (popover_id, set_popover_id) = signal(Uuid::now_v7());
 
@@ -86,6 +86,7 @@ pub fn SelectButton(
             class={css::select_button}
             style=format!("{}", get_element_sizes(btn_sizes, true).all)
             popovertarget=move || ctx.popover_id.get().to_string()
+            role="combobox"
         >
             {children()}
             <span class={css::select_button_arrow}>"›"</span>
@@ -119,6 +120,7 @@ pub fn SelectContent(children: Children) -> impl IntoView {
             id=move || ctx.popover_id.get().to_string()
             class={css::select_content}
             popover="auto" 
+            role="listbox"
         >
             {children()}
         </div>
@@ -128,7 +130,7 @@ pub fn SelectContent(children: Children) -> impl IntoView {
 // 6. Grouping (Optional wrapper)
 #[component]
 pub fn OptGroup(children: Children) -> impl IntoView {
-    view! { <div class={css::opt_group}>{children()}</div> }
+    view! { <div class={css::opt_group} role="group">{children()}</div> }
 }
 
 // 7. Label for a Group
@@ -174,6 +176,7 @@ pub fn SelectOption(
     view! {
         <button
             type="button"
+            role="option"
             class={css::select_option}
             class=(css::has_opt_group_label, move || has_opt_group_label)
             // Add the selected class reactively
@@ -201,12 +204,20 @@ pub struct OptionData {
 pub fn Select(
     // Accepts any list of objects
     options: Vec<OptionData>,
+    #[prop(optional)] default_value: Option<String>,
     // Placeholder text
     #[prop(optional, into)] placeholder: String,
     #[prop(default = None)] btn_sizes: Option<Sizes>,
     // Callback
     #[prop(optional, into)] on_change: Option<Callback<String>>,
-) -> impl IntoView {    
+) -> impl IntoView {
+    // Find the label associated with the default value.
+    let initial_label = default_value.as_ref().and_then(|def_val| {
+        options.iter()
+            .find(|opt| &opt.value == def_val)
+            .map(|opt| opt.label.clone())
+    });
+
     // We define a listener to update the button label when the value changes.
     let update_btn_label = {
         Callback::new(move |val: String| {
@@ -217,62 +228,65 @@ pub fn Select(
         })
     };
 
-    let mut grouped_options: HashMap<String, Vec<GroupedItem>> = HashMap::new();
+    let mut ordered_groups: Vec<(String, Vec<GroupedItem>)> = Vec::new();
 
     for opt in options {
-        // Default to an empty string if the group is None.
-        let group_name = opt.group.unwrap_or_else(|| "".to_string());
-        
+        let group_name = opt.group.unwrap_or_default();
         let item = GroupedItem {
             value: opt.value,
             label: opt.label,
         };
 
-        grouped_options
-            .entry(group_name)
-            .or_insert_with(Vec::new)
-            .push(item);
+        // Find existing group or create a new one
+        if let Some(pos) = ordered_groups.iter().position(|(name, _)| name == &group_name) {
+            ordered_groups[pos].1.push(item);
+        } else {
+            ordered_groups.push((group_name, vec![item]));
+        }
     }
 
     view! {
-        <SelectRoot on_change=update_btn_label>
+        <SelectRoot
+            default_value=default_value 
+            initial_label=initial_label
+            on_change=update_btn_label
+        >
             <SelectButton btn_sizes=btn_sizes>
                 <SelectValue placeholder=placeholder />
             </SelectButton>
             
             <SelectContent>
-
-                {grouped_options.into_iter().map(|(group_name, items)| {
-                    // Check if group_name is empty once here so we can pass a simple bool to the inner loop.
+                {ordered_groups.into_iter().map(|(group_name, items)| {
                     let is_grouped = !group_name.is_empty();
-                    // This is needed for the OptGroupLabel check.
-                    let group_name_for_label = group_name.clone();
                     
-                    view! {
-                        <OptGroup>
-                            // Only render label if the group_name isn't "None" or empty.
-                            {is_grouped.then(|| view! { 
-                                <OptGroupLabel>{group_name_for_label}</OptGroupLabel> 
-                            })}
-                            {items.into_iter().map(|item| {
-                                view! {
-                                    <SelectItem>
-                                        <SelectOption
-                                            value=item.value 
-                                            label=item.label.clone()
-                                            // is_grouped is a 'bool' (which implements the Copy trait), so it won't trigger a Copy error.
-                                            has_opt_group_label=is_grouped
-                                        >
-                                            {item.label}
-                                        </SelectOption>
-                                    </SelectItem>
-                                }
-                            }).collect_view()}
-                        </OptGroup>
+                    // 1. Generate the list of items first
+                    let items_view = items.into_iter().map(|item| {
+                        view! {
+                            <SelectItem>
+                                <SelectOption
+                                    value=item.value 
+                                    label=item.label.clone()
+                                    has_opt_group_label=is_grouped
+                                >
+                                    {item.label}
+                                </SelectOption>
+                            </SelectItem>
+                        }
+                    }).collect_view();
+
+                    // 2. Conditionally wrap in OptGroup
+                    if is_grouped {
+                        view! {
+                            <OptGroup>
+                                <OptGroupLabel>{group_name}</OptGroupLabel> 
+                                {items_view}
+                            </OptGroup>
+                        }.into_any()
+                    } else {
+                        // Render the items directly without the group wrappers
+                        items_view.into_any()
                     }
-                    
                 }).collect_view()}
-                    
             </SelectContent>
         </SelectRoot>
     }

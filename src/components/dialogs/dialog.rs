@@ -1,5 +1,16 @@
 use leptos::prelude::*;
+use uuid::Uuid;
 use stylance::*;
+
+use crate::components::colors_and_sizes::{
+    BtnVariant, 
+    Colors, 
+    Sizes, 
+    ElementWidths, 
+    get_btn_colors, 
+    get_element_sizes, 
+    get_element_width
+};
 
 import_style!(css, "dialog.module.scss");
 
@@ -7,33 +18,16 @@ import_style!(css, "dialog.module.scss");
 // This allows the Trigger to tell the Content to open/close
 #[derive(Clone, Copy)]
 struct DialogContext {
-    is_open: Signal<bool>,
-    set_is_open: WriteSignal<bool>,
+    popover_id: Signal<String>,
 }
 
 // ROOT COMPONENT
 #[component]
 pub fn Dialog(children: Children) -> impl IntoView {
-    // The `is_open` state is held here.
-    let (is_open, set_is_open) = signal(false);
+    // Generate a unique ID for the popover connection
+    let (popover_id, _) = signal(format!("dialog-{}", Uuid::now_v7()));
 
-    // The `is_open` state is provided to all children via Context.
-    provide_context(DialogContext { is_open: is_open.into(), set_is_open });
-
-    // Handle body scroll locking
-    // This adds the CSS rule overflow: hidden; to the <body> tag. This cuts off any content that goes outside the screen edges and removes the scrollbars, which prevents the user from scrolling the page content.
-    // NOTE: This doesn't actually seem to do anything, but I am leaving it here in case I run into scrolling issues later.
-    // Effect::new(move |_| {
-    //     if is_open.get() {
-    //         if let Some(doc) = document().body() {
-    //             let _ = doc.style().set_property("overflow", "hidden");
-    //         }
-    //     } else {
-    //         if let Some(doc) = document().body() {
-    //             let _ = doc.style().remove_property("overflow");
-    //         }
-    //     }
-    // });
+    provide_context(DialogContext { popover_id: popover_id.into() });
 
     view! {
         {children()}
@@ -42,16 +36,25 @@ pub fn Dialog(children: Children) -> impl IntoView {
 
 // TRIGGER (The button that opens it)
 #[component]
-pub fn DialogTrigger(children: Children) -> impl IntoView {
-    let ctx = use_context::<DialogContext>().expect("DialogTrigger must be inside <Dialog/>");
+pub fn DialogTrigger(
+    #[prop(default = BtnVariant::Primary)] variant: BtnVariant,
+    #[prop(default = false)] inverted: bool,
+    #[prop(default = None)] colors: Option<Colors>,
+    #[prop(default = None)] sizes: Option<Sizes>,
+    #[prop(default = ElementWidths::Auto)] width: ElementWidths,
+    children: Children,
+) -> impl IntoView {
+    let ctx = use_context::<DialogContext>().expect("missing DialogContext");
 
     view! {
-        <div 
+        // popovertarget links the button to the content ID
+        <button 
             class={css::trigger} 
-            on:click=move |_| ctx.set_is_open.set(true)
+            style=format!("{} {} {}", get_btn_colors(colors, variant, inverted), get_element_sizes(sizes, true).all, get_element_width(width))
+            popovertarget=move || ctx.popover_id.get()
         >
             {children()}
-        </div>
+        </button>
     }
 }
 
@@ -59,29 +62,20 @@ pub fn DialogTrigger(children: Children) -> impl IntoView {
 #[component]
 pub fn DialogContent(
     children: ChildrenFn,
-    #[prop(optional, into)] class: String, // Allow custom classes like width.
 ) -> impl IntoView {
-    let ctx = use_context::<DialogContext>().expect("DialogContent must be inside <Dialog/>");
+    let ctx = use_context::<DialogContext>().expect("missing DialogContext");
 
     view! {
-        <Show when=move || ctx.is_open.get()>
-            // Backdrop
-            <div 
-                class={css::backdrop} 
-                on:click=move |_| ctx.set_is_open.set(false)
-            >
-                // Modal Window
-                <div 
-                    class=format!("{} {}", css::content, class)
-                    // Prevent clicking the modal from closing it
-                    on:click=move |e| e.stop_propagation() 
-                    role="dialog"
-                    aria-modal="true"
-                >
-                    {children.clone()()}
-                </div>
-            </div>
-        </Show>
+        <div 
+            // The magic happens here:
+            id=move || ctx.popover_id.get()
+            popover="auto" 
+            role="dialog"
+            class={css::content}
+        >
+            // With Popover API, the "backdrop" is handled via CSS ::backdrop
+            {children.clone()()}
+        </div>
     }
 }
 
@@ -107,15 +101,6 @@ pub fn DialogBody(children: Children) -> impl IntoView {
     view! { <div class={css::body}>{children()}</div> }
 }
 
-// SCROLL AREA
-// #[component]
-// pub fn ScrollArea(
-//     children: Children, 
-//     #[prop(optional, into)] class: String
-// ) -> impl IntoView {
-//     view! { <div class=format!("{} {}", css::scroll_area, class)>{children()}</div> }
-// }
-
 // FOOTER & CLOSE BUTTON
 #[component]
 pub fn DialogFooter(children: Children) -> impl IntoView {
@@ -123,12 +108,24 @@ pub fn DialogFooter(children: Children) -> impl IntoView {
 }
 
 #[component]
-pub fn DialogClose(children: Children) -> impl IntoView {
-    let ctx = use_context::<DialogContext>().expect("DialogClose must be inside <Dialog/>");
+pub fn DialogClose(
+    #[prop(default = BtnVariant::Primary)] variant: BtnVariant,
+    #[prop(default = false)] inverted: bool,
+    #[prop(default = None)] colors: Option<Colors>,
+    #[prop(default = None)] sizes: Option<Sizes>,
+    #[prop(default = ElementWidths::Auto)] width: ElementWidths,
+    children: Children,
+) -> impl IntoView {
+    let ctx = use_context::<DialogContext>().expect("missing DialogContext");
 
     view! {
-        <div on:click=move |_| ctx.set_is_open.set(false)>
+        // Using popovertargetaction="hide" tells the browser to close the ID
+        <button 
+            popovertarget=move || ctx.popover_id.get()
+            popovertargetaction="hide"
+            style=format!("{} {} {}", get_btn_colors(colors, variant, inverted), get_element_sizes(sizes, true).all, get_element_width(width))
+        >
             {children()}
-        </div>
+        </button>
     }
 }

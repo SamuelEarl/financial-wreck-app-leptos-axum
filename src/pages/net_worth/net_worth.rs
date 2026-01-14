@@ -89,6 +89,7 @@ pub fn NetWorth() -> impl IntoView {
 
         <Select
             options=asset_options
+            default_value="retirement_investment".to_string()
             placeholder="Select an Asset"
             btn_sizes=Some(Sizes {
                 pv: Some(2),

@@ -14,22 +14,20 @@ use crate::components::{
 pub fn NetWorthArticle() -> impl IntoView {
     view! {
         <Dialog>
-            <DialogTrigger>
-                <Button
-                    colors=Some(Colors {
-                        bg: "var(--warning-bg)".to_string(),
-                        fg: "var(--warning-fg)".to_string(),
-                        br: "var(--warning-bg)".to_string(),
-                        ol: "var(--warning-bg)".to_string(),
-                    })
-                    sizes=Some(Sizes {
-                        pv: Some(0),
-                        ph: Some(2),
-                        ..Default::default()
-                    })
-                >
-                    "Learn more"
-                </Button>
+            <DialogTrigger
+                colors=Some(Colors {
+                    bg: "var(--warning-bg)".to_string(),
+                    fg: "var(--warning-fg)".to_string(),
+                    br: "var(--warning-bg)".to_string(),
+                    ol: "var(--warning-bg)".to_string(),
+                })
+                sizes=Some(Sizes {
+                    pv: Some(0),
+                    ph: Some(2),
+                    ..Default::default()
+                })
+            >
+                "Learn more"
             </DialogTrigger>
 
             <DialogContent>
@@ -111,10 +109,8 @@ pub fn NetWorthArticle() -> impl IntoView {
                 </DialogBody>
 
                 <DialogFooter>
-                    <DialogClose>
-                        <Button variant={BtnVariant::Primary}>
-                            "Close"
-                        </Button>
+                    <DialogClose variant={BtnVariant::Primary}>
+                        "Close"
                     </DialogClose>
                 </DialogFooter>
             </DialogContent>

@@ -4,10 +4,8 @@
 
 {{
     <Dialog>
-        <DialogTrigger>
-            <Button variant={BtnVariant::Primary}>
-                "Open Terms of Service"
-            </Button>
+        <DialogTrigger variant={BtnVariant::Primary}>
+            "Open Terms of Service"
         </DialogTrigger>
         <DialogContent>
             <DialogHeader>
@@ -32,22 +30,18 @@
                 <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
             </DialogBody>
             <DialogFooter>
-                <DialogClose>
-                    <Button
-                        colors=Some(Colors {
-                            bg: "transparent".to_string(),
-                            fg: "var(--secondary-bg)".to_string(),
-                            br: "var(--secondary-bg)".to_string(),
-                            ol: "var(--secondary-bg)".to_string(),
-                        })
-                    >
-                        "Decline"
-                    </Button>
+                <DialogClose 
+                    colors=Some(Colors {
+                        bg: "transparent".to_string(),
+                        fg: "var(--secondary-bg)".to_string(),
+                        br: "var(--secondary-bg)".to_string(),
+                        ol: "var(--secondary-bg)".to_string(),
+                    })
+                >
+                    "Decline"
                 </DialogClose>
-                <DialogClose>
-                    <Button variant={BtnVariant::Secondary}>
-                        "Accept"
-                    </Button>
+                <DialogClose variant={BtnVariant::Secondary}>
+                    "Accept"
                 </DialogClose>
             </DialogFooter>
         </DialogContent>
@@ -70,10 +64,8 @@ use crate::components::dialogs::dialog::{
 
 <Dialog>
     // The button that sits on the page.
-    <DialogTrigger>
-        <Button variant={BtnVariant::Primary}>
-            "Open Terms of Service"
-        </Button>
+    <DialogTrigger variant={BtnVariant::Primary}>
+        "Open Terms of Service"
     </DialogTrigger>
 
     // The dialog content
@@ -92,25 +84,21 @@ use crate::components::dialogs::dialog::{
             <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
         </DialogBody>
         <DialogFooter>
-            <DialogClose>
-                <Button
-                    colors=Some(Colors {
-                        bg: "transparent".to_string(),
-                        fg: "var(--secondary-bg)".to_string(),
-                        br: "var(--secondary-bg)".to_string(),
-                        ol: "var(--secondary-bg)".to_string(),
-                    })
-                >
-                    "Decline"
-                </Button>
+            <DialogClose 
+                colors=Some(Colors {
+                    bg: "transparent".to_string(),
+                    fg: "var(--secondary-bg)".to_string(),
+                    br: "var(--secondary-bg)".to_string(),
+                    ol: "var(--secondary-bg)".to_string(),
+                })
+            >
+                "Decline"
             </DialogClose>
 
             // Note: Since this is "Accept", you might want custom logic here
             // besides just closing, but for this example we just wrap a button.
-            <DialogClose>
-                <Button variant={BtnVariant::Secondary}>
-                    "Accept"
-                </Button>
+            <DialogClose variant={BtnVariant::Secondary}>
+                "Accept"
             </DialogClose>
         </DialogFooter>
     </DialogContent>

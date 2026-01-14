@@ -39,6 +39,8 @@ pub mod docs {
     pub mod accordions_docs;
     pub mod buttons_docs;
     pub mod dialogs_docs;
+    pub mod radio_buttons_docs;
+    pub mod select_docs;
 }
 
 pub mod pages {

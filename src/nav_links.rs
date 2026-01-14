@@ -12,8 +12,10 @@ pub static MAIN_NAV: [NavLink; 4] = [
 ];
 
 #[cfg(feature = "docs")]
-pub static DOCS_NAV: [NavLink; 3] = [
+pub static DOCS_NAV: [NavLink; 5] = [
     NavLink { text: "Accordions", url: "/docs/accordions", },
     NavLink { text: "Buttons", url: "/docs/buttons", },
     NavLink { text: "Dialogs", url: "/docs/dialogs", },
+    NavLink { text: "Radio Buttons", url: "/docs/radio-buttons", },
+    NavLink { text: "Select", url: "/docs/select", },
 ];

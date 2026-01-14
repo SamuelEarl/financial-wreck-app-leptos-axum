@@ -127,10 +127,15 @@ pub fn get_element_sizes(sizes: Option<Sizes>, is_btn: bool) -> ElementSizes {
     // Logic: If fw exists, use it. Else if is_btn is true, "bold". Else "normal".
     let fw_val = s.and_then(|x| x.fw.clone());
     
+    // let font_weight = if let Some(fw) = fw_val {
+    //     fw
+    // } else if is_btn {
+    //     "bold".to_string()
+    // } else {
+    //     "normal".to_string()
+    // };
     let font_weight = if let Some(fw) = fw_val {
         fw
-    } else if is_btn {
-        "bold".to_string()
     } else {
         "normal".to_string()
     };
@@ -152,15 +157,15 @@ pub fn get_element_sizes(sizes: Option<Sizes>, is_btn: bool) -> ElementSizes {
 
     // -- Construct the 'all' string --
     let mut all = format!(
-        "font-size: {}; font-weight: {}; padding: {} {};",
+        "font-size: {} font-weight: {}; padding: {} {};",
         font_size, font_weight, padding_v, padding_h
     );
 
     // -- Gap Logic --
     let gap = if fs_val > -1 {
-        format!("var(--size-{});", fs_val)
+        format!("var(--size-{})", fs_val)
     } else {
-        "var(--size-base);".to_string()
+        "var(--size-base)".to_string()
     };
 
     // If the element that is retrieving the size styles is a button, then add a `gap` (flexbox) style.
