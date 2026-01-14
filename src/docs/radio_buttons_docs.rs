@@ -1,6 +1,5 @@
 use leptos::prelude::*;
 use markdown_view_leptos::markdown_view;
-use leptos::logging::log;
 
 // 1. IMPORT THE COMPONENT! 
 // Even though we don't use <Alert> explicitly in the view! below,

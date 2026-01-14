@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 use leptos::prelude::*;
 // use leptos::logging::log;
 use uuid::Uuid;
@@ -24,11 +23,8 @@ struct SelectContext {
     // We store the label too so the Button knows what to display
     selected_label: Signal<String>,
     set_selected_label: WriteSignal<String>,
-    // Controls the native popover state
-    is_open: Signal<bool>,
-    set_is_open: WriteSignal<bool>,
     popover_id: Signal<Uuid>,
-    set_popover_id: WriteSignal<Uuid>,
+    // set_popover_id: WriteSignal<Uuid>,
 }
 
 // 2. The Root Component
@@ -44,8 +40,7 @@ pub fn SelectRoot(
     let (selected_value, set_selected_value) = signal(default_value.unwrap_or_default());
     // Initialize label with the provided initial_label.
     let (selected_label, set_selected_label) = signal(initial_label.unwrap_or_default());
-    let (is_open, set_is_open) = signal(false);
-    let (popover_id, set_popover_id) = signal(Uuid::now_v7());
+    let (popover_id, _set_popover_id) = signal(Uuid::now_v7());
 
     // Provide context to all children
     provide_context(SelectContext {
@@ -53,10 +48,8 @@ pub fn SelectRoot(
         set_selected_value,
         selected_label: selected_label.into(),
         set_selected_label,
-        is_open: is_open.into(),
-        set_is_open,
         popover_id: popover_id.into(), 
-        set_popover_id,
+        // set_popover_id,
     });
 
     // Effect to run the on_change callback

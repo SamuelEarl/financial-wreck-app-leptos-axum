@@ -9,7 +9,6 @@ use stylance::*;
 use crate::components::{
     colors_and_sizes::{BtnVariant, Sizes},
     buttons::button::Button,
-    radio_buttons::radio_buttons::{RadioButtonData, RadioButtons},
     selects::select::{Select, OptionData},
 };
 use crate::utils::{
@@ -46,25 +45,6 @@ pub fn NetWorth() -> impl IntoView {
         OptionData { group: None, value: "other_asset".to_string(), label: "Other Asset".to_string(), },
     ];
 
-    // let asset_options = vec![
-    //     OptionData { group: Some("assets".to_string()), value: "bank_account".to_string(), label: "Bank Account (checking, savings)".to_string(), },
-    //     OptionData { group: Some("assets".to_string()), value: "retirement_investment".to_string(), label: "Retirement Investment (401k, IRA)".to_string(), },
-    //     OptionData { group: Some("assets".to_string()), value: "non_retirement_investment".to_string(), label: "Non-Retirement Investment (mutual funds, stocks, bonds)".to_string(), },
-    //     OptionData { group: Some("assets".to_string()), value: "cod".to_string(), label: "Certificate of Deposit".to_string(), },
-    //     OptionData { group: Some("assets".to_string()), value: "cash_value".to_string(), label: "Cash Value of Life Insurance".to_string(), },
-    //     OptionData { group: Some("assets".to_string()), value: "annuity".to_string(), label: "Annuity".to_string(), },
-    //     OptionData { group: Some("assets".to_string()), value: "pension".to_string(), label: "Pension".to_string(), },
-    //     OptionData { group: Some("assets".to_string()), value: "hsa".to_string(), label: "Health Savings Account (HSA)".to_string(), },
-    //     OptionData { group: Some("assets".to_string()), value: "cryptocurrency".to_string(), label: "Cryptocurrency".to_string(), },
-    //     OptionData { group: Some("liabilities".to_string()), value: "cash".to_string(), label: "Cash On-Hand".to_string(), },
-    //     OptionData { group: Some("liabilities".to_string()), value: "real_estate".to_string(), label: "Real Estate".to_string(), },
-    //     OptionData { group: Some("liabilities".to_string()), value: "vehicle".to_string(), label: "Vehicle".to_string(), },
-    //     OptionData { group: Some("liabilities".to_string()), value: "personal_item".to_string(), label: "Personal Item".to_string(), },
-    //     OptionData { group: Some("liabilities".to_string()), value: "business".to_string(), label: "A Business (your portion only)".to_string(), },
-    //     OptionData { group: Some("liabilities".to_string()), value: "money_owed_to_you".to_string(), label: "Money Owed To You".to_string(), },
-    //     OptionData { group: Some("liabilities".to_string()), value: "other_asset".to_string(), label: "Other Asset".to_string(), },
-    // ];
-
     let liability_options = vec![
         OptionData { group: None, value: "loan".to_string(), label: "Loan (mortgage, car, education, etc)".to_string(), },
         OptionData { group: None, value: "credit_card".to_string(), label: "Credit Card".to_string(), },
@@ -73,15 +53,6 @@ pub fn NetWorth() -> impl IntoView {
 
     let (net_worth, set_net_worth) = signal(1_000_000);
     let (selected_asset, set_selected_asset) = signal("".to_string());
-
-    let programming_languages = vec![
-        RadioButtonData { value: "mojo".into(), label: "Mojo".into() },
-        RadioButtonData { value: "rust".into(), label: "Rust".into() },
-        RadioButtonData { value: "python".into(), label: "Python".into() },
-        RadioButtonData { value: "typescript".into(), label: "Typescript".into() },
-    ];
-
-    let (favorite, set_favorite) = signal("".to_string());
 
     view! {
         <Title text="Financial Wreck | Net Worth"/>
@@ -105,37 +76,12 @@ pub fn NetWorth() -> impl IntoView {
                 ..Default::default()
             })
             on_change=Callback::new(move |val: String| {
-                log!("Selected: {}", val);
+                log!("(net_worth) Selected: {}", val);
                 set_selected_asset.set(val);
             })
         />
 
         <div>"Selected Asset: " { move || selected_asset.get() }</div>
-
-        <br />
-
-        // <h3>"Select your favorite language:"</h3>
-        // <RadioGroup 
-        //     name="languages" 
-        //     value=favorite
-        //     set_value=set_favorite
-        // >
-        //     <RadioButton value="rust" label="Rust" />
-        //     <RadioButton value="ts" label="TypeScript" />
-        //     <RadioButton value="python" label="Python" />
-        // </RadioGroup>
-
-        <label>"Select your favorite language"
-            <RadioButtons 
-                group_name="languages"
-                options=programming_languages
-                default_value="mojo"
-                // Sync the internal state back to the parent
-                on_change=move |val| set_favorite.set(val)
-            />
-        </label>
-
-        <p>"Currently selected: " {move || favorite.get()}</p>
 
         <br />
 

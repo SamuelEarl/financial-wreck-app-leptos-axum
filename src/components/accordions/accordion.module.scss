@@ -12,10 +12,10 @@
   outline-width: var(--outline-none);
   outline-style: var(--outline-style);
   outline-color: var(--outline-color);
+  outline-offset: var(--outline-offset);
 
   &:hover, &:focus-within {
     outline-width: var(--outline-width);
-    outline-offset: var(--outline-offset);
   }
 
   .accordion_item_btn {
@@ -23,7 +23,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--size-4);
+    padding: var(--size-2) var(--size-3);
     background-color: var(--element-bg);
     border: none;
     cursor: pointer;
@@ -41,7 +41,7 @@
       overflow: hidden;
 
       .accordion_item_panel_inner {
-        padding: var(--size-4);
+        padding: var(--size-3);
         border-top: 1px solid var(--border-color);
         background-color: var(--white);
       }

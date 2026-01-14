@@ -43,7 +43,7 @@ pub fn SelectDocs() -> impl IntoView {
         OptionData { group: Some("sauropods".to_string()), value: "apatosaurus".to_string(), label: "Apatosaurus".to_string(), },
     ];
 
-    let (selected_grouped_dino, set_selected_grouped_dino) = signal("".to_string());
+    let (_selected_grouped_dino, set_selected_grouped_dino) = signal("".to_string());
 
     view! {
         <div class="docs-container">
