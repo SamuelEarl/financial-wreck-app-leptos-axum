@@ -9,7 +9,7 @@ use stylance::*;
 use crate::components::{
     colors_and_sizes::{BtnVariant, Sizes},
     buttons::button::Button,
-    radio_buttons::radio_buttons::{RadioGroup, RadioButton},
+    radio_buttons::radio_buttons::{RadioButtonData, RadioButtons},
     selects::select::{Select, OptionData},
 };
 use crate::utils::{
@@ -73,7 +73,15 @@ pub fn NetWorth() -> impl IntoView {
 
     let (net_worth, set_net_worth) = signal(1_000_000);
     let (selected_asset, set_selected_asset) = signal("".to_string());
-    let (favorite, set_favorite) = signal("rust".to_string());
+
+    let programming_languages = vec![
+        RadioButtonData { value: "mojo".into(), label: "Mojo".into() },
+        RadioButtonData { value: "rust".into(), label: "Rust".into() },
+        RadioButtonData { value: "python".into(), label: "Python".into() },
+        RadioButtonData { value: "typescript".into(), label: "Typescript".into() },
+    ];
+
+    let (favorite, set_favorite) = signal("".to_string());
 
     view! {
         <Title text="Financial Wreck | Net Worth"/>
@@ -106,16 +114,26 @@ pub fn NetWorth() -> impl IntoView {
 
         <br />
 
-        <h3>"Select your favorite language:"</h3>
-        <RadioGroup 
-            name="languages" 
-            value=favorite
-            set_value=set_favorite
-        >
-            <RadioButton value="rust" label="Rust" />
-            <RadioButton value="ts" label="TypeScript" />
-            <RadioButton value="python" label="Python" />
-        </RadioGroup>
+        // <h3>"Select your favorite language:"</h3>
+        // <RadioGroup 
+        //     name="languages" 
+        //     value=favorite
+        //     set_value=set_favorite
+        // >
+        //     <RadioButton value="rust" label="Rust" />
+        //     <RadioButton value="ts" label="TypeScript" />
+        //     <RadioButton value="python" label="Python" />
+        // </RadioGroup>
+
+        <label>"Select your favorite language"
+            <RadioButtons 
+                group_name="languages"
+                options=programming_languages
+                default_value="mojo"
+                // Sync the internal state back to the parent
+                on_change=move |val| set_favorite.set(val)
+            />
+        </label>
 
         <p>"Currently selected: " {move || favorite.get()}</p>
 

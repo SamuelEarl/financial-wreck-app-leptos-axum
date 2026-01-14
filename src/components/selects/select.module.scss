@@ -24,12 +24,13 @@
       color: var(--element-fg);
       border: none;
       border-radius: var(--radius);
-      outline-width: var(--outline-width);
+      outline-width: var(--outline-none);
       outline-style: var(--outline-style);
-      outline-color: transparent;
+      outline-color: var(--outline-color);
+      outline-offset: var(--outline-offset);
 
       &:hover, &:focus {
-        outline-color: var(--outline-color);
+        outline-width: var(--outline-width);
       }
 
       .select_button_arrow {
@@ -52,7 +53,7 @@
 
       &:popover-open {
         display: block; // Or your preferred layout when open
-        margin: auto;   // Centers the popover if it's a modal
+        margin: auto; // Centers the popover if it's a modal
       }
 
       &::backdrop {

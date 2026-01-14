@@ -9,21 +9,19 @@ use crate::components::{
     radio_buttons::radio_buttons::{
         RadioButtons,
         RadioButtonData,
-        RadioGroup,
-        RadioButton
     },
 };
 
 #[component]
 pub fn RadioButtonsDocs() -> impl IntoView {
-    // let programming_languages = vec![
-    //     RadioButtonData { value: "mojo", label: "Mojo" },
-    //     RadioButtonData { value: "rust", label: "Rust" },
-    //     RadioButtonData { value: "typescript", label: "Typescript" },
-    //     RadioButtonData { value: "python", label: "Python" },
-    // ];
+    let programming_languages = vec![
+        RadioButtonData { value: "mojo".into(), label: "Mojo".into() },
+        RadioButtonData { value: "rust".into(), label: "Rust".into() },
+        RadioButtonData { value: "python".into(), label: "Python".into() },
+        RadioButtonData { value: "typescript".into(), label: "Typescript".into() },
+    ];
 
-    // let (favorite, set_favorite) = signal("rust".to_string());
+    let (favorite, set_favorite) = signal("".to_string());
 
     view! {
         <div class="docs-container">

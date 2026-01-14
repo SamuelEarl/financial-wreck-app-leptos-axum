@@ -120,7 +120,8 @@ pub fn DialogClose(
 
     view! {
         // Using popovertargetaction="hide" tells the browser to close the ID
-        <button 
+        <button
+            class={css::dialog_close}
             popovertarget=move || ctx.popover_id.get()
             popovertargetaction="hide"
             style=format!("{} {} {}", get_btn_colors(colors, variant, inverted), get_element_sizes(sizes, true).all, get_element_width(width))

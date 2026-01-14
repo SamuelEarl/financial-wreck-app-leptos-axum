@@ -1,36 +1,14 @@
-<!-- TODO: I need ask Gemini how to loop over a vector and display one <RadioButton> component for each item in the vector. -->
+# Radio Buttons
 
-```rust
-{{
-    <label>"Select your favorite language"
-        <RadioGroup 
-            name="languages" 
-            value=favorite
-            set_value=set_favorite
-        >
-            <RadioButton value="rust" label="Rust" />
-            <RadioButton value="ts" label="TypeScript" />
-            <RadioButton value="python" label="Python" />
-        </RadioGroup>
-    </label>
+---
 
-    <br/>
-
-    <p>"Currently selected: " {move || favorite.get()}</p>
-}}
-```
-
-<br/>
-
-```rust
 {{
     <label>"Select your favorite language"
         <RadioButtons 
             group_name="languages"
             options=programming_languages
             default_value="mojo"
-            value=favorite
-            set_value=set_favorite
+            on_change=move |val| set_favorite.set(val)
         />
     </label>
 
@@ -38,20 +16,42 @@
 
     <p>"Currently selected: " {move || favorite.get()}</p>
 }}
-```
-
-```rust
-<label>"Select your favorite language"
-    <RadioButtons 
-        group_name="languages"
-        options=programming_languages
-        default_value="mojo"
-        value=favorite // Pass the signal getter to the `value` prop.
-        set_value=set_favorite // Pass the signal setter to the `set_value` prop.
-    />
-</label>
 
 <br/>
 
-<p>"Currently selected: " {move || favorite.get()}</p>
+```rust
+use leptos::prelude::*;
+use leptos::logging::log;
+
+use crate::components::{
+    radio_buttons::radio_buttons::{RadioButtonData, RadioButtons},
+};
+
+#[component]
+pub fn PageComponent() -> impl IntoView {
+    let programming_languages = vec![
+        RadioButtonData { value: "mojo".into(), label: "Mojo".into() },
+        RadioButtonData { value: "rust".into(), label: "Rust".into() },
+        RadioButtonData { value: "python".into(), label: "Python".into() },
+        RadioButtonData { value: "typescript".into(), label: "Typescript".into() },
+    ];
+
+    let (favorite, set_favorite) = signal("".to_string());
+
+    view! {
+        <label>"Select your favorite language"
+            <RadioButtons 
+                group_name="languages"
+                options=programming_languages
+                default_value="mojo"
+                // Sync the internal state back to the parent
+                on_change=move |val| set_favorite.set(val)
+            />
+        </label>
+
+        <br/>
+
+        <p>"Currently selected: " {move || favorite.get()}</p>
+    }
+}
 ```

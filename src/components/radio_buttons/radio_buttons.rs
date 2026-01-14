@@ -47,8 +47,14 @@ pub fn RadioButton(
     let ctx = use_context::<RadioContext>()
         .expect("RadioButton must be used within a RadioGroup");
 
-    let val_clone = value.clone();
-    let is_checked = move || ctx.selected.get() == val_clone;
+    // Memoize the checked state for better performance
+    let is_checked = {
+        let val = value.clone();
+        move || ctx.selected.get() == val
+    };
+
+    let name = ctx.name.clone();
+    let val_for_change = value.clone();
 
     view! {
         <div class={css::radio_label_wrapper}>
@@ -56,10 +62,10 @@ pub fn RadioButton(
                 <input
                     type="radio"
                     class={css::radio_input}
-                    name=ctx.name.clone()
-                    value=value.clone()
+                    name=name
+                    value=value
                     prop:checked=is_checked
-                    on:change=move |_| ctx.set_selected.set(value.clone())
+                    on:change=move |_| ctx.set_selected.set(val_for_change.clone())
                 /> {label}
                 <span class={css::radio_checkmark}></span>
             </label>
@@ -69,20 +75,29 @@ pub fn RadioButton(
 
 #[component]
 pub fn RadioButtons(
-    group_name: String,
-    // Accepts any list of objects
+    #[prop(into)] group_name: String,
     options: Vec<RadioButtonData>,
-    #[prop(optional)] default_value: Option<String>,
-    #[prop(into)] value: ReadSignal<String>,
-    #[prop(into)] set_value: WriteSignal<String>,
+    #[prop(optional, into)] default_value: Option<String>,
+    // An optional callback for the parent to listen to
+    #[prop(optional, into)] on_change: Option<Callback<String>>,
 ) -> impl IntoView {
+    // Initialize the signal with the default value.
+    let (selected, set_selected) = signal(default_value.unwrap_or_default());
+
+    // When the signal changes, we run the on_change callback if it exists.
+    Effect::new(move |_| {
+        if let Some(cb) = on_change {
+            cb.run(selected.get());
+        }
+    });
+
     view! {
         <RadioGroup
             name=group_name
-            value=value
-            set_value=set_value
+            value=selected
+            set_value=set_selected
         >
-            {options.into_iter().map(|opt: RadioButtonData| {
+            {options.into_iter().map(|opt| {
                 view! {
                     <RadioButton value=opt.value label=opt.label />
                 }

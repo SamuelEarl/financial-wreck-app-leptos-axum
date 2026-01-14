@@ -1,13 +1,19 @@
 // Utility for trigger buttons (optional, can be overridden)
 .trigger {
   cursor: pointer;
+  border-radius: var(--radius);
+  outline-width: var(--outline-none);
+  outline-style: var(--outline-style);
+  outline-color: var(--outline-color);
+  outline-offset: var(--outline-offset);
+
+  &:hover, &:focus {
+    outline-width: var(--outline-width);
+  }
 }
 
 // The main container box
 .content {
-  display: flex;
-  flex-direction: column;
-  margin: auto;   // Centers the popover if it's a modal
   background-color: var(--white);
   border-radius: var(--radius);
   padding: 0;
@@ -29,6 +35,9 @@
 
   // 2. The "Open" state
   &:popover-open {
+    display: flex; // Or your preferred layout when open.
+    flex-direction: column;
+    margin: auto; // Centers the popover if it's a modal.
     opacity: 1;
     transform: translateY(0) scale(1);    
   }
@@ -104,4 +113,16 @@
   justify-content: flex-end;
   gap: var(--size-3);
   flex-shrink: 0; // Don't shrink footer
+}
+
+.dialog_close {
+  border-radius: var(--radius);
+  outline-width: var(--outline-none);
+  outline-style: var(--outline-style);
+  outline-color: var(--outline-color);
+  outline-offset: var(--outline-offset);
+
+  &:hover, &:focus {
+    outline-width: var(--outline-width);
+  }
 }
