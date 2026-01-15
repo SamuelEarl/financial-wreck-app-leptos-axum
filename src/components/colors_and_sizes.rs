@@ -63,6 +63,24 @@ pub fn get_btn_colors(
     }
 }
 
+// TODO: Implement a get_element_colors() function that works like this JavaScript version:
+
+// export function getElementColors(colors: IColors | null = null) {
+//   const backgroundColor = colors?.bg ? colors.bg : "var(--element-bg)";
+//   const foregroundColor = colors?.fg ? colors.fg : "var(--element-fg)";
+//   const borderColor = colors?.br ? colors.br : "var(--element-br)";
+//   const outlineColor = colors?.ol ? colors.ol : "var(--element-ol)";
+
+//   const all = `background-color: ${backgroundColor}; color: ${foregroundColor}; border-color: ${borderColor}; outline-color: ${outlineColor};`;
+
+//   return {
+//     all,
+//     bg: backgroundColor,
+//     fg: foregroundColor,
+//     br: borderColor,
+//     ol: outlineColor,
+//   };
+// }
 
 // The Sizes input structure
 #[derive(Clone, Debug)]
@@ -124,16 +142,9 @@ pub fn get_element_sizes(sizes: Option<Sizes>, is_btn: bool) -> ElementSizes {
     };
 
     // -- Font Weight Logic --
-    // Logic: If fw exists, use it. Else if is_btn is true, "bold". Else "normal".
+    // Extract fw, default to "normal" if None.
     let fw_val = s.and_then(|x| x.fw.clone());
     
-    // let font_weight = if let Some(fw) = fw_val {
-    //     fw
-    // } else if is_btn {
-    //     "bold".to_string()
-    // } else {
-    //     "normal".to_string()
-    // };
     let font_weight = if let Some(fw) = fw_val {
         fw
     } else {

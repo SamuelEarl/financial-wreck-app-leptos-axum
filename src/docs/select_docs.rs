@@ -1,3 +1,7 @@
+// This attribute ensures this entire module is ignored 
+// if the "docs" feature is missing.
+#![cfg(feature = "docs")]
+
 use leptos::prelude::*;
 use markdown_view_leptos::markdown_view;
 use leptos::logging::log;
