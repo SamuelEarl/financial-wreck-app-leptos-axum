@@ -47,7 +47,7 @@ pub fn Dashboard() -> impl IntoView {
             <Button
                 variant={BtnVariant::Secondary}
                 inverted={false}
-                width=ElementWidths::Full
+                width={ElementWidths::Full}
             >
                 "Click"
             </Button>
