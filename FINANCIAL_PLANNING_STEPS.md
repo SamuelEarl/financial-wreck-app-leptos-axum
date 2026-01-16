@@ -9,7 +9,46 @@ The word "budgeting" often carries a negative connotation. If you don't like the
 
 This is a simple 4-step guide to budgeting:
 
-1. Pay God first (if you are religious). We could all use heaven's help in our lives. If you are religious, then after each paycheck that you receive and before you spend money anywhere else, you should pay any tithes and offerings that you have committed to pay to God first. When you put God first, then He will put you first. When you put God first, somehow everything else seems to fall into place. That's often called Heavenly Math. It doesn't always make sense to us, but it works!
-2. Fund your goals. The next thing you should do with your paycheck is transfer money toward your goals (e.g. savings, investments, debt payoff). This will force you to work with what you have left over and you can be more at ease knowing that you are taking care of your future. If money is tight and you are unable to save or invest a lot right now, then start small. You could start saving or investing with 1% of your paycheck. As your salary increases or as you pay off debt and more money becomes available to you, then increase your savings and investment goals (at least annually, if possible) until you are allocating at least 10% to 15% of your income toward savings and investments.
-3. Fund your expenses. Set aside enough money to cover your expenses (e.g. groceries, mortgage, utilities). You have to live, right? So make sure that your current needs are met.
-4. Care-free spending. Once you have taken care of your goals and expenses, then you can enjoy life! Spend the rest of your money freely knowing that your future is being built and your present is taken care of.
+### Step 1: Pay God first (if you are religious)
+
+We could all use heaven's help in our lives. If you are religious, then after each paycheck that you receive and before you spend money anywhere else, you should pay any tithes and offerings that you have committed to pay to God first. When you put God first, then He will put you first. When you put God first, somehow everything else seems to fall into place. That's often called Heavenly Math. It doesn't always make sense to us, but it works!
+
+### Step 2: Fund your goals
+
+The next thing you should do with your paycheck is transfer money toward your goals (e.g. savings, investments, debt payoff). This is how you take care of your future and start building the abundant life that you want. This will force you to work with what you have left over and you can be more at ease with your spending because you know that you are taking care of your future.
+
+When we want to make changes in our lives, we often set way too many goals. However, it is better to knock out one goal quickly and move on to the next rather than make slow progress on 20 different goals. If you don't see noticeable progress, then you will likely lose motivation and quit your goal. So focus on a manageable number of goals that you can work on consistently and accomplish quickly. It is okay to have a long list of possible goals, but we recommend that you pick your top two or three goals and actively work on those so you can knock them out quickly.
+
+As a benchmark for investment goals, you could start by moving 10% of your net income to investments and increase that amount by 1% each year until you are investing 15% of your net income each month. If money is tight and you are unable to invest a lot right now, then start small. You could start investing with 5% or even 1% of your paycheck. As your salary increases or as you pay off debt and more money becomes available to you, then increase your investment goals by 1% each year (if possible) until you are allocating at least 15% of your income toward investments. If you have savings and/or debt payoff goals, then you could take a similar approach: Allocate a certain percentage (as much as you can reasonably afford) and increase those amounts until you reach your savings/debt payoff goals.
+
+Savings and investments are often lumped together into one category. However, if it makes sense to you, then you might want to think about them as two different types of goals: Investment goals are used for long-term goals (e.g. retirement) while savings goals are used for short to mid-term goals (e.g. emergency fund, down payment, new car).
+
+### Step 3: Fund your needs
+
+Set aside enough money to cover your needs (e.g. groceries, mortgage, utilities). You have to live, right? So make sure that your current needs are met.
+
+Our needs are often where people get bogged down and paralyzed by budgeting. Things like insurance, medical bills, and even rent/mortgage payments can feel like necessary evils. Financial goals are fun and exciting, but tracking needs is a major chore that nobody wants to do. So, in order to keep things simple, you may want to consider keeping needs to only two categories in your budget: Fixed and variable needs. 
+
+Fixed needs are things where the amount of the bill doesn't change from one month to the next (e.g. mortgage, car payment, some types of utilities, medications). Variable needs are things where you have influence over the amount of the bill each month (e.g. grocercies, gasoline, some types of utilities).
+
+If your variable needs seem a little high, then we recommend taking the "1% Improvement" approach:
+
+1. Identify one variable need (e.g. groceries).
+2. Separate it out into its own category to get a detailed view of your spending related to that need.
+3. Try to cut spending for that need by 1% each month until it is at a level that you are comfortable with.
+
+A 1% improvement might not seem like much, but if you think of money management more like a marathon (instead of a sprint) where slow and steady (i.e. patience and consistency) wins the race, then you will win. Just work your plan and small changes today will lead to significant differences in the future. 
+        
+Also, if you want to cut your spending in multiple need areas, be careful about taking on too much all at once. We recommend identifying only one or two (maybe three) needs to work on at a time. Remember that this is a marathon, not a sprint.
+
+NOTE: You are always welcome to split your categories in whatever way works for you. If you are the type of person that works well with numbers and details, then feel free to split your spending into as many categories as you want. 
+
+### Step 4: Fund your wants (care-free spending)
+
+Once you have taken care of your goals and needs, then you can enjoy life! Spend the rest of your money freely knowing that your future is being built and your present is taken care of. Your wants can be anything that _you_ want (e.g. travel, restaurants, entertainment, streaming subscriptions, clothes). 
+
+There are some categories, like clothes, that you may want to list under needs. If you are not too interested in shopping for clothes or if any old thing will work for you, then clothes probably belong under needs. But if clothes are your thing or you are particular about how you dress, then clothes should probably be listed under wants.
+
+Try to identify categories that fit the description of clothes above and place those categories under needs or wants based on how you view them.
+
+There are some categories, like travel, that might fit better under goals. For example, if you are planning a large trip, then you might need to set a goal to save for it first. On the other hand, a small weekend trip might be within your monthly budget without needing to save for it first. It all depends on your situation.
