@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 use stylance::*;
 
 use crate::components::{
-    colors_and_sizes::{BtnVariant, Sizes},
+    colors_and_sizes::{BtnVariant, Colors, Sizes},
     buttons::button::Button,
     dialogs::dialog::{ 
         Dialog, DialogTrigger, DialogContent, DialogBody, DialogHeader, 
@@ -97,45 +97,15 @@ pub fn NWItemsList(nw_item_type: String) -> impl IntoView {
         |t| get_items(t)
     );
 
+    provide_context(items_resource);
+
     let type_for_create_resource = nw_items_type.clone();
 
     view! {
         <div class={css::al_wrapper}>
             <h2 class={css::h2}>{nw_items_type}</h2>
             <div class={css::btns_container}>
-                <AddNWItem nw_item_type=nw_item_type />
-
-                <Button
-                    variant={BtnVariant::Primary}
-                    sizes=Some(Sizes {
-                        pv: Some(0),
-                        ph: Some(2),
-                        ..Default::default()
-                    })
-                    on:click=move |_| {
-                        let type_for_create_resource_cloned = type_for_create_resource.clone();
-                        spawn_local(async move {
-                            // 1. Call the server function
-                            // We match on the Result to ensure it succeeded.
-                            match create_item(type_for_create_resource_cloned).await {
-                                Ok(new_item) => {
-                                    // 2. LOCALLY update the resource
-                                    // We don't need to refetch the whole list!
-                                    items_resource.update(|current_state| {
-                                        // current_state is &mut Option<Result<Vec<NWItem>, Error>>
-                                        // We only want to push if we currently have a valid list
-                                        if let Some(Ok(list)) = current_state {
-                                            list.push(new_item);
-                                        }
-                                    });
-                                },
-                                Err(e) => error!("Failed to create net worth item: {}", e),
-                            }
-                        });
-                    }
-                >
-                    "Add"
-                </Button>
+                <AddNWItemDialog nw_item_type=nw_item_type />
             </div>
         </div>
 
@@ -180,10 +150,9 @@ pub fn NWItemsList(nw_item_type: String) -> impl IntoView {
 
 
 #[component]
-pub fn AddNWItem(nw_item_type: String) -> impl IntoView {
-    // Ensure the vectors are available to be cloned.
-    // let asset_options_clone = asset_options.clone();
-    // let liability_options_clone = liability_options.clone();
+pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
+    let items_resource = use_context::<Resource<Result<Vec<NWItem>, ServerFnError>>>()
+    .expect("resource not found");
 
     // The closure needs to clone the data it returns.
     let item_options = {
@@ -196,9 +165,9 @@ pub fn AddNWItem(nw_item_type: String) -> impl IntoView {
 
     let label = {
         if nw_item_type == "asset" {
-            "Select an asset"
+            "Select an asset type"
         } else {
-            "Select a liability"
+            "Select a liability type"
         }
     };
 
@@ -255,8 +224,47 @@ pub fn AddNWItem(nw_item_type: String) -> impl IntoView {
                 </DialogBody>
 
                 <DialogFooter>
-                    <DialogClose variant={BtnVariant::Primary}>
-                        "Close"
+                    <DialogClose 
+                        colors=Some(Colors {
+                            bg: "transparent".to_string(),
+                            fg: "var(--secondary-bg)".to_string(),
+                            br: "var(--secondary-bg)".to_string(),
+                            ol: "var(--secondary-bg)".to_string(),
+                        })
+                    >
+                        "Cancel"
+                    </DialogClose>
+                    <DialogClose
+                        variant={BtnVariant::Secondary}
+                        // TODO: Add a disabled state to the <DialogClose> button.
+                        // Disable if nothing is selected
+                        attr:disabled=move || selected_item.get().is_empty()
+                        on:click=move |_| {
+                            // 1. Get the current values from our signals/storage
+                            let item_type = title_type.get_value(); // "asset" or "liability"
+                            let item_val = selected_item.get();    // The value from the Select
+                            
+                            // 2. Fire and forget the server call
+                            spawn_local(async move {
+                                log!("Creating {}: {}", item_type, item_val);
+                                
+                                match create_item(item_type).await {
+                                    Ok(new_item) => {
+                                        // 3. Update the context resource we grabbed at the top of the component
+                                        items_resource.update(|current_state| {
+                                            // current_state is &mut Option<Result<Vec<NWItem>, Error>>
+                                            // We only want to push if we currently have a valid list.
+                                            if let Some(Ok(list)) = current_state {
+                                                list.push(new_item);
+                                            }
+                                        });
+                                    },
+                                    Err(e) => error!("Failed to create item: {}", e),
+                                }
+                            });
+                        }
+                    >
+                        "Add " { move || title_type.with_value(|t| t.clone()) }
                     </DialogClose>
                 </DialogFooter>
             </DialogContent>
