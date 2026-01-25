@@ -3,6 +3,8 @@
 Update the financial planning steps in my website to match the steps outlined in this video: [A Guide to Financial Planning for Couples
 ](https://www.youtube.com/watch?v=JHsZ4uIEBMg)
 
+There is no silver bullet that will work for everyone. You have to find what works for you based on your circumstances, needs, wants, and your personality. So the approach that we take is that we teach principles about how money works and how everything fits together into your overall financial plan and then we offer some ideas that you can use (or tweak) to apply those principles into your own life to make financial planning work for you.
+
 ## Budgeting
 
 The word "budgeting" often carries a negative connotation. If you don't like the word budgeting, then you can use a different word like allocating or something else that means to set money aside that is to be used intentionally (as opposed to thoughtlessly). Budgeting is simply a way to spend your money intentionally or thoughtfully. It is not a way to restrict your spending, which might be where a lot of the negative connotations come from. Raise your hand if you have ever spent money without giving it much thought or thoughtlessly? Have you ever spent _a lot_ of money thoughtlessly? Budgeting helps you to avoid thoughtless spending and to create a future that you can be excited about--an abundant future!

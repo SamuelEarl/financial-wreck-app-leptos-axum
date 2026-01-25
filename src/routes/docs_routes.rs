@@ -1,3 +1,8 @@
+// TODO: Can/should I use this module-level attribute instead of all of the other attributes in this module?
+// // This attribute ensures this entire module is ignored 
+// // if the "docs" feature is missing.
+// #![cfg(feature = "docs")]
+
 use leptos::prelude::*;
 #[cfg(feature = "docs")]
 use leptos_router::{
@@ -35,7 +40,7 @@ pub fn DocsRoutes() -> impl MatchNestedRoutes + Clone {
         // Conditional DocsRoutes
         // If the docs feature is OFF, then this block disappears from the binary entirely.
         <ParentRoute path=path!("/docs") view=move || view! { <Layout nav=&DOCS_NAV /> }>
-            <Route path=path!("/") view=HomeDocs />
+            <Route path=path!("/home") view=HomeDocs />
             <Route path=path!("/accordions") view=AccordionsDocs />
             <Route path=path!("/buttons") view=ButtonsDocs />
             <Route path=path!("/dialogs") view=DialogsDocs />

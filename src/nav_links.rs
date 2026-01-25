@@ -13,7 +13,7 @@ pub static MAIN_NAV: [NavLink; 4] = [
 
 #[cfg(feature = "docs")]
 pub static DOCS_NAV: [NavLink; 6] = [
-    NavLink { text: "Docs Home", url: "/docs", },
+    NavLink { text: "Docs Home", url: "/docs/home", },
     NavLink { text: "Accordions", url: "/docs/accordions", },
     NavLink { text: "Buttons", url: "/docs/buttons", },
     NavLink { text: "Dialogs", url: "/docs/dialogs", },

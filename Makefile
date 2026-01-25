@@ -17,6 +17,7 @@ leptos-watch:
 stylance-watch:
 	stylance --watch . --output-dir ./styles/
 
+# Read the description of this target in the `tools/trigger_leptos_reload/src/main.rs` file.
 trigger-leptos-reload:
 	cargo run --manifest-path tools/trigger_leptos_reload/Cargo.toml
 
@@ -26,7 +27,8 @@ kill:
 	-kill -9 $(lsof -t -i:3000) || true
 	-kill -9 $(lsof -t -i:3001) || true
 
-dev: kill
+# dev: kill
+dev:
 	make --jobs=3 leptos-watch stylance-watch trigger-leptos-reload
 
 # ----------------------------------------------------------------

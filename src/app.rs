@@ -36,7 +36,7 @@ pub fn App() -> impl IntoView {
         <Stylesheet id="leptos" href="/pkg/financial-wreck-app.css"/>
 
         // sets the document title
-        <Title text="Financial Wreck"/>
+        <Title text="Financial Wreck | Go from Financial Wreck to Carefree Retiree!"/>
 
         <ClientRouter />
     }

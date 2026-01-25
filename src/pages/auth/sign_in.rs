@@ -10,7 +10,7 @@ pub fn SignIn() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        <Title text="Financial Wreck | Sign In"/>
+        <Title text="Financial Wreck | Go from Financial Wreck to Carefree Retiree! | Sign In"/>
 
         // <img src="/images/car-wreck.png" alt="background" />
 

@@ -1,17 +1,16 @@
 .btn {
   border-width: var(--border-width);
   border-style:  var(--border-style);
+  border-radius: var(--radius);
   outline-width: var(--outline-none);
   outline-style: var(--outline-style);
   outline-offset: var(--outline-offset);
-  border-radius: var(--radius);
   display: flex;
   align-items: center;
   justify-content: center; /* Center the text when the button is full width. */
 
   &:hover, &:focus {
     outline-width: var(--outline-width);
-    // outline-color: blue !important;
   }
 
   &:disabled {

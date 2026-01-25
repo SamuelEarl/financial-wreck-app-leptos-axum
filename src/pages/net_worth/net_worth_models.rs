@@ -1,5 +1,8 @@
 use serde::{Deserialize, Serialize}; // Assuming you need this for DB/Frontend
 use std::str::FromStr;
+use crate::components::{
+    selects::select::{OptionData},
+};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum AssetCategory {
@@ -114,4 +117,33 @@ impl FromStr for AssetCategory {
             _ => Err(()),
         }
     }
+}
+
+pub fn asset_options() -> Vec<OptionData> {
+    vec![
+        OptionData { group: None, value: "bank_account".to_string(), label: "Bank Account (checking, savings)".to_string(), },
+        OptionData { group: None, value: "retirement_investment".to_string(), label: "Retirement Investment (401k, IRA)".to_string(), },
+        OptionData { group: None, value: "non_retirement_investment".to_string(), label: "Non-Retirement Investment (mutual funds, stocks, bonds)".to_string(), },
+        OptionData { group: None, value: "cod".to_string(), label: "Certificate of Deposit".to_string(), },
+        OptionData { group: None, value: "cash_value".to_string(), label: "Cash Value of Life Insurance".to_string(), },
+        OptionData { group: None, value: "annuity".to_string(), label: "Annuity".to_string(), },
+        OptionData { group: None, value: "pension".to_string(), label: "Pension".to_string(), },
+        OptionData { group: None, value: "hsa".to_string(), label: "Health Savings Account (HSA)".to_string(), },
+        OptionData { group: None, value: "cryptocurrency".to_string(), label: "Cryptocurrency".to_string(), },
+        OptionData { group: None, value: "cash".to_string(), label: "Cash On-Hand".to_string(), },
+        OptionData { group: None, value: "real_estate".to_string(), label: "Real Estate".to_string(), },
+        OptionData { group: None, value: "vehicle".to_string(), label: "Vehicle".to_string(), },
+        OptionData { group: None, value: "personal_item".to_string(), label: "Personal Item".to_string(), },
+        OptionData { group: None, value: "business".to_string(), label: "A Business (your portion only)".to_string(), },
+        OptionData { group: None, value: "money_owed_to_you".to_string(), label: "Money Owed To You".to_string(), },
+        OptionData { group: None, value: "other_asset".to_string(), label: "Other Asset".to_string(), },
+    ]
+}
+
+pub fn liability_options() -> Vec<OptionData> {
+    vec![
+        OptionData { group: None, value: "loan".to_string(), label: "Loan (mortgage, car, education, etc)".to_string(), },
+        OptionData { group: None, value: "credit_card".to_string(), label: "Credit Card".to_string(), },
+        OptionData { group: None, value: "other_liability".to_string(), label: "Other Liability".to_string(), },
+    ]
 }

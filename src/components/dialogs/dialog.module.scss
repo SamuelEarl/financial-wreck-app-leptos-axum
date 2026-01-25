@@ -116,10 +116,11 @@
 }
 
 .dialog_close {
+  border-width: var(--border-width);
+  border-style: var(--border-style);
   border-radius: var(--radius);
   outline-width: var(--outline-none);
   outline-style: var(--outline-style);
-  outline-color: var(--outline-color);
   outline-offset: var(--outline-offset);
 
   &:hover, &:focus {

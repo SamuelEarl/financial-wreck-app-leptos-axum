@@ -9,7 +9,11 @@ use stylance::*;
 use crate::components::{
     colors_and_sizes::{BtnVariant, Sizes},
     buttons::button::Button,
-    selects::select::{Select, OptionData},
+    dialogs::dialog::{ 
+        Dialog, DialogTrigger, DialogContent, DialogBody, DialogHeader, 
+        DialogTitle, DialogFooter, DialogClose
+    },
+    selects::select::{Select},
 };
 use crate::utils::{
     format_currency::format_currency,
@@ -17,7 +21,7 @@ use crate::utils::{
 };
 use crate::pages::net_worth::{
     net_worth_article::NetWorthArticle,
-    // net_worth_models::AssetCategory,
+    net_worth_models::{asset_options, liability_options},
 };
 
 import_style!(css, "net_worth.module.scss");
@@ -25,31 +29,6 @@ import_style!(css, "net_worth.module.scss");
 #[component]
 pub fn NetWorth() -> impl IntoView {
     provide_meta_context();
-
-    let asset_options = vec![
-        OptionData { group: None, value: "bank_account".to_string(), label: "Bank Account (checking, savings)".to_string(), },
-        OptionData { group: None, value: "retirement_investment".to_string(), label: "Retirement Investment (401k, IRA)".to_string(), },
-        OptionData { group: None, value: "non_retirement_investment".to_string(), label: "Non-Retirement Investment (mutual funds, stocks, bonds)".to_string(), },
-        OptionData { group: None, value: "cod".to_string(), label: "Certificate of Deposit".to_string(), },
-        OptionData { group: None, value: "cash_value".to_string(), label: "Cash Value of Life Insurance".to_string(), },
-        OptionData { group: None, value: "annuity".to_string(), label: "Annuity".to_string(), },
-        OptionData { group: None, value: "pension".to_string(), label: "Pension".to_string(), },
-        OptionData { group: None, value: "hsa".to_string(), label: "Health Savings Account (HSA)".to_string(), },
-        OptionData { group: None, value: "cryptocurrency".to_string(), label: "Cryptocurrency".to_string(), },
-        OptionData { group: None, value: "cash".to_string(), label: "Cash On-Hand".to_string(), },
-        OptionData { group: None, value: "real_estate".to_string(), label: "Real Estate".to_string(), },
-        OptionData { group: None, value: "vehicle".to_string(), label: "Vehicle".to_string(), },
-        OptionData { group: None, value: "personal_item".to_string(), label: "Personal Item".to_string(), },
-        OptionData { group: None, value: "business".to_string(), label: "A Business (your portion only)".to_string(), },
-        OptionData { group: None, value: "money_owed_to_you".to_string(), label: "Money Owed To You".to_string(), },
-        OptionData { group: None, value: "other_asset".to_string(), label: "Other Asset".to_string(), },
-    ];
-
-    let liability_options = vec![
-        OptionData { group: None, value: "loan".to_string(), label: "Loan (mortgage, car, education, etc)".to_string(), },
-        OptionData { group: None, value: "credit_card".to_string(), label: "Credit Card".to_string(), },
-        OptionData { group: None, value: "other_liability".to_string(), label: "Other Liability".to_string(), },
-    ];
 
     let (net_worth, set_net_worth) = signal(1_000_000);
     let (selected_asset, set_selected_asset) = signal("".to_string());
@@ -67,7 +46,7 @@ pub fn NetWorth() -> impl IntoView {
         <br />
 
         <Select
-            options=asset_options
+            options=asset_options()
             default_value="retirement_investment".to_string()
             placeholder="Select an Asset"
             btn_sizes=Some(Sizes {
@@ -85,92 +64,47 @@ pub fn NetWorth() -> impl IntoView {
 
         <br />
 
-        // <AssetSelector />
-
         <p>"Add financial accounts, transfer money between accounts, and add bill pay alerts"</p>
 
-        <AssetList />
+        <NWItemsList nw_item_type="asset".to_string() />
         
         <br />
 
-        <div class={css::al_wrapper}>
-            <h2 class={css::h2}>"Liabilities"</h2>
-            <div class={css::btns_container}>
-                <Button
-                    variant={BtnVariant::Primary}
-                    sizes=Some(Sizes {
-                        pv: Some(0),
-                        ph: Some(2),
-                        ..Default::default()
-                    })
-                    on:click=move |_| { log!("ADD"); }
-                >
-                    "Add"
-                </Button>
-            </div>
-        </div>
-
+        <NWItemsList nw_item_type="liability".to_string() />
     }
 }
 
-// #[component]
-// pub fn AssetSelector() -> impl IntoView {
-//     // 1. Create a signal to hold the selected enum
-//     // Default to the first item (BankAccount), or whatever you prefer
-//     let (selected_asset_opt, set_selected_asset_opt) = signal(AssetCategory::BankAccount);
 
-//     view! {
-//         <div class="input-group">
-//             <label for="category">"Asset Category"</label>
-            
-//             <select
-//                 id="category"
-//                 class="form-select" // Your styling class here
-                
-//                 // 2. Handle the change event
-//                 on:change=move |ev| {
-//                     // event_target_value helper gets the string value from the event
-//                     let val = event_target_value(&ev);
-//                     // Parse string back to Enum
-//                     if let Ok(cat) = AssetCategory::from_str(&val) {
-//                         set_selected_asset_opt.set(cat);
-//                     }
-//                 }
-                
-//                 // 3. Control the value so it syncs with signal (optional but good practice)
-//                 prop:value=move || selected_asset_opt.get().option_value()
-//             >
-//                 // 4. Iterate over the Enum to generate options
-//                 {AssetCategory::all().iter().map(|category| {
-//                     view! {
-//                         <option value={category.option_value()}>
-//                             {category.option_text()}
-//                         </option>
-//                     }
-//                 }).collect::<Vec<_>>()}
-//             </select>
-
-//             // Debugging: Show what is currently selected
-//             <p style="margin-top: 10px; color: #666;">
-//                 "Selected Enum: " 
-//                 <strong>{move || format!("{:?}", selected_asset_opt.get())}</strong>
-//             </p>
-//         </div>
-//     }
-// }
-
-
+// The NWItemsList component displays the Net Worth items (e.g. Assets, Liabilities) that the user has added to their account.
 #[component]
-pub fn AssetList() -> impl IntoView {
+pub fn NWItemsList(nw_item_type: String) -> impl IntoView {
+    let nw_items_type = {
+        if nw_item_type == "asset" {
+            "Assets".to_string()
+        } else {
+            "Liabilities".to_string()
+        }
+    };
     // 1. Create the Resource
     // The first argument `|| ()` is the "dependency." 
     // Since it's empty, this resource runs exactly once (on load).
-    let assets_resource = Resource::new(|| (), |_| get_assets());
+    // Clone the string once to get it into the closure environment.
+    let type_for_get_resource = nw_items_type.clone();
+    // The fetcher (second argument) is an Fn, so you need to clone inside it.
+    let items_resource = Resource::new(
+        // Leptos passes the result of the first closure (the cloned String) into the second closure (where the call to get_items() is located).
+        move || type_for_get_resource.clone(),
+        |t| get_items(t)
+    );
+
+    let type_for_create_resource = nw_items_type.clone();
 
     view! {
         <div class={css::al_wrapper}>
-            <h2 class={css::h2}>"Assets"</h2>
+            <h2 class={css::h2}>{nw_items_type}</h2>
             <div class={css::btns_container}>
+                <AddNWItem nw_item_type=nw_item_type />
+
                 <Button
                     variant={BtnVariant::Primary}
                     sizes=Some(Sizes {
@@ -178,23 +112,24 @@ pub fn AssetList() -> impl IntoView {
                         ph: Some(2),
                         ..Default::default()
                     })
-                    on:click=move |_| { 
+                    on:click=move |_| {
+                        let type_for_create_resource_cloned = type_for_create_resource.clone();
                         spawn_local(async move {
                             // 1. Call the server function
-                            // We match on the Result to ensure it succeeded
-                            match create_asset().await {
-                                Ok(new_asset) => {
+                            // We match on the Result to ensure it succeeded.
+                            match create_item(type_for_create_resource_cloned).await {
+                                Ok(new_item) => {
                                     // 2. LOCALLY update the resource
                                     // We don't need to refetch the whole list!
-                                    assets_resource.update(|current_state| {
-                                        // current_state is &mut Option<Result<Vec<Asset>, Error>>
+                                    items_resource.update(|current_state| {
+                                        // current_state is &mut Option<Result<Vec<NWItem>, Error>>
                                         // We only want to push if we currently have a valid list
                                         if let Some(Ok(list)) = current_state {
-                                            list.push(new_asset);
+                                            list.push(new_item);
                                         }
                                     });
                                 },
-                                Err(e) => error!("Failed to create asset: {}", e),
+                                Err(e) => error!("Failed to create net worth item: {}", e),
                             }
                         });
                     }
@@ -205,30 +140,30 @@ pub fn AssetList() -> impl IntoView {
         </div>
 
         // 2. Wrap in Suspense to handle the "Loading..." state
-        <Suspense fallback=move || view! { <p>"Loading assets..."</p> }>
+        <Suspense fallback=move || view! { <p>"Loading {nw_items_type}..."</p> }>
             
             // 3. Read the resource
             // We use ErrorBoundary to handle if the server function fails (Result::Err)
             <ErrorBoundary fallback=|_| view! { <p>"Something went wrong."</p> }>
                 {move || {
-                    // .get() returns Option<Result<Vec<Asset>, Error>>
+                    // .get() returns Option<Result<Vec<NWItems>, Error>>
                     // .map handles the "Loaded" state
-                    assets_resource.get().map(|result| {
+                    items_resource.get().map(|result| {
                         match result {
-                            Ok(assets) => view! {
+                            Ok(items) => view! {
                                 <div class="asset-grid">
-                                    // 4. Iterate over the Vec<Asset>
+                                    // 4. Iterate over the Vec<NWItem>
                                     // <For> is efficient for lists that might change
-                                    // Note: We use assets.clone() here because the resource
+                                    // Note: We use items.clone() here because the resource
                                     // owns the data. This is standard for small lists.
                                     <For
-                                        each=move || assets.clone()
-                                        key=|asset| asset.uuid // Use UUID as the unique key
-                                        children=|asset| view! {
-                                            <div class="asset-card">
-                                                <h4>{asset.name}</h4>
-                                                <p>"Value: $" {asset.value}</p>
-                                                <p>"Type: " {asset.asset_type}</p>
+                                        each=move || items.clone()
+                                        key=|item| item.uuid // Use UUID as the unique key
+                                        children=|item| view! {
+                                            <div class="item-card">
+                                                <h4>{item.name}</h4>
+                                                <p>"Value: $" {item.value}</p>
+                                                <p>"Type: " {item.item_type}</p>
                                             </div>
                                         }
                                     />
@@ -243,10 +178,97 @@ pub fn AssetList() -> impl IntoView {
     }
 }
 
+
+#[component]
+pub fn AddNWItem(nw_item_type: String) -> impl IntoView {
+    // Ensure the vectors are available to be cloned.
+    // let asset_options_clone = asset_options.clone();
+    // let liability_options_clone = liability_options.clone();
+
+    // The closure needs to clone the data it returns.
+    let item_options = {
+        if nw_item_type == "asset" {
+            asset_options.clone()
+        } else {
+            liability_options.clone()
+        }
+    };
+
+    let label = {
+        if nw_item_type == "asset" {
+            "Select an asset"
+        } else {
+            "Select a liability"
+        }
+    };
+
+    let default_val = StoredValue::new(if nw_item_type == "asset" {
+        "bank_account".to_string()
+    } else {
+        "loan".to_string()
+    });
+
+    let (selected_item, set_selected_item) = signal("".to_string());
+
+    // Store the string in the Leptos runtime.
+    // This returns a 'StoredValue<String>' which is Copy.
+    let title_type = StoredValue::new(nw_item_type);
+
+    view! {
+        <Dialog>
+            <DialogTrigger
+                variant={BtnVariant::Primary}
+                sizes=Some(Sizes {
+                    pv: Some(0),
+                    ph: Some(2),
+                    ..Default::default()
+                })
+            >
+                "Add"
+            </DialogTrigger>
+
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>
+                        // .with_value() lets you access the string without moving it.
+                        "Add " { move || title_type.with_value(|t| t.clone()) }
+                    </DialogTitle>
+                </DialogHeader>
+
+                <DialogBody>
+                    <label>
+                        {label}
+                        <Select
+                            options=item_options()
+                            default_value=default_val.get_value()
+                            btn_sizes=Some(Sizes {
+                                pv: Some(2),
+                                ph: Some(3),
+                                ..Default::default()
+                            })
+                            on_change=Callback::new(move |val: String| {
+                                log!("(net_worth) Selected: {}", val);
+                                set_selected_item.set(val);
+                            })
+                        />
+                    </label>
+                </DialogBody>
+
+                <DialogFooter>
+                    <DialogClose variant={BtnVariant::Primary}>
+                        "Close"
+                    </DialogClose>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+    }
+}
+
+
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-pub struct Asset {
+pub struct NWItem {
   uuid: Uuid,
-  asset_type: String,
+  item_type: String,
 //   asset_subtype: String,
   name: String,
   value: i64,
@@ -256,16 +278,16 @@ pub struct Asset {
   calculated_bank_balance: bool,
 }
 
-#[server(name = CreateAsset, prefix = "/api/create-asset")]
-pub async fn create_asset() -> Result<Asset, ServerFnError> {
+#[server(name = CreateItem, prefix = "/api/create-item")]
+pub async fn create_item(nw_items_type: String) -> Result<NWItem, ServerFnError> {
     // Define the data as requested
-    let asset = Asset { 
+    let asset = NWItem { 
         // uuid: Some(Uuid::now_v7().to_string()),
         uuid: Uuid::now_v7(),
-        asset_type: String::from("Bank Account"),
-        name: String::from("USAA Savings"),
+        item_type: String::from("Bank Account"),
+        name: String::from("Capital One Savings"),
         value: 1_000_000, // $10,000.00
-        login_url: String::from("https://usaa.com"),
+        login_url: String::from("https://capitalone.com"),
         sort_order: 0,
         created_at: get_utc_iso_date(),
         calculated_bank_balance: true,
@@ -276,25 +298,25 @@ pub async fn create_asset() -> Result<Asset, ServerFnError> {
     Ok(asset)
 }
 
-#[server(name = GetAssets, prefix = "/api/get-assets")]
-pub async fn get_assets() -> Result<Vec<Asset>, ServerFnError> {
+#[server(name = GetItems, prefix = "/api/get-items")]
+pub async fn get_items(nw_items_type: String) -> Result<Vec<NWItem>, ServerFnError> {
     // Define the data as requested
     let assets = vec![
-        Asset { 
+        NWItem { 
             // uuid: Some(Uuid::now_v7().to_string()),
             uuid: Uuid::now_v7(),
-            asset_type: String::from("Bank Account"),
-            name: String::from("USAA Savings"),
+            item_type: String::from("Bank Account"),
+            name: String::from("Capital One Savings"),
             value: 1_000_000, // $10,000.00
-            login_url: String::from("https://usaa.com"),
+            login_url: String::from("https://capitalone.com"),
             sort_order: 0,
             created_at: get_utc_iso_date(),
             calculated_bank_balance: true,
         },
-        Asset { 
+        NWItem { 
             // uuid: Some(Uuid::now_v7().to_string()),
             uuid: Uuid::now_v7(),
-            asset_type: String::from("IRA"),
+            item_type: String::from("IRA"),
             name: String::from("Vangard"),
             value: 10_000_000, // $10,000.00
             login_url: String::from("https://vangard.com"),
@@ -304,5 +326,34 @@ pub async fn get_assets() -> Result<Vec<Asset>, ServerFnError> {
         },
     ];
 
-    Ok(assets)
+    let liabilities = vec![
+        NWItem { 
+            // uuid: Some(Uuid::now_v7().to_string()),
+            uuid: Uuid::now_v7(),
+            item_type: "Loan".to_string(),
+            name: "Student Loans".to_string(),
+            value: 1_000_000, // $10,000.00
+            login_url: "https://finaid.edu".to_string(),
+            sort_order: 0,
+            created_at: get_utc_iso_date(),
+            calculated_bank_balance: false,
+        },
+        NWItem { 
+            // uuid: Some(Uuid::now_v7().to_string()),
+            uuid: Uuid::now_v7(),
+            item_type: "Credit Card".to_string(),
+            name: "AMEX".to_string(),
+            value: 10_000_000, // $10,000.00
+            login_url: "https://amex.com".to_string(),
+            sort_order: 1,
+            created_at: get_utc_iso_date(),
+            calculated_bank_balance: false,
+        },
+    ];
+
+    if nw_items_type == "Assets" {
+        return Ok(assets);
+    } else {
+        return Ok(liabilities);
+    }
 }
