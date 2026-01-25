@@ -236,7 +236,7 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                     </DialogClose>
                     <DialogClose
                         variant={BtnVariant::Secondary}
-                        // TODO: Add a disabled state to the <DialogClose> button.
+                        // TODO: Add a disabled state to the <DialogClose> component so this disabled attribute actually works.
                         // Disable if nothing is selected
                         attr:disabled=move || selected_item.get().is_empty()
                         on:click=move |_| {
