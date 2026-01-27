@@ -54,3 +54,30 @@ There are some categories, like clothes, that you may want to list under needs. 
 Try to identify categories that fit the description of clothes above and place those categories under needs or wants based on how you view them.
 
 There are some categories, like travel, that might fit better under goals. For example, if you are planning a large trip, then you might need to set a goal to save for it first. On the other hand, a small weekend trip might be within your monthly budget without needing to save for it first. It all depends on your situation.
+
+
+## Investing
+
+If you are new to investing, when you visit a financial services webiste or an investment website, there is so much information about investments that you likely will end up in one of two situations:
+
+1. You won't even know where to begin and you will give up.
+2. You will get lost in the jungle of information and won't be able to find what you are looking for.
+
+To simplify the process and give you a good starting point, it might be helpful to do a simple search like this on either Google (and refer to the AI Overview results) or Perplexity.ai:
+
+"What is a good growth investment at [name of investment company] for a long-term investor?"
+
+For example, the search results should provide you with the names of some specific funds that you can research at the investment company. This will give you a starting point and from there you can compare those funds to similar funds (or any other funds) to see which one(s) fit your needs best.
+
+For example:
+
+FIDELITY MUTUAL FUNDS:
+
+TECHNOLOGY:
+1. FSELX
+2. FSPTX
+
+LARGE-CAP GROWTH:
+1. FBGRX
+2. FOCPX
+3. FCNTX
