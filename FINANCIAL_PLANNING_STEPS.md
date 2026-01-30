@@ -37,7 +37,9 @@ Our needs are often where people get bogged down and paralyzed by budgeting. Fin
 
 There are many different ways to track your needs and you need to find a method that works for you. Here are some ideas to do this:
 
-#### Use only two categories: fixed and variable needs
+#### Two categories method
+
+You can keep things super simple by using only two categories: fixed and variable needs.
 
 Fixed needs are things where the amount of the bill doesn't change from one month to the next (e.g. mortgage, car payment, some types of utilities, medications). Variable needs are things where you have influence over the amount of the bill each month (e.g. grocercies, gasoline, some types of utilities).
 
@@ -51,7 +53,7 @@ A 1% improvement might not seem like much, but if you think of money management 
         
 Also, if you want to cut your spending in multiple need areas, be careful about taking on too much all at once. We recommend identifying only one or two (maybe three) needs to work on at a time. Remember that this is a marathon, not a sprint.
 
-#### Use many categories
+#### Many categories method
 
 TODO: Explain this approach and present the list of categories and subcategories from my `financial-wreck-site-sveltekit` repo on the `src/routes/(content)/(detail-pages)/budgeting/get-on-a-budget/page.svelte.md` page.
 
