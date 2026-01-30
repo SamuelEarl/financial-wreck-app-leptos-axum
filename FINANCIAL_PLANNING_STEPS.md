@@ -3,17 +3,21 @@
 Update the financial planning steps in my website to match the steps outlined in this video: [A Guide to Financial Planning for Couples
 ](https://www.youtube.com/watch?v=JHsZ4uIEBMg)
 
-There is no silver bullet that will work for everyone. You have to find what works for you based on your circumstances, needs, wants, and your personality. So the approach that we take is that we teach principles about how money works and how everything fits together into your overall financial plan and then we offer some ideas that you can use (or tweak) to apply those principles into your own life to make financial planning work for you.
+There is no silver bullet that will work for everyone. You have to find what works for you based on your circumstances, needs, wants, and your personality. So the approach that we take is that we teach principles about how money works and how everything fits together into your overall financial plan and then we offer some ideas that you can use (and tweak) to apply those principles into your own life to make financial planning work for you.
 
-## Budgeting
+---
 
-The word "budgeting" often carries a negative connotation. If you don't like the word budgeting, then you can use a different word like allocating or something else that means to set money aside that is to be used intentionally (as opposed to thoughtlessly). Budgeting is simply a way to spend your money intentionally or thoughtfully. It is not a way to restrict your spending, which might be where a lot of the negative connotations come from. Raise your hand if you have ever spent money without giving it much thought or thoughtlessly? Have you ever spent _a lot_ of money thoughtlessly? Budgeting helps you to avoid thoughtless spending and to create a future that you can be excited about--an abundant future!
+## Spending plan (i.e. budgeting)
 
-This is a simple 4-step guide to budgeting:
+The word "budgeting" often carries a negative connotation. If you don't like the word budgeting, then you can use a different term like "spending plan" or something else that means to set money aside that is to be used intentionally (as opposed to thoughtlessly). Having a plan for how you are going to spend (or allocate) your money each month is at the heart of your financial plan and is possibly the greatest key to your financial success.
+
+A spending plan is simply a way to spend your money intentionally or thoughtfully. It is not a way to restrict your spending, which might be where a lot of the negative connotations related to budgeting come from. Raise your hand if you have ever spent money without giving it much thought or thoughtlessly? Have you ever spent _a lot_ of money thoughtlessly? A spending plan helps you to avoid thoughtless spending and helps you to create a future that you can be excited about--an abundant future!
+
+This is a simple 4-step guide to plan your spending:
 
 ### Step 1: Pay God first (if you are religious)
 
-We could all use heaven's help in our lives. If you are religious, then after each paycheck that you receive and before you spend money anywhere else, you should pay any tithes and offerings that you have committed to pay to God first. When you put God first, then He will put you first. When you put God first, somehow everything else seems to fall into place. That's often called Heavenly Math. It doesn't always make sense to us, but it works!
+We could all use heaven's help in our lives. If you are religious, then after each paycheck that you receive and before you spend money anywhere else, you should pay any tithes and offerings that you have committed to pay to God first. When you put God first, then He will put you first. When you put God first, somehow everything else seems to fall into place. That is sometimes called Heavenly Math. It doesn't always make sense to us, but somehow it works!
 
 ### Step 2: Fund your goals
 
@@ -21,15 +25,19 @@ The next thing you should do with your paycheck is transfer money toward your go
 
 When we want to make changes in our lives, we often set way too many goals. However, it is better to knock out one goal quickly and move on to the next rather than make slow progress on 20 different goals. If you don't see noticeable progress, then you will likely lose motivation and quit your goal. So focus on a manageable number of goals that you can work on consistently and accomplish quickly. It is okay to have a long list of possible goals, but we recommend that you pick your top two or three goals and actively work on those so you can knock them out quickly.
 
-As a benchmark for investment goals, you could start by moving 10% of your net income to investments and increase that amount by 1% each year until you are investing 15% of your net income each month. If money is tight and you are unable to invest a lot right now, then start small. You could start investing with 5% or even 1% of your paycheck. As your salary increases or as you pay off debt and more money becomes available to you, then increase your investment goals by 1% each year (if possible) until you are allocating at least 15% of your income toward investments. If you have savings and/or debt payoff goals, then you could take a similar approach: Allocate a certain percentage (as much as you can reasonably afford) and increase those amounts until you reach your savings/debt payoff goals.
+As a benchmark for investment goals, you could start by allocating 10% of your gross income to investments and increase that amount by 1% each year until you are investing 15% of your net income each month. If money is tight and you are unable to invest a lot right now, then start small. You could start investing with 5% or even 1% of your gross paycheck. As your salary increases or as you pay off debt and more money becomes available to you, then increase your investment goals by 1% each year (if possible) until you are allocating at least 15% of your gross income toward investments. If you have savings and/or debt payoff goals, then you could take a similar approach: Allocate a certain percentage (as much as you can reasonably afford) and increase those amounts until you reach your savings/debt payoff goals.
 
-Savings and investments are often lumped together into one category. However, if it makes sense to you, then you might want to think about them as two different types of goals: Investment goals are used for long-term goals (e.g. retirement) while savings goals are used for short to mid-term goals (e.g. emergency fund, down payment, new car).
+Savings and investments are often lumped together into one category. However, if it makes sense to you, then you might want to think about them as two different types of goals: Investment goals are used for long-term goals (e.g. retirement) while savings goals are used for short to mid-term goals (e.g. an emergency fund, a down payment on a home, a new car).
 
 ### Step 3: Fund your needs
 
 Set aside enough money to cover your needs (e.g. groceries, mortgage, utilities). You have to live, right? So make sure that your current needs are met.
 
-Our needs are often where people get bogged down and paralyzed by budgeting. Things like insurance, medical bills, and even rent/mortgage payments can feel like necessary evils. Financial goals are fun and exciting, but tracking needs is a major chore that nobody wants to do. So, in order to keep things simple, you may want to consider keeping needs to only two categories in your budget: Fixed and variable needs. 
+Our needs are often where people get bogged down and paralyzed by budgeting. Financial goals can be fun and exciting, but tracking needs is a major chore that most people don't want to do. Things like insurance, medical bills, and even rent/mortgage payments can feel like necessary evils.
+
+There are many different ways to track your needs and you need to find a method that works for you. Here are some ideas to do this:
+
+#### Use only two categories: fixed and variable needs
 
 Fixed needs are things where the amount of the bill doesn't change from one month to the next (e.g. mortgage, car payment, some types of utilities, medications). Variable needs are things where you have influence over the amount of the bill each month (e.g. grocercies, gasoline, some types of utilities).
 
@@ -43,7 +51,20 @@ A 1% improvement might not seem like much, but if you think of money management 
         
 Also, if you want to cut your spending in multiple need areas, be careful about taking on too much all at once. We recommend identifying only one or two (maybe three) needs to work on at a time. Remember that this is a marathon, not a sprint.
 
-NOTE: You are always welcome to split your categories in whatever way works for you. If you are the type of person that works well with numbers and details, then feel free to split your spending into as many categories as you want. 
+#### Use many categories
+
+TODO: Explain this approach and present the list of categories and subcategories from my `financial-wreck-site-sveltekit` repo on the `src/routes/(content)/(detail-pages)/budgeting/get-on-a-budget/page.svelte.md` page.
+
+#### TODO: Present a few more budgeting ideas
+
+* https://usaaef.org/tools/video/how-to-build-a-budget/
+* https://www.capitalone.com/learn-grow/money-management/what-is-a-budget/
+* https://www.capitalone.com/bank/money-management/ways-to-save/balanced-family-budget/
+
+#### Find what works for you
+
+We have presented a few different approaches for a spending plan, but remember that there is no such thing as one right way to track your needs. So use one of these ideas, find your own, and tweak things until you find something that works for you.
+
 
 ### Step 4: Fund your wants (care-free spending)
 
@@ -55,6 +76,7 @@ Try to identify categories that fit the description of clothes above and place t
 
 There are some categories, like travel, that might fit better under goals. For example, if you are planning a large trip, then you might need to set a goal to save for it first. On the other hand, a small weekend trip might be within your monthly budget without needing to save for it first. It all depends on your situation.
 
+---
 
 ## Investing
 
@@ -81,3 +103,10 @@ LARGE-CAP GROWTH:
 1. FBGRX
 2. FOCPX
 3. FCNTX
+
+
+### Debt Payoff vs Invest Analysis
+
+Does it make more sense to pay off all your debt before investing or should you use your extra money (after paying the minimums on your debt) to pay down debt or put into an investment? That depends on your situation, which is why you should do a debt payoff vs invest analysis.
+
+Doing a search for "debt payoff vs investing calculator" will return many search results. This is only one of the many that you could use: https://www.empower.com/learning_center/calculators/paying-debt-vs-investing.shtml#/
