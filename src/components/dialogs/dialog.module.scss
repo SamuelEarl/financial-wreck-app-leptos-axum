@@ -102,8 +102,6 @@
   border-bottom: var(--border);
   // Optional: Smooth scrolling.
   scroll-behavior: smooth;
-  // Ensure the scrollbar doesn't shift layout.
-  scrollbar-gutter: stable;
 }
 
 .footer {

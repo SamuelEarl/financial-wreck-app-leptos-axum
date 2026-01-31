@@ -11,7 +11,7 @@
   }
 }
 
-.al_wrapper {
+.items_wrapper {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -25,5 +25,22 @@
   .btns_container {
     display: flex;
     gap: var(--size-2);
+  }
+}
+
+.items_grid {
+
+  .item_card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    // gap: 10px;
+
+    .item_name {
+
+    }
+
+    .item_value {
+
+    }
   }
 }

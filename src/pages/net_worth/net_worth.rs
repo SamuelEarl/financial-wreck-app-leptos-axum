@@ -103,7 +103,7 @@ pub fn NWItemsList(nw_item_type: String) -> impl IntoView {
     let type_for_create_resource = nw_items_type.clone();
 
     view! {
-        <div class={css::al_wrapper}>
+        <div class={css::items_wrapper}>
             <h2 class={css::h2}>{nw_items_type}</h2>
             <div class={css::btns_container}>
                 <AddNWItemDialog nw_item_type=nw_item_type />
@@ -122,7 +122,7 @@ pub fn NWItemsList(nw_item_type: String) -> impl IntoView {
                     items_resource.get().map(|result| {
                         match result {
                             Ok(items) => view! {
-                                <div class="asset-grid">
+                                <div class={css::items_grid}>
                                     // 4. Iterate over the Vec<NWItem>
                                     // <For> is efficient for lists that might change
                                     // Note: We use items.clone() here because the resource
@@ -131,10 +131,10 @@ pub fn NWItemsList(nw_item_type: String) -> impl IntoView {
                                         each=move || items.clone()
                                         key=|item| item.uuid // Use UUID as the unique key
                                         children=|item| view! {
-                                            <div class="item-card">
-                                                <h4>{item.name}</h4>
-                                                <p>"Value: $" {item.value}</p>
-                                                <p>"Type: " {item.item_type}</p>
+                                            <div class={css::item_card}>
+                                                <span class={css::item_name}>{item.name}</span>
+                                                <span class={css::item_value}>{move || format_currency(item.value, None)}</span>
+                                                // <span class={css::item_type}>"Type: " {item.item_type}</span>
                                             </div>
                                         }
                                     />
@@ -186,7 +186,8 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
         "loan".to_string()
     });
 
-    let (selected_item, set_selected_item) = signal("".to_string());
+    let (selected_item_type, set_selected_item_type) = signal("".to_string());
+    let (item_name, set_item_name) = signal("".to_string());
 
     // Store the string in the Leptos runtime.
     // This returns a 'StoredValue<String>' which is Copy.
@@ -226,7 +227,7 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                             })
                             on_change=Callback::new(move |val: String| {
                                 log!("(net_worth) Selected: {}", val);
-                                set_selected_item.set(val);
+                                set_selected_item_type.set(val);
                             })
                         />
                     </label>
@@ -236,7 +237,11 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                     <label>
                         {name_label}
                         <Input
-                            attr:placeholder="Default input"
+                            attr:placeholder="Give this a name that makes sense to you"
+                            attr:value=move || item_name.get()
+                            on:input=move |event| {
+                                set_item_name.set(event_target_value(&event));
+                            }
                         />
                     </label>
                 </DialogBody>
@@ -256,11 +261,11 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                         variant={BtnVariant::Secondary}
                         // TODO: Add a disabled state to the <DialogClose> component so this disabled attribute actually works.
                         // Disable if nothing is selected
-                        attr:disabled=move || selected_item.get().is_empty()
+                        attr:disabled=move || selected_item_type.get().is_empty()
                         on:click=move |_| {
                             // 1. Get the current values from our signals/storage
                             let item_type = title_type.get_value(); // "asset" or "liability"
-                            let item_val = selected_item.get();    // The value from the Select
+                            let item_val = selected_item_type.get();    // The value from the Select
                             
                             // 2. Fire and forget the server call
                             spawn_local(async move {

@@ -122,7 +122,7 @@ pub fn PageComponent() -> impl IntoView {
                     attr:value=move || name.get()
                     // WRITE: Update signal on every keystroke.
                     on:input=move |event| {
-                        // event_target_value helps extract the string from the event.
+                        // `event_target_value` is a helper function built into Leptos. It takes the raw DOM event, finds the element that triggered it, and extracts the current text value safely.
                         set_name.set(event_target_value(&event));
                     }
                 />
@@ -141,6 +141,7 @@ pub fn PageComponent() -> impl IntoView {
         <div>
             <label>"Enter your email"
                 <Input
+                    // In Rust, type is a reserved keyword. To use it as an attribute name in the macro, you must prefix it with r# (the raw identifier prefix).
                     attr:r#type="email"
                     attr:placeholder="Email address"
                     attr:value=move || email.get()
