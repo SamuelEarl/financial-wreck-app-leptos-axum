@@ -19,6 +19,7 @@ use crate::docs::{
     accordions_docs::AccordionsDocs,
     buttons_docs::ButtonsDocs,
     dialogs_docs::DialogsDocs,
+    inputs_docs::InputsDocs,
     radio_buttons_docs::RadioButtonsDocs,
     select_docs::SelectDocs,
 };
@@ -44,6 +45,7 @@ pub fn DocsRoutes() -> impl MatchNestedRoutes + Clone {
             <Route path=path!("/accordions") view=AccordionsDocs />
             <Route path=path!("/buttons") view=ButtonsDocs />
             <Route path=path!("/dialogs") view=DialogsDocs />
+            <Route path=path!("/inputs") view=InputsDocs />
             <Route path=path!("/radio-buttons") view=RadioButtonsDocs />
             <Route path=path!("/select") view=SelectDocs />
         </ParentRoute>

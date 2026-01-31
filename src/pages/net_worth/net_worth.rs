@@ -13,6 +13,7 @@ use crate::components::{
         Dialog, DialogTrigger, DialogContent, DialogBody, DialogHeader, 
         DialogTitle, DialogFooter, DialogClose
     },
+    inputs::input::Input,
     selects::select::{Select},
 };
 use crate::utils::{
@@ -163,11 +164,19 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
         }
     };
 
-    let label = {
+    let select_label = {
         if nw_item_type == "asset" {
             "Select an asset type"
         } else {
             "Select a liability type"
+        }
+    };
+
+    let name_label = {
+        if nw_item_type == "asset" {
+            "Name of asset"
+        } else {
+            "Name of liability"
         }
     };
 
@@ -206,7 +215,7 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
 
                 <DialogBody>
                     <label>
-                        {label}
+                        {select_label}
                         <Select
                             options=item_options()
                             default_value=default_val.get_value()
@@ -219,6 +228,15 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                                 log!("(net_worth) Selected: {}", val);
                                 set_selected_item.set(val);
                             })
+                        />
+                    </label>
+
+                    <br/>
+
+                    <label>
+                        {name_label}
+                        <Input
+                            attr:placeholder="Default input"
                         />
                     </label>
                 </DialogBody>

@@ -16,6 +16,9 @@ pub mod components {
     pub mod icons {
         pub mod icon;
     }
+    pub mod inputs {
+        pub mod input;
+    }
     pub mod layouts {
         pub mod layout;
         pub mod mobile_header;
@@ -32,6 +35,10 @@ pub mod components {
     }
 }
 
+// NOTE: When adding a docs page, update these 3 files:
+// 1. This one.
+// 2. src/nav_links.rs
+// 3. src/routes/docs_routes.rs
 // Only compile this module if the feature is active.
 #[cfg(feature = "docs")]
 pub mod docs {
@@ -39,6 +46,7 @@ pub mod docs {
     pub mod accordions_docs;
     pub mod buttons_docs;
     pub mod dialogs_docs;
+    pub mod inputs_docs;
     pub mod radio_buttons_docs;
     pub mod select_docs;
 }
