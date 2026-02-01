@@ -155,7 +155,18 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
     let items_resource = use_context::<Resource<Result<Vec<NWItem>, ServerFnError>>>()
     .expect("resource not found");
 
-    let nw_item_type_clone = nw_item_type.clone();
+    let (selected_item_type, set_selected_item_type) = signal("".to_string());
+    let (item_name, set_item_name) = signal("".to_string());
+    let (value_cents, set_value_cents) = signal(0);
+    let (item_url, set_item_url) = signal("".to_string());
+
+    let select_item_label = {
+        if nw_item_type == "asset" {
+            "Select an asset type"
+        } else {
+            "Select a liability type"
+        }
+    };
 
     // The closure needs to clone the data it returns.
     let item_options = {
@@ -166,36 +177,15 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
         }
     };
 
-    let select_label = {
-        if nw_item_type == "asset" {
-            "Select an asset type"
-        } else {
-            "Select a liability type"
-        }
-    };
-
-    let name_label = {
-        if nw_item_type == "asset" {
-            "Name of asset"
-        } else {
-            "Name of liability"
-        }
-    };
-
-    let default_val = StoredValue::new(if nw_item_type == "asset" {
+    let item_type_default_val = StoredValue::new(if nw_item_type == "asset" {
         "bank_account".to_string()
     } else {
         "loan".to_string()
     });
 
-    let (selected_item_type, set_selected_item_type) = signal("".to_string());
-    let (item_name, set_item_name) = signal("".to_string());
-    let (value_cents, set_value_cents) = signal(0);
-    let (item_url, set_item_url) = signal("".to_string());
-
     // Store the string in the Leptos runtime.
     // This returns a 'StoredValue<String>' which is Copy.
-    let title_type = StoredValue::new(nw_item_type);
+    let nw_item_type_copyable = StoredValue::new(nw_item_type);
 
     view! {
         <Dialog>
@@ -214,16 +204,16 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                 <DialogHeader>
                     <DialogTitle>
                         // .with_value() lets you access the string without moving it.
-                        "Add " { move || title_type.with_value(|t| t.clone()) }
+                        "Add " { move || nw_item_type_copyable.with_value(|t| t.clone()) }
                     </DialogTitle>
                 </DialogHeader>
 
                 <DialogBody>
                     <label>
-                        {select_label}
+                        {select_item_label}
                         <Select
                             options=item_options()
-                            default_value=default_val.get_value()
+                            default_value=item_type_default_val.get_value()
                             btn_sizes=Some(Sizes {
                                 pv: Some(2),
                                 ph: Some(3),
@@ -239,7 +229,7 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                     <br/>
 
                     <label>
-                        {name_label}
+                        "Name of " {move || nw_item_type_copyable.get_value()}
                         <Input
                             attr:placeholder="Give this a name that makes sense to you"
                             attr:value=move || item_name.get()
@@ -262,7 +252,7 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                     <br/>
 
                     <label>
-                        "Link to the login screen of this " {nw_item_type_clone}
+                        "Link to the login screen of this " {move || nw_item_type_copyable.get_value()}
                         <Input
                             attr:placeholder="This link will allow you to login to your financial accounts quickly when you need to update this info"
                             attr:value=move || item_url.get()
@@ -271,6 +261,8 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                             }
                         />
                     </label>
+
+                    // TODO: Add a tooltip with the question "Why are you asking for my account login page?" and the answer "This will allow you to be directed to your financial account quickly so you can update the information in this Financial Wreck app easily."
                 </DialogBody>
 
                 <DialogFooter>
@@ -291,7 +283,7 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                         attr:disabled=move || selected_item_type.get().is_empty()
                         on:click=move |_| {
                             // 1. Get the current values from our signals/storage
-                            let item_type = title_type.get_value(); // "asset" or "liability"
+                            let item_type = nw_item_type_copyable.get_value(); // "asset" or "liability"
                             let item_val = selected_item_type.get();    // The value from the Select
                             
                             // 2. Fire and forget the server call
@@ -314,7 +306,7 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                             });
                         }
                     >
-                        "Add " { move || title_type.with_value(|t| t.clone()) }
+                        "Add " { move || nw_item_type_copyable.with_value(|t| t.clone()) }
                     </DialogClose>
                 </DialogFooter>
             </DialogContent>
