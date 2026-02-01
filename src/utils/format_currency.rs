@@ -43,7 +43,7 @@ impl Default for FmtCurrencyOpts {
 /// 
 /// Case 1: Use defaults
 /// let (price, set_price) = signal(1_000_000);
-/// format_currency(price, None);
+/// format_currency(price.get(), None);
 /// 
 /// Case 2: Override specific fields
 /// let (price, set_price) = signal(1_000_000);

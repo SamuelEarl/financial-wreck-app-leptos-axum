@@ -13,7 +13,7 @@ use crate::components::{
         Dialog, DialogTrigger, DialogContent, DialogBody, DialogHeader, 
         DialogTitle, DialogFooter, DialogClose
     },
-    inputs::input::Input,
+    inputs::input::{Input, CurrencyInput},
     selects::select::{Select},
 };
 use crate::utils::{
@@ -155,6 +155,8 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
     let items_resource = use_context::<Resource<Result<Vec<NWItem>, ServerFnError>>>()
     .expect("resource not found");
 
+    let nw_item_type_clone = nw_item_type.clone();
+
     // The closure needs to clone the data it returns.
     let item_options = {
         if nw_item_type == "asset" {
@@ -188,6 +190,8 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
 
     let (selected_item_type, set_selected_item_type) = signal("".to_string());
     let (item_name, set_item_name) = signal("".to_string());
+    let (value_cents, set_value_cents) = signal(0);
+    let (item_url, set_item_url) = signal("".to_string());
 
     // Store the string in the Leptos runtime.
     // This returns a 'StoredValue<String>' which is Copy.
@@ -241,6 +245,29 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                             attr:value=move || item_name.get()
                             on:input=move |event| {
                                 set_item_name.set(event_target_value(&event));
+                            }
+                        />
+                    </label>
+
+                    <br/>
+
+                    <label>
+                        "Value/Amount (in dollars)"
+                        <CurrencyInput
+                            value=value_cents 
+                            set_value=set_value_cents
+                        />
+                    </label>
+
+                    <br/>
+
+                    <label>
+                        "Link to the login screen of this " {nw_item_type_clone}
+                        <Input
+                            attr:placeholder="This link will allow you to login to your financial accounts quickly when you need to update this info"
+                            attr:value=move || item_url.get()
+                            on:input=move |event| {
+                                set_item_url.set(event_target_value(&event));
                             }
                         />
                     </label>

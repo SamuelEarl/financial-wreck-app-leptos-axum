@@ -95,6 +95,27 @@
 
 <br/>
 
+## Currency input
+
+{{
+    <div>
+        <label>"Enter the price"
+            <CurrencyInput
+                value=price_cents 
+                set_value=set_price_cents
+                placeholder="Type the dollar amount"
+            />
+        </label>
+    </div>
+
+    <br/>
+
+    <p>This is the value (in cents) that will be stored in the database:</p>
+    <p>"Stored Value: " {price_cents} " cents"</p>
+}}
+
+<br/>
+
 ```rust
 use leptos::prelude::*;
 use leptos::logging::log;
@@ -107,7 +128,8 @@ pub fn PageComponent() -> impl IntoView {
     let (name, set_name) = signal("".to_string());  
     let (email, set_email) = signal("".to_string());
     let (password, set_password) = signal("".to_string());
-    let (age, set_age) = signal("".to_string());  
+    let (age, set_age) = signal("".to_string());
+    let (price_cents, set_price_cents) = signal(1000); // Represents $10.00
 
     view! {
         // -----------------
@@ -201,6 +223,24 @@ pub fn PageComponent() -> impl IntoView {
         <br/>
 
         <p>"Your age: " {age}</p>
+
+        // ---------------------
+        // CURRENCY INPUT FIELD
+        // ---------------------
+        <div>
+            <label>"Enter the price"
+                <CurrencyInput
+                    value=price_cents 
+                    set_value=set_price_cents
+                    placeholder="Type the dollar amount"
+                />
+            </label>
+        </div>
+
+        <br/>
+
+        <p>This is the value (in cents) that will be stored in the database:</p>
+        <p>"Stored Value: " {price_cents} " cents"</p>
     }
 }
 ```
