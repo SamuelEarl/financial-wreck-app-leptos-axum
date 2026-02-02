@@ -8,13 +8,13 @@ use stylance::*;
 
 use crate::components::{
     colors_and_sizes::{BtnVariant, Colors, Sizes},
-    buttons::button::Button,
     dialogs::dialog::{ 
         Dialog, DialogTrigger, DialogContent, DialogBody, DialogHeader, 
         DialogTitle, DialogFooter, DialogClose
     },
     inputs::input::{Input, CurrencyInput},
-    selects::select::{Select},
+    selects::select::Select,
+    // tooltips::tooltip::Tooltip,
 };
 use crate::utils::{
     format_currency::format_currency,
@@ -32,7 +32,6 @@ pub fn NetWorth() -> impl IntoView {
     provide_meta_context();
 
     let (net_worth, set_net_worth) = signal(1_000_000);
-    let (selected_asset, set_selected_asset) = signal("".to_string());
 
     view! {
         <Title text="Financial Wreck | Net Worth"/>
@@ -44,32 +43,11 @@ pub fn NetWorth() -> impl IntoView {
 
         <h2>{move || format_currency(net_worth.get(), None)}</h2>
 
-        <br />
-
-        <Select
-            options=asset_options()
-            default_value="retirement_investment".to_string()
-            placeholder="Select an Asset"
-            btn_sizes=Some(Sizes {
-                pv: Some(2),
-                ph: Some(3),
-                ..Default::default()
-            })
-            on_change=Callback::new(move |val: String| {
-                log!("(net_worth) Selected: {}", val);
-                set_selected_asset.set(val);
-            })
-        />
-
-        <div>"Selected Asset: " { move || selected_asset.get() }</div>
-
-        <br />
-
         <p>"Add financial accounts, transfer money between accounts, and add bill pay alerts"</p>
 
         <NWItemsList nw_item_type="asset".to_string() />
         
-        <br />
+        <br/>
 
         <NWItemsList nw_item_type="liability".to_string() />
     }
@@ -262,7 +240,16 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                         />
                     </label>
 
-                    // TODO: Add a tooltip with the question "Why are you asking for my account login page?" and the answer "This will allow you to be directed to your financial account quickly so you can update the information in this Financial Wreck app easily."
+                    // <Tooltip
+                    //     text="The link to your financial account is simply a convenience so you can be redirected to that account in order to get information to update the data in your Financial Wreck app, if necessary."
+                    // >
+                    //     <p class={css::tooltip_wrapper}>
+                    //         <span>
+                    //             <span class="tooltip-info-icon">"?"</span>
+                    //         </span>
+                    //         <span class={css::tooltip}>"Why are you asking for my account login page?"</span>
+                    //     </p>
+                    // </Tooltip>
                 </DialogBody>
 
                 <DialogFooter>

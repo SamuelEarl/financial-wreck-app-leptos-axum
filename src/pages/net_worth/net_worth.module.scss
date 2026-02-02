@@ -44,3 +44,15 @@
     }
   }
 }
+
+.tooltip_wrapper {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+
+  .tooltip {
+    color: var(--primary-bg);
+    font-style: italic;
+    border-bottom: 1px dotted var(--primary-bg);
+  }
+}

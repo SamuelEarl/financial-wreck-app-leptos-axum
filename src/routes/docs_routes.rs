@@ -22,6 +22,7 @@ use crate::docs::{
     inputs_docs::InputsDocs,
     radio_buttons_docs::RadioButtonsDocs,
     select_docs::SelectDocs,
+    // tooltips_docs::TooltipsDocs,
 };
 #[cfg(feature = "docs")]
 use crate::nav_links::DOCS_NAV;
@@ -48,6 +49,7 @@ pub fn DocsRoutes() -> impl MatchNestedRoutes + Clone {
             <Route path=path!("/inputs") view=InputsDocs />
             <Route path=path!("/radio-buttons") view=RadioButtonsDocs />
             <Route path=path!("/select") view=SelectDocs />
+            // <Route path=path!("/tooltips") view=TooltipsDocs />
         </ParentRoute>
     }
     .into_inner()

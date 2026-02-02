@@ -1,0 +1,60 @@
+.tooltip_bubble {
+  background-color: var(--neutral-11);
+  color: var(--white);
+  padding: var(--size-2) var(--size-3);
+  border-radius: var(--radius);
+  // font-size: 14px;
+  position: relative;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  // This will preserve any line breaks in the tooltip bubble content.
+  white-space: pre-line;
+  // width: 100vw;
+  max-width: 300px;
+
+  // // The Arrow
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   left: 10px; // Default left-aligned arrow
+  //   border: 6px solid transparent;
+  // }
+
+  // // Arrow for TOP placement (points down)
+  // &:not(.is_bottom)::after {
+  //   bottom: -12px;
+  //   border-top-color: var(--neutral-11);
+  // }
+
+  // // Arrow for BOTTOM placement (points up)
+  // &.is_bottom::after {
+  //   top: -12px;
+  //   border-bottom-color: var(--neutral-11);
+  // }
+
+  .tooltip_arrow {
+    position: absolute;
+    width: 0; height: 0;
+    border: 6px solid transparent;
+    left: 12px; // Align arrow to the left as requested
+    
+    // If bubble is on top, arrow is on bottom pointing down
+    .tooltip_bubble:not(.is_bottom) & {
+      bottom: -12px;
+      border-top-color: var(--neutral-9);
+    }
+
+    // If bubble is on bottom, arrow is on top pointing up
+    .tooltip_bubble.is_bottom & {
+      top: -12px;
+      border-bottom-color: var(--neutral-9);
+    }
+  }
+}
+
+// Ensure the Popover container itself doesn't interfere.
+[popover] {
+  &:popover-open {
+    display: block;
+  }
+}

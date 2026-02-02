@@ -147,11 +147,11 @@ style=format!("background-color: {}; font-size: {};", get_element_colors(colors,
 
 <br/>
 
-### Rest props
+### Attribute splatting (i.e. rest props)
 
-Rest props are used to capture the rest of the properties that are not specifically defined in the component. For example, you could pass an `id="abc"` prop to a `<Button>` component and the `id` will show up in the `<button>` in the DOM.
+Attribute splatting is used to capture the rest of the properties that are not specifically defined in the component. For example, you could pass an `id="abc"` prop to a `<Button>` component and the `id` will show up in the `<button>` in the DOM.
 
-These components use an `attributes` prop to handle any rest props. See the `<Button>` component for details.
+These components use an `attributes` prop to handle attribute splatting. See the `<Button>` component for details.
 
 ```rust
 #[component]
@@ -173,6 +173,55 @@ pub fn Button(
             // This spreads the attributes that are captured in the `attributes` prop,
             // including any on:<event> attributes.
             {..attributes}
+        >
+            {children()}
+        </button>
+    }
+}
+```
+
+### Reactive class with Stylance
+
+The `Input` component is a good example of using reactive classes. This is the syntax:
+
+```rust
+class=(css::some_variable, move || some_variable)
+```
+
+This is the code where reactive classes are used:
+
+```rust
+#[component]
+pub fn SelectOption(
+    #[prop(into)] value: String,
+    #[prop(optional, into)] label: Option<String>, 
+    has_opt_group_label: bool,
+    children: Children
+) -> impl IntoView {
+    let ctx = use_context::<SelectContext>().expect("SelectOption must be in <Select>");
+    let display_label = label.unwrap_or(value.clone());
+    // Clone value once for the comparison closure.
+    let current_val = value.clone();
+    // This closure will re-run whenever ctx.selected_value changes.
+    let is_selected = move || ctx.selected_value.get() == current_val;
+
+    let button_action = move |_| {
+        ctx.set_selected_value.set(value.clone());
+        ctx.set_selected_label.set(display_label.clone());
+    };
+
+    view! {
+        <button
+            type="button"
+            role="option"
+            class={css::select_option}
+            class=(css::has_opt_group_label, move || has_opt_group_label)
+            // Add the selected class reactively
+            class=(css::selected_option, move || is_selected())
+            on:click=button_action
+            // Target the dynamic ID so this button can close the specific popover
+            popovertarget=move || ctx.popover_id.get().to_string()
+            popovertargetaction="hide"
         >
             {children()}
         </button>

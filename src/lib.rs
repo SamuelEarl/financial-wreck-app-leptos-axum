@@ -27,12 +27,15 @@ pub mod components {
     pub mod progress_bars {
         pub mod progress_bar;
     }
-    pub mod selects {
-        pub mod select;
-    }
     pub mod radio_buttons {
         pub mod radio_buttons;
     }
+    pub mod selects {
+        pub mod select;
+    }
+    // pub mod tooltips {
+    //     pub mod tooltip;
+    // }
 }
 
 // NOTE: When adding a docs page, update these 3 files:
@@ -49,6 +52,7 @@ pub mod docs {
     pub mod inputs_docs;
     pub mod radio_buttons_docs;
     pub mod select_docs;
+    pub mod tooltips_docs;
 }
 
 pub mod pages {

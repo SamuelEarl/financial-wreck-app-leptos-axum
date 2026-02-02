@@ -236,3 +236,12 @@
   --xl-max: 1535px;
   --xxl-min: 1536px;
 }
+
+.tooltip-info-icon {
+  font-family: var(--monospace);
+  font-weight: bold;
+  padding: 0 4px;
+  background-color: var(--neutral-11);
+  color: var(--white);
+  border-radius: 50%;
+}
