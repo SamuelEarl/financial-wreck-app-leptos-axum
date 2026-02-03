@@ -2,7 +2,7 @@
 
 ---
 
-<!-- {{
+{{
     <Tooltip text="This is the tooltip text">
         <span class="tooltip-info-icon">"?"</span>
     </Tooltip>
@@ -31,4 +31,4 @@ pub fn PageComponent() -> impl IntoView {
         
     }
 }
-``` -->
+```

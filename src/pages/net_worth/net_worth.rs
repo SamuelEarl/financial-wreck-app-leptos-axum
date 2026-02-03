@@ -14,7 +14,7 @@ use crate::components::{
     },
     inputs::input::{Input, CurrencyInput},
     selects::select::Select,
-    // tooltips::tooltip::Tooltip,
+    tooltips::tooltip::Tooltip,
 };
 use crate::utils::{
     format_currency::format_currency,
@@ -240,16 +240,16 @@ pub fn AddNWItemDialog(nw_item_type: String) -> impl IntoView {
                         />
                     </label>
 
-                    // <Tooltip
-                    //     text="The link to your financial account is simply a convenience so you can be redirected to that account in order to get information to update the data in your Financial Wreck app, if necessary."
-                    // >
-                    //     <p class={css::tooltip_wrapper}>
-                    //         <span>
-                    //             <span class="tooltip-info-icon">"?"</span>
-                    //         </span>
-                    //         <span class={css::tooltip}>"Why are you asking for my account login page?"</span>
-                    //     </p>
-                    // </Tooltip>
+                    <Tooltip
+                        text="The link to your financial account is simply a convenience so you can be redirected to that account in order to get information to update the data in your Financial Wreck app, if necessary."
+                    >
+                        <p class={css::tooltip_wrapper}>
+                            <span>
+                                <span class="tooltip-info-icon">"?"</span>
+                            </span>
+                            <span class={css::tooltip}>"Why are you asking for my account login page?"</span>
+                        </p>
+                    </Tooltip>
                 </DialogBody>
 
                 <DialogFooter>

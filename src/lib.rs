@@ -33,9 +33,9 @@ pub mod components {
     pub mod selects {
         pub mod select;
     }
-    // pub mod tooltips {
-    //     pub mod tooltip;
-    // }
+    pub mod tooltips {
+        pub mod tooltip;
+    }
 }
 
 // NOTE: When adding a docs page, update these 3 files:

@@ -41,3 +41,20 @@ pub fn App() -> impl IntoView {
         <ClientRouter />
     }
 }
+
+
+#[derive(Clone, Copy)]
+pub struct ZStack(pub RwSignal<i32>);
+
+/// This will manage the z-indexes of various components that are stacked on top of each other.
+/// Instead of hardcoding z-index: 9999, every time a component (Tooltip, Select, or Dialog) opens, it asks for a "new layer."
+/// 1. A global signal starts at base_z = 1000.
+/// 2. When Dialog A opens, it calls next(), gets 1001, and assigns it to its style.
+/// 3. When Select B opens inside that dialog, it calls next(), gets 1002, and sits on top.
+/// 4. When Tooltip C opens, it gets 1003.
+impl ZStack {
+    pub fn next(&self) -> i32 {
+        self.0.update(|z| *z += 1);
+        self.0.get_untracked()
+    }
+}
